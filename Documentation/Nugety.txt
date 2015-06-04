@@ -1,0 +1,17 @@
+db:
+Install-Package EntityFramework
+
+
+app:
+klient:
+Install-Package knockoutjs
+Install-Package bootstrap
+
+nservicebus:
+Install-Package NServiceBus
+Install-Package Autofac
+Install-Package NServiceBus.Autofac
+Install-Package Autofac.Mvc5
+
+signalR:
+install-package Microsoft.AspNet.SignalR
