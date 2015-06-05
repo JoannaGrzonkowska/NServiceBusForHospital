@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using BusinessLogic;
+using HospitalDependencyResolver;
 using NServiceBus;
 using System;
 using System.Collections.Generic;
@@ -31,6 +33,9 @@ namespace WebApplication1
 
             // Register your MVC controllers.
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+
+            builder.RegisterModule(new DataModule());
+            builder.RegisterModule(new BusinessLogicModel());
 
             // Set the dependency resolver to be Autofac.
             IContainer container = builder.Build();

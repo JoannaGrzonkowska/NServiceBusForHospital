@@ -206,6 +206,14 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{0c9ed9dc-e01a-46a6-b1c7-596da7141d5f}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HospitalDependencyResolver\HospitalDependencyResolver.csproj">
+      <Project>{caf3b045-0272-4ed5-90a0-8d3e2f642ad6}</Project>
+      <Name>HospitalDependencyResolver</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Ordering.Shared\Ordering.Shared.csproj">
       <Project>{5728de02-c264-4697-b554-dda5fad10a47}</Project>
       <Name>Ordering.Shared</Name>

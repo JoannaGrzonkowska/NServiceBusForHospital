@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
-     internal class PatientRepository : RepositoryBase<Patient, HospitalTestEntities>, IPatientRepository
+     public class PatientRepository : RepositoryBase<Patient, HospitalTestEntities>, IPatientRepository
     {
         public PatientRepository(HospitalTestEntities context)
             : base(context)
@@ -16,7 +16,7 @@ namespace DataAccess.Repositories
         public IEnumerable<Patient> TestMethod1(int id)
         {
             return Context.Set<Patient>()
-                .Where(x => x.Id >10);
+                .Where(x => x.Id >1);
 
         }
      }

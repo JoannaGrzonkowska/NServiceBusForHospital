@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
-    internal class RepositoryBase<TModel, TContext> : IRepository<TModel>
+    public class RepositoryBase<TModel, TContext> : IRepository<TModel>
         where TModel : class
         where TContext : DbContext
     {

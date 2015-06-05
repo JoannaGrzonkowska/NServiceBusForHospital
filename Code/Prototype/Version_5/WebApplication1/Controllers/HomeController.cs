@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ordering.Shared.Extensions;
+using BusinessLogic.Services;
 
 namespace WebApplication1.Controllers
 {
@@ -12,10 +14,13 @@ namespace WebApplication1.Controllers
     {
 
          IBus bus;
+         private readonly IPatientService _patientService;
 
-         public HomeController(IBus bus)
+
+         public HomeController(IBus bus, IPatientService patientService)
     {
         this.bus = bus;
+        _patientService = patientService;
     }
 
 
@@ -33,6 +38,18 @@ namespace WebApplication1.Controllers
 
          public ActionResult Index()
         {
+            IEnumerable<WynikiDlaPacjenta> test = new List<WynikiDlaPacjenta>(){
+                 new WynikiDlaPacjenta{ Wynik=1},
+                 new WynikiDlaPacjenta{ Wynik=2},
+                 new WynikiDlaPacjenta{ Wynik=3}
+             };
+
+            var filtered = test.Filter<WynikiDlaPacjenta>(x => x.Wynik > 2);
+
+
+
+            var t = _patientService.TestMethod1_1(2);
+
             ViewBag.Message = "Pacjent";
 
             return View();
