@@ -26,5 +26,7 @@ namespace DataAccess
         }
     
         public virtual DbSet<Patient> Patient { get; set; }
+        public virtual DbSet<Alergies> Alergies { get; set; }
+        public virtual DbSet<PatientAlergies> PatientAlergies { get; set; }
     }
 }

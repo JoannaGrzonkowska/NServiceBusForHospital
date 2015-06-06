@@ -6,6 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="6197469c80c94644b04dbe7438ae4949" Name="Diagram1">
         <EntityTypeShape EntityType="HospitalTestModel.Patient" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalTestModel.Alergies" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="HospitalTestModel.PatientAlergies" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="HospitalTestModel.FK_PatientAlergies_Alergies" />
+        <AssociationConnector Association="HospitalTestModel.FK_PatientAlergies_Patient" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

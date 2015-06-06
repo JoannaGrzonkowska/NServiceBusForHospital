@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Services
 {
-    public interface IPatientService
+    public interface IAlergyService
     {
-        IEnumerable<PatientModel> TestMethod1_1(int id);
-        PatientModel GetById(int id);
+        IEnumerable<AlergyTypeModel> GetAll();
     }
 }

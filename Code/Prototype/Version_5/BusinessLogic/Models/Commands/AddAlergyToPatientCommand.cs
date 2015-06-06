@@ -9,5 +9,7 @@ namespace BusinessLogic.Models.Commands
     public class AddAlergyToPatientCommand
     {
         public int AlergyId { get; set; }
+        public int PatientId { get; set; }
+        public string Description { get; set; }
     }
 }

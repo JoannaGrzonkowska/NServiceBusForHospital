@@ -1,12 +1,15 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using BusinessLogic;
 using HospitalDependencyResolver;
 using NServiceBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -28,11 +31,13 @@ namespace WebApplication1
 
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
 
             ContainerBuilder builder = new ContainerBuilder();
 
             // Register your MVC controllers.
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            //builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             builder.RegisterModule(new DataModule());
             builder.RegisterModule(new BusinessLogicModel());
@@ -41,6 +46,10 @@ namespace WebApplication1
             IContainer container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+           /* GlobalConfiguration.Configuration.DependencyResolver =
+    new AutofacWebApiDependencyResolver(container);*/
+
+
 
             BusConfiguration busConfiguration = new BusConfiguration();
             busConfiguration.EndpointName("Samples.Mvc.WebApplication");

@@ -20,6 +20,7 @@ install-package Microsoft.AspNet.SignalR
 http://idevexplorer.com/2014/10/implementing-ninject-dependency-injection-framework-in-a-class-library/
 DI:
 Install-Package Ninject
+Install-Package Autofac.WebApi
 
 
 Prototyp:

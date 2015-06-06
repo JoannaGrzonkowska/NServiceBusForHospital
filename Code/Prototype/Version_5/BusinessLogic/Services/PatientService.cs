@@ -18,6 +18,16 @@ namespace BusinessLogic.Services
             _patientRepository = patientRepository;
         }
 
+        public PatientModel GetById(int id)
+        {
+            var patient = _patientRepository.GetById(id);
+            return new PatientModel
+            {
+                Name = patient.Name,
+                Age = patient.Age
+            };
+        }
+
         public IEnumerable<PatientModel> TestMethod1_1(int id)
         {
             var patients = _patientRepository.TestMethod1(id);

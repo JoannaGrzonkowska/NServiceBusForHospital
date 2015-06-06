@@ -1,4 +1,4 @@
-﻿function PatientInfoViewModel(data) {
+﻿function PatientModel(data) {
     var self = this;
 
     this.Name = ko.observable(data.Name);

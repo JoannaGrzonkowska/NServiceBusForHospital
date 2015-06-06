@@ -1,13 +1,13 @@
 ﻿function PatientPersonalDataViewModel(data) {
     var self = this;
 
-    this.Info = new PatientInfoViewModel(data.Info);
+    this.Info = new PatientModel(data.Info);
 
     this.PatientAlergies = ko.observableArray([]);
 
     if (data.PatientAlergies != null) {
         data.PatientAlergies.forEach(function (item) {
-            self.PatientAlergies.push(new PatientAlergyViewModel(item));
+            self.PatientAlergies.push(new PatientAlergyModel(item));
         });
     };
 
@@ -15,7 +15,7 @@
 
     if (data.AlergyTypes != null) {
         data.AlergyTypes.forEach(function (item) {
-            self.AlergyTypes.push(new AlergyTypeViewModel(item));
+            self.AlergyTypes.push(new AlergyTypeModel(item));
         });
     };
 

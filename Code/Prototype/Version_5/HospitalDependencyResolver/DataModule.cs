@@ -13,12 +13,12 @@ namespace HospitalDependencyResolver
     {
         protected override void Load(ContainerBuilder builder)
         {
-           // builder.RegisterInstance(typeof(HospitalTestEntities), new HospitalTestEntities(), new H);
-
             builder.Register(c => new HospitalTestEntities()).As<HospitalTestEntities>().InstancePerRequest();
-           
-
+         
             builder.RegisterType<PatientRepository>().As<IPatientRepository>().InstancePerRequest();
+            builder.RegisterType<AlergyRepository>().As<IAlergyRepository>().InstancePerRequest();
+            builder.RegisterType<PatientAlergyRepository>().As<IPatientAlergyRepository>().InstancePerRequest();
+           
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
 
             base.Load(builder);

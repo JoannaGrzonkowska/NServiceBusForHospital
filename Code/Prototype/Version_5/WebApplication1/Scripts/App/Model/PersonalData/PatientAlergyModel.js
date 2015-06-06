@@ -1,4 +1,4 @@
-﻿function PatientAlergyViewModel(data) {
+﻿function PatientAlergyModel(data) {
     var self = this;
 
     this.AlergyId = ko.observable(data.AlergyId);

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebApplication1.ViewModels
+namespace BusinessLogic.Models
 {
-    public class AlergyTypeViewModel
+    public class AlergyTypeModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

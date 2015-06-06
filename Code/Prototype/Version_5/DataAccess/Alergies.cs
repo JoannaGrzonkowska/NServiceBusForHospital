@@ -12,17 +12,15 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class Patient
+    public partial class Alergies
     {
-        public Patient()
+        public Alergies()
         {
             this.PatientAlergies = new HashSet<PatientAlergies>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Age { get; set; }
-        public string Password { get; set; }
     
         public virtual ICollection<PatientAlergies> PatientAlergies { get; set; }
     }

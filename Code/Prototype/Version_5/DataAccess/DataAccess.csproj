@@ -58,6 +58,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alergies.cs">
+      <DependentUpon>HospitalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="HospitalModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -74,6 +77,13 @@
       <DependentUpon>HospitalModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="PatientAlergies.cs">
+      <DependentUpon>HospitalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\AlergyRepository.cs" />
+    <Compile Include="Repositories\IAlergyRepository.cs" />
+    <Compile Include="Repositories\IPatientAlergyRepository.cs" />
+    <Compile Include="Repositories\PatientAlergyRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="Patient.cs">
       <DependentUpon>HospitalModel.tt</DependentUpon>

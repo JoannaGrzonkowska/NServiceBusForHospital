@@ -16,7 +16,7 @@
         $.ajaxSetup({ cache: false });
         $.getJSON(self.urls.getAlergies, function (result) {
             var mappedData = $.map(result, function (item) {
-                return new PatientAlergyViewModel(item);
+                return new PatientAlergyModel(item);
             });
             handler(mappedData);
         }).fail(function (response) {

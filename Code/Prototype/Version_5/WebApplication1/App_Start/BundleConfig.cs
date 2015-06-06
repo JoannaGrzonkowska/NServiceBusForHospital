@@ -25,9 +25,9 @@ namespace WebApplication1
 
             bundles.Add(new ScriptBundle("~/bundles/patient_index").Include(
                      "~/Scripts/select2.js",
-                     "~/Scripts/App/Model/PersonalData/PatientInfoViewModel.js",
-                     "~/Scripts/App/Model/PersonalData/PatientAlergyViewModel.js",
-                     "~/Scripts/App/Model/PersonalData/AlergyTypeViewModel.js",
+                     "~/Scripts/App/Model/PersonalData/PatientModel.js",
+                     "~/Scripts/App/Model/PersonalData/PatientAlergyModel.js",
+                     "~/Scripts/App/Model/PersonalData/AlergyTypeModel.js",
                      "~/Scripts/App/Model/PersonalData/PatientLocalizations.js",
                      "~/Scripts/App/Model/PersonalData/PatientPersonalDataViewModel.js",
                      "~/Scripts/App/Services/PatientPersonalDataService.js"
