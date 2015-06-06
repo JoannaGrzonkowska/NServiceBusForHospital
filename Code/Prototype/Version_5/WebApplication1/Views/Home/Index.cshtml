@@ -1,20 +1,124 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using Resources
+
+@{
+    ViewBag.Title = "Patient Data";
 }
 
 <h3>@ViewBag.Message</h3>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<main id="patient-personal-data-content" class="container">
 
-<h2>Tescik</h2>
-<div class="container">
+    <div data-bind="template: { name: 'news-template'}"></div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div data-bind="template: { name: 'patient-info-template'}"></div>
+        </div>
+        <div class="col-sm-6">
+            <div data-bind="template: { name: 'add-alergy-template'}"></div>
+        </div>
+    </div>
+
+    <div data-bind="template:{name:'patient-alergies-template'}"></div>
+</main>
+
+<script id="news-template" type="text/html">
     <ul id="discussion"></ul>
-</div>
+</script>
+
+<script id="patient-info-template" type="text/html">
+    <section class="panel panel-info">
+        <div class="panel-heading">Patient's info</div>
+        <div class="panel-body">
+            <div class="row">
+                <label class="col-sm-2">Name:</label>
+                <span data-bind="text: info().Name"></span>
+            </div>
+            <div class="row">
+                <label class="col-sm-2">Age:</label>
+                <span data-bind="text: info().Age"></span>
+            </div>
+        </div>
+    </section>
+</script>
+
+<script id="add-alergy-template" type="text/html">
+    <div id="add-alergy-container">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h2>@Localizations.AddNewAlergy</h2></div>
+            <div class="panel-body">
+                <div data-bind="visible: isSendMessageVisible" class="alert alert-success">@Localizations.SendMessage</div>
+                <form id="add-alergy-form">
+                    <div class="form-group">
+                        <label>@Localizations.ChooseAlergyType_Label</label>
+                        <div>
+                            <select class="form-control input-lg" id="alergyTypeSelect" data-bind="foreach: alergyTypes, value: selectedAlergyTypeId, select2: { width: '100%', placeholder: '@Localizations.ChooseAlergyType_Placeholder' }">
+                                <option data-bind="text: Name(), value: Id"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>@Localizations.ChooseAlergyType_Label</label>
+                        <div>
+                            <select class="form-control input-lg" id="alergyTypeTestSelect" data-bind="foreach: alergyTypes, value: selectedAlergyTypeId, select2: { width: '100%', placeholder: '@Localizations.ChooseAlergyType_Placeholder', templateResult: formatAlergyListItem }">
+                                <option data-bind="text: Name(), value: Id, attr: {'data-image': ImagePath()}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>@Localizations.PatientAlergyDescription_Label</label>
+                        <textarea id="activityDescriptionInput" class="form-control" rows="4" cols="70"
+                                  placeholder="@Localizations.PatientAlergyDescription_Placeholder"
+                                  data-bind="value: alergyDescription, attr:{maxlength:alergyDescriptionMaxLength()}"></textarea>
+                    </div>
+                    <button class="btn btn-primary btn-lg" data-bind="click: addAlergyToPatient, enable: isFormAddAlergyValid">@Localizations.AddAlergyToPatient</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script id="patient-alergies-template" type="text/html">
+    <section id="alergies-container" class="panel panel-info">
+        <div class="panel-heading"><h2 data-bind="text:patientLocalizations().AlergiesHeader"></h2></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    <strong>@Localizations.AlergyNameHeader</strong>
+                </div>
+                <div class="col-sm-6">
+                    <span>@Localizations.DescriptionHeader</span>
+                </div>
+                <div class="col-sm-3">
+                    <span>@Localizations.WhenDiagnosedHeader</span>
+                </div>
+            </div>
+            <div data-bind="template: { name: 'patient-alergy-template', foreach: patientAlergies}"></div>
+        </div>
+    </section>
+</script>
+
+
+<script id="patient-alergy-template" type="text/html">
+    <div class="row">
+        <div class="col-sm-3" data-toggle="tooltip"
+             data-placement="top" data-bind="attr: { 'title': AlergyId() }">
+            <strong data-bind="text: AlergyName"></strong>
+        </div>
+        <div class="col-sm-6">
+            <span data-bind="text: Description"></span>
+        </div>
+        <div class="col-sm-3">
+            <span data-bind="localizedDateTime: WhenDiagnosed"></span>
+        </div>
+    </div>
+</script>
+
 @section scripts {
+
+    @Scripts.Render("~/bundles/patient_index")
+
     <!--Script references. -->
     <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
     <!--Reference the SignalR library. -->
@@ -40,5 +144,99 @@
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
+    </script>
+
+    <script type="text/javascript">
+
+        (function () {
+            var urls = {
+                content: '@Url.Content("~/content")',
+                addAlergy: "@Url.RouteUrl("Default", new { httproute = "", controller = "PatientPersonalData", action = "AddAlergy" })",
+                getAlergies: "@Url.RouteUrl("Default", new { httproute = "", controller = "PatientPersonalData", action = "GetAlergies" })",
+            };
+
+            var patientPersonalDataService = new PatientPersonalDataService(urls);
+
+            var AlergiesViewModel = function () {
+                var self = this;
+                var activityRequestResponse = {};
+
+                self.info = ko.observable();
+                self.patientAlergies = ko.observableArray([]);
+                self.alergyTypes = ko.observableArray([]);
+                self.patientLocalizations = ko.observable();
+                self.alergyDescriptionMaxLength = ko.observable();
+
+                self.selectedAlergyTypeId = ko.observable();
+                self.alergyDescription = ko.observable('');
+
+                self.isSendMessageVisible = ko.observable(false);
+
+                self.contentPath = urls.content;
+
+                self.isFormAddAlergyValid = ko.computed(function () {
+                    return self.selectedAlergyTypeId() > 0 && self.alergyDescription !== '';
+                });
+
+
+                self.addAlergyToPatient = function () {
+                    patientPersonalDataService.addAlergy(
+                        {
+                            AlergyId: self.selectedAlergyTypeId(),
+                            Description: self.alergyDescription()
+                        },
+                        function () {
+                            self.selectedAlergyTypeId(-1);
+                            self.alergyDescription('');
+
+                            self.getPatientAlergies();
+                            self.isSendMessageVisible(true);
+                        });
+                };
+
+                self.getPatientAlergies = function () {
+                    patientPersonalDataService.getAlergies(function (data) {
+                        self.patientAlergies(data);
+                    });
+                }
+
+                self.formatAlergyListItem = function (item) {
+                    if (!item.id) { return item.text; }
+                    return '<span><img src="' + self.contentPath + item.element.attributes["data-image"].value + '"/> ' + item.text + '</span>'
+                };
+            };
+
+
+            $(function () {
+
+                var alergiesViewModel = new AlergiesViewModel();
+
+                $('add-alergy-form').submit(function () {
+                    return false;
+                });
+
+                patientPersonalDataService.getPersonalData(function (data) {
+                    alergiesViewModel.info(data.Info);
+                    alergiesViewModel.patientAlergies(data.PatientAlergies());
+                    alergiesViewModel.alergyTypes(data.AlergyTypes());
+                    alergiesViewModel.patientLocalizations(data.PatientLocalizations);
+                    alergiesViewModel.alergyDescriptionMaxLength(data.AlergyDescriptionMaxLength);
+
+                    $('#alergyTypeSelect').val(null).trigger('change');
+                    $('#alergyTypeTestSelect').val(null).trigger('change');
+
+                    ko.applyBindings(alergiesViewModel, document.getElementById("patient-personal-data-content"));
+                    $.data(document.body, "AlergiesViewModel", alergiesViewModel);
+
+                    $('[data-toggle="tooltip"]').tooltip({
+                        container: 'body'
+                    });
+
+                });
+
+
+
+            });
+        })();
     </script>
 }

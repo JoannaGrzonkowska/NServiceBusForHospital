@@ -6,6 +6,7 @@ app:
 klient:
 Install-Package knockoutjs
 Install-Package bootstrap
+Install-Package Moment.js
 
 nservicebus:
 Install-Package NServiceBus
@@ -15,3 +16,18 @@ Install-Package Autofac.Mvc5
 
 signalR:
 install-package Microsoft.AspNet.SignalR
+
+http://idevexplorer.com/2014/10/implementing-ninject-dependency-injection-framework-in-a-class-library/
+DI:
+Install-Package Ninject
+
+
+Prototyp:
+
+Patient:
+@Localizations
+Logowanie
+
+
+Laboratory:
+bindowanie knockoutem, lista, dane+odp+send button

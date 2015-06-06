@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="CommandHandlers\AddPatientCommandHandler.cs" />
     <Compile Include="CommandHandlers\IAddPatientCommandHandler.cs" />
+    <Compile Include="Models\Commands\AddAlergyToPatientCommand.cs" />
     <Compile Include="Models\Commands\AddPatientCommand.cs" />
     <Compile Include="Models\Commands\WynikZLabCommand.cs" />
     <Compile Include="Models\PatientModel.cs" />

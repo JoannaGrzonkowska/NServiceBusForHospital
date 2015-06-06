@@ -23,6 +23,21 @@ namespace WebApplication1
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/patient_index").Include(
+                     "~/Scripts/select2.js",
+                     "~/Scripts/App/Model/PersonalData/PatientInfoViewModel.js",
+                     "~/Scripts/App/Model/PersonalData/PatientAlergyViewModel.js",
+                     "~/Scripts/App/Model/PersonalData/AlergyTypeViewModel.js",
+                     "~/Scripts/App/Model/PersonalData/PatientLocalizations.js",
+                     "~/Scripts/App/Model/PersonalData/PatientPersonalDataViewModel.js",
+                     "~/Scripts/App/Services/PatientPersonalDataService.js"
+                     ));
+
+            bundles.Add(new ScriptBundle("~/bundles/common").Include(
+                     "~/Scripts/knockout-3.3.0.js",
+                     "~/Scripts/moment.min.js",
+                     "~/Scripts/customBindingHandlers.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
