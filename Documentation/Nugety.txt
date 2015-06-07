@@ -22,6 +22,8 @@ DI:
 Install-Package Ninject
 Install-Package Autofac.WebApi
 
+simplecrypto
+
 
 Prototyp:
 

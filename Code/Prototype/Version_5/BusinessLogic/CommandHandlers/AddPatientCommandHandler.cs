@@ -27,7 +27,9 @@ namespace BusinessLogic.CommandHandlers
         {
             var patient = new Patient
             {
-                Name = command.Name
+                Name = command.Name,
+                Password = command.Password,
+                PasswordSalt = command.PasswordSalt
             };
             _patientRepository.Add(patient);
             _unitOfWork.SaveChanges();

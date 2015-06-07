@@ -20,16 +20,19 @@ namespace WebApplication1.Controllers
         private readonly IAlergyService _alergyService;
         private readonly IAddAlergyToPatientCommandHandler _addAlergyToPatientCommandHandler;
         private readonly IPatientAlergyService _patientAlergyService;
+        private readonly IAccountService _accountService;
 
         public PatientPersonalDataController(IPatientService patientService,
             IAlergyService alergyService,
             IAddAlergyToPatientCommandHandler addAlergyToPatientCommandHandler,
-            IPatientAlergyService patientAlergyService)
+            IPatientAlergyService patientAlergyService,
+            IAccountService accountService)
         {
             _patientService = patientService;
             _alergyService = alergyService;
             _addAlergyToPatientCommandHandler = addAlergyToPatientCommandHandler;
             _patientAlergyService = patientAlergyService;
+            _accountService = accountService;
         }
 
         public ActionResult Index()
@@ -38,9 +41,12 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult GetPersonalData()
         {
-            var patientId = 1;
+            var patient = _patientService.GetModelByName(User.Identity.Name);
+
+            var patientId = patient.Id;
             var info = _patientService.GetById(patientId);
             var alergyTypes = _alergyService.GetAll();
             var patientAlergies = _patientAlergyService.GetPatientAlergies(patientId);
@@ -63,7 +69,8 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public ActionResult AddAlergy(AddAlergyToPatientCommand command)
         {
-            command.PatientId = 1;
+            var patient = _patientService.GetModelByName(User.Identity.Name);
+            command.PatientId = patient.Id;
             if (command.Description != null && command.Description.Length > LenghtConstraints.AlergyDescriptionMaxLength)
                 return Json(new CommandResult(new[]{ 
                     string.Format("Description must be less than {0} characters.", LenghtConstraints.AlergyDescriptionMaxLength) }),
@@ -75,8 +82,8 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult GetAlergies()
         {
-            int patientId = 1;
-            return Json(_patientAlergyService.GetPatientAlergies(patientId), JsonRequestBehavior.AllowGet);
+            var patient = _patientService.GetModelByName(User.Identity.Name);
+            return Json(_patientAlergyService.GetPatientAlergies(patient.Id), JsonRequestBehavior.AllowGet);
         }
     }
 }

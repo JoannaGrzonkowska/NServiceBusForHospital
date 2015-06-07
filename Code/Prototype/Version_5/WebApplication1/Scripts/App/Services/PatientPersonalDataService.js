@@ -8,7 +8,7 @@
             var mappedData = new PatientPersonalDataViewModel(result);
             handler(mappedData);
         }).fail(function (response) {
-            alert(response);
+            showErrorMessage(response);
         });
     };
 
@@ -20,7 +20,7 @@
             });
             handler(mappedData);
         }).fail(function (response) {
-            alert(response);
+            showErrorMessage(response);
         });
     };
 
@@ -29,10 +29,10 @@
         $.post(self.urls.addAlergy, data, function (result) {
             handler(result);
             if (result.IsSuccess === false) {
-                alert(result.Errors.join('\n'));
+                showError(result.Errors.join('\n'));
             }
         }, 'json').fail(function (response) {
-            alert(response);
+            showErrorMessage(response);
         });
     }
 };

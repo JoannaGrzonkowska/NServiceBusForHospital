@@ -16,6 +16,7 @@ namespace HospitalDependencyResolver
             builder.RegisterType<PatientService>().As<IPatientService>().InstancePerRequest();
             builder.RegisterType<AlergyService>().As<IAlergyService>().InstancePerRequest();
             builder.RegisterType<PatientAlergyService>().As<IPatientAlergyService>().InstancePerRequest();
+            builder.RegisterType<AccountService>().As<IAccountService>().InstancePerRequest();
 
             builder.RegisterType<AddPatientCommandHandler>().As<IAddPatientCommandHandler>().InstancePerRequest();
             builder.RegisterType<AddAlergyToPatientCommandHandler>().As<IAddAlergyToPatientCommandHandler>().InstancePerRequest();

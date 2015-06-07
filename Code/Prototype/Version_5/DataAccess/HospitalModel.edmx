@@ -20,6 +20,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Age" Type="int" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="PatientAlergies">
           <Key>
@@ -81,6 +82,7 @@
           <Property Name="Age" Type="Int32" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PatientAlergies" Relationship="HospitalTestModel.FK_PatientAlergies_Patient" FromRole="Patient" ToRole="PatientAlergies" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="HospitalTestEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Patient" EntityType="Self.Patient" />
@@ -148,6 +150,7 @@
           <EntitySetMapping Name="Patient">
             <EntityTypeMapping TypeName="HospitalTestModel.Patient">
               <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

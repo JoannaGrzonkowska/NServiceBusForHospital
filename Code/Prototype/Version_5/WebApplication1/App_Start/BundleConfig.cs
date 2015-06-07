@@ -36,6 +36,7 @@ namespace WebApplication1
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
                      "~/Scripts/knockout-3.3.0.js",
                      "~/Scripts/moment.min.js",
+                      "~/Scripts/App/Common.js",
                      "~/Scripts/customBindingHandlers.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

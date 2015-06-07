@@ -33,6 +33,9 @@
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleCrypto">
+      <HintPath>..\packages\SimpleCrypto.0.3.30.26\lib\SimpleCrypto.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,7 +56,9 @@
     <Compile Include="Models\PatientAlergyModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\AlergyService.cs" />
+    <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IAlergyService.cs" />
     <Compile Include="Services\IPatientAlergyService.cs" />
     <Compile Include="Services\IPatientService.cs" />

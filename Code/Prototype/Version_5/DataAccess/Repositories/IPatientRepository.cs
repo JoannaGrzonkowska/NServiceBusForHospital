@@ -9,5 +9,7 @@ namespace DataAccess.Repositories
     public interface IPatientRepository : IRepository<Patient>
     {
         IEnumerable<Patient> TestMethod1(int id);
+        void Update(Patient patient);
+        Patient GetByName(string name);
     }
 }

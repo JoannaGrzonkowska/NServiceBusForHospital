@@ -23,10 +23,47 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>
+                            <strong>@Html.Encode(User.Identity.Name)</strong>
+                            @Html.ActionLink("Log out", "Logout", "User")
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Log in", "Login", "User")</li>
+                        <li>@Html.ActionLink("Register", "Register", "User")</li>
+                    }
+
                 </ul>
+
+
+
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Error</h4>
+                </div>
+                <div class="modal-body">
+                    <span id="errorModal-content"></span>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                *@
+            </div>
+        </div>
+    </div>
+
+
     <div class="container body-content">
         @RenderBody()
         <hr />

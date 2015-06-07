@@ -23,6 +23,7 @@ namespace DataAccess
         public string Name { get; set; }
         public int Age { get; set; }
         public string Password { get; set; }
+        public string PasswordSalt { get; set; }
     
         public virtual ICollection<PatientAlergies> PatientAlergies { get; set; }
     }
