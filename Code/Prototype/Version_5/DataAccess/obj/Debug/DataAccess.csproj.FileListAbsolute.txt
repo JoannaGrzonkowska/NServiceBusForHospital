@@ -1,0 +1,16 @@
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\DataAccess.dll.config
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\DataAccess.dll
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\DataAccess.pdb
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\Autofac.dll
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\EntityFramework.dll
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\log4net.dll
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\Ninject.dll
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\Autofac.xml
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\EntityFramework.xml
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\log4net.xml
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\bin\Debug\Ninject.xml
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\obj\Debug\DataAccess.dll
+C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\DataAccess\obj\Debug\DataAccess.pdb

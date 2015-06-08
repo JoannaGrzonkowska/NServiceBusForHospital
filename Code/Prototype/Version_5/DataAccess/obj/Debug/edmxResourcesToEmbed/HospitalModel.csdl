@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HospitalTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PatientAlergies" Relationship="HospitalTestModel.FK_PatientAlergies_Patient" FromRole="Patient" ToRole="PatientAlergies" />
+    <Property Name="PasswordSalt" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="HospitalTestEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Patient" EntityType="Self.Patient" />
+    <EntitySet Name="Alergies" EntityType="HospitalTestModel.Alergies" />
+    <EntitySet Name="PatientAlergies" EntityType="HospitalTestModel.PatientAlergies" />
+    <AssociationSet Name="FK_PatientAlergies_Alergies" Association="HospitalTestModel.FK_PatientAlergies_Alergies">
+      <End Role="Alergies" EntitySet="Alergies" />
+      <End Role="PatientAlergies" EntitySet="PatientAlergies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientAlergies_Patient" Association="HospitalTestModel.FK_PatientAlergies_Patient">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientAlergies" EntitySet="PatientAlergies" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Alergies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PatientAlergies" Relationship="HospitalTestModel.FK_PatientAlergies_Alergies" FromRole="Alergies" ToRole="PatientAlergies" />
+  </EntityType>
+  <EntityType Name="PatientAlergies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientId" Type="Int32" Nullable="false" />
+    <Property Name="AlergyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Alergies" Relationship="HospitalTestModel.FK_PatientAlergies_Alergies" FromRole="PatientAlergies" ToRole="Alergies" />
+    <NavigationProperty Name="Patient" Relationship="HospitalTestModel.FK_PatientAlergies_Patient" FromRole="PatientAlergies" ToRole="Patient" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="WhenDiagnosed" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK_PatientAlergies_Alergies">
+    <End Type="HospitalTestModel.Alergies" Role="Alergies" Multiplicity="1" />
+    <End Type="HospitalTestModel.PatientAlergies" Role="PatientAlergies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alergies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientAlergies">
+        <PropertyRef Name="AlergyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientAlergies_Patient">
+    <End Type="HospitalTestModel.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="HospitalTestModel.PatientAlergies" Role="PatientAlergies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientAlergies">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
