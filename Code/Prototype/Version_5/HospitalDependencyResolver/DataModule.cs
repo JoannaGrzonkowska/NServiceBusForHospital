@@ -13,7 +13,7 @@ namespace HospitalDependencyResolver
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.Register(c => new HospitalTestEntities()).As<HospitalTestEntities>().InstancePerRequest();
+            builder.Register(c => new HospitalKSREntities()).As<HospitalKSREntities>().InstancePerRequest();
          
             builder.RegisterType<PatientRepository>().As<IPatientRepository>().InstancePerRequest();
             builder.RegisterType<AlergyRepository>().As<IAlergyRepository>().InstancePerRequest();

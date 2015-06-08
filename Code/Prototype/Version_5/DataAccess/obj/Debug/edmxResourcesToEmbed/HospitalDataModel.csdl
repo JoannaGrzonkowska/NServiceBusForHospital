@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HospitalKSRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Alergies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="PatientAlergies" Relationship="Self.FK_PatientAlergies_Alergies" FromRole="Alergies" ToRole="PatientAlergies" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordSalt" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PatientAlergies" Relationship="Self.FK_PatientAlergies_Patient" FromRole="Patient" ToRole="PatientAlergies" />
+  </EntityType>
+  <EntityType Name="PatientAlergies">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatientId" Type="Int32" Nullable="false" />
+    <Property Name="AlergyId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="WhenDiagnosed" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Alergies" Relationship="Self.FK_PatientAlergies_Alergies" FromRole="PatientAlergies" ToRole="Alergies" />
+    <NavigationProperty Name="Patient" Relationship="Self.FK_PatientAlergies_Patient" FromRole="PatientAlergies" ToRole="Patient" />
+  </EntityType>
+  <Association Name="FK_PatientAlergies_Alergies">
+    <End Role="Alergies" Type="Self.Alergies" Multiplicity="1" />
+    <End Role="PatientAlergies" Type="Self.PatientAlergies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Alergies">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientAlergies">
+        <PropertyRef Name="AlergyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PatientAlergies_Patient">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+    <End Role="PatientAlergies" Type="Self.PatientAlergies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PatientAlergies">
+        <PropertyRef Name="PatientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HospitalKSREntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Alergies" EntityType="Self.Alergies" />
+    <EntitySet Name="Patient" EntityType="Self.Patient" />
+    <EntitySet Name="PatientAlergies" EntityType="Self.PatientAlergies" />
+    <AssociationSet Name="FK_PatientAlergies_Alergies" Association="Self.FK_PatientAlergies_Alergies">
+      <End Role="Alergies" EntitySet="Alergies" />
+      <End Role="PatientAlergies" EntitySet="PatientAlergies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PatientAlergies_Patient" Association="Self.FK_PatientAlergies_Patient">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="PatientAlergies" EntitySet="PatientAlergies" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

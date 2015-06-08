@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
-    public class PatientAlergyRepository: RepositoryBase<PatientAlergies, HospitalTestEntities>, IPatientAlergyRepository
+    public class PatientAlergyRepository : RepositoryBase<PatientAlergies, HospitalKSREntities>, IPatientAlergyRepository
     {
-        public PatientAlergyRepository(HospitalTestEntities context)
+        public PatientAlergyRepository(HospitalKSREntities context)
             : base(context)
         {
 

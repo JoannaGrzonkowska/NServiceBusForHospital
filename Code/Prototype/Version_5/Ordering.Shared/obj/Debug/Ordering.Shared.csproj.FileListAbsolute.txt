@@ -3,6 +3,5 @@ C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\NServiceBus.Core.dll
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\NServiceBus.Core.pdb
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\NServiceBus.Core.xml
-C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\obj\Debug\Ordering.Shared.csprojResolveAssemblyReference.cache
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\obj\Debug\Ordering.Shared.dll
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\obj\Debug\Ordering.Shared.pdb

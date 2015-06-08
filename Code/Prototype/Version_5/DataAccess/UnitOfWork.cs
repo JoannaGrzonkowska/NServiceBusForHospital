@@ -13,9 +13,9 @@ namespace DataAccess
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(UnitOfWork));
 
-        private HospitalTestEntities _dataContext;
+        private HospitalKSREntities _dataContext;
 
-        public UnitOfWork(HospitalTestEntities dataContext)
+        public UnitOfWork(HospitalKSREntities dataContext)
         {
             _dataContext = dataContext;
         }

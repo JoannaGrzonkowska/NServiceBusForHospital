@@ -13,10 +13,10 @@ namespace DataAccess
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HospitalTestEntities : DbContext
+    public partial class HospitalKSREntities : DbContext
     {
-        public HospitalTestEntities()
-            : base("name=HospitalTestEntities")
+        public HospitalKSREntities()
+            : base("name=HospitalKSREntities")
         {
         }
     
@@ -25,8 +25,8 @@ namespace DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Patient> Patient { get; set; }
         public virtual DbSet<Alergies> Alergies { get; set; }
+        public virtual DbSet<Patient> Patient { get; set; }
         public virtual DbSet<PatientAlergies> PatientAlergies { get; set; }
     }
 }
