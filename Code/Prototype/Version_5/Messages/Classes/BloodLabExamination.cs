@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Messages.Interfaces;
+using NServiceBus;
 
 namespace Messages.Classes
 {
-    class BloodLabExamination : IBloodLabExamination
+    class BloodLabExamination : IEvent, IBloodLabExamination
     {
         public int PatientId { get; set; }
 

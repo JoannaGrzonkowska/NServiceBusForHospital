@@ -1,4 +1,3 @@
-D:\NServiceBusForHospital\Code\Prototype\Version_5\LAB\obj\Debug\LAB.csprojResolveAssemblyReference.cache
 D:\NServiceBusForHospital\Code\Prototype\Version_5\LAB\bin\LAB.dll.config
 D:\NServiceBusForHospital\Code\Prototype\Version_5\LAB\bin\LAB.dll
 D:\NServiceBusForHospital\Code\Prototype\Version_5\LAB\bin\LAB.pdb

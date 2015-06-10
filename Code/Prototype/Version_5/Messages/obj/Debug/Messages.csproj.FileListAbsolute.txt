@@ -3,3 +3,6 @@ D:\NServiceBusForHospital\Code\Prototype\Version_5\Messages\bin\Debug\Messages.p
 D:\NServiceBusForHospital\Code\Prototype\Version_5\Messages\obj\Debug\Messages.csprojResolveAssemblyReference.cache
 D:\NServiceBusForHospital\Code\Prototype\Version_5\Messages\obj\Debug\Messages.dll
 D:\NServiceBusForHospital\Code\Prototype\Version_5\Messages\obj\Debug\Messages.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Messages\bin\Debug\NServiceBus.Core.dll
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Messages\bin\Debug\NServiceBus.Core.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Messages\bin\Debug\NServiceBus.Core.xml

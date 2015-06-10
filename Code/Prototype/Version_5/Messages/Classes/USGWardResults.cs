@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Messages.Interfaces;
 
+using NServiceBus;
+
 namespace Messages.Classes
 {
-    class USGWardResults : IUSGWardResults
+    class USGWardResults : IEvent, IUSGWardResults
     {
         public int PatientId { get; set; }
 
