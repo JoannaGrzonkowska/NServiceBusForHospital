@@ -59,35 +59,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alergies.cs">
-      <DependentUpon>HospitalDataModel.tt</DependentUpon>
+      <DependentUpon>HospitalModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="HospitalDataModel.Context.cs">
+    <Compile Include="HospitalModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HospitalDataModel.Context.tt</DependentUpon>
+      <DependentUpon>HospitalModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="HospitalDataModel.cs">
+    <Compile Include="HospitalModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HospitalDataModel.tt</DependentUpon>
+      <DependentUpon>HospitalModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="HospitalDataModel.Designer.cs">
+    <Compile Include="HospitalModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HospitalDataModel.edmx</DependentUpon>
+      <DependentUpon>HospitalModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Patient.cs">
+      <DependentUpon>HospitalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="PatientAlergies.cs">
-      <DependentUpon>HospitalDataModel.tt</DependentUpon>
+      <DependentUpon>HospitalModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Repositories\AlergyRepository.cs" />
     <Compile Include="Repositories\IAlergyRepository.cs" />
     <Compile Include="Repositories\IPatientAlergyRepository.cs" />
     <Compile Include="Repositories\PatientAlergyRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
-    <Compile Include="Patient.cs">
-      <DependentUpon>HospitalDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IPatientRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
@@ -96,26 +96,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="HospitalDataModel.edmx">
+    <EntityDeploy Include="HospitalModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>HospitalDataModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>HospitalModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="HospitalDataModel.edmx.diagram">
-      <DependentUpon>HospitalDataModel.edmx</DependentUpon>
+    <None Include="HospitalModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HospitalModel.edmx</DependentUpon>
+      <LastGenOutput>HospitalModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="HospitalModel.edmx.diagram">
+      <DependentUpon>HospitalModel.edmx</DependentUpon>
+    </None>
+    <None Include="HospitalModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>HospitalModel.edmx</DependentUpon>
+      <LastGenOutput>HospitalModel.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="HospitalDataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HospitalDataModel.edmx</DependentUpon>
-      <LastGenOutput>HospitalDataModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="HospitalDataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>HospitalDataModel.edmx</DependentUpon>
-      <LastGenOutput>HospitalDataModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

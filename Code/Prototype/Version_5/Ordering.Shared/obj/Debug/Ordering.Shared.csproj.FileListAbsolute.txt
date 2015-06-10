@@ -5,3 +5,10 @@ C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\NServiceBus.Core.xml
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\obj\Debug\Ordering.Shared.dll
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\obj\Debug\Ordering.Shared.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\Ordering.Shared.dll
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\Ordering.Shared.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\NServiceBus.Core.dll
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\NServiceBus.Core.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\NServiceBus.Core.xml
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\obj\Debug\Ordering.Shared.dll
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\obj\Debug\Ordering.Shared.pdb

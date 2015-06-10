@@ -1,33 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="HospitalTestModelStoreContainer" CdmEntityContainer="HospitalTestEntities">
-    <EntitySetMapping Name="Patient">
-      <EntityTypeMapping TypeName="HospitalTestModel.Patient">
-        <MappingFragment StoreEntitySet="Patient">
-          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Age" ColumnName="Age" />
+  <EntityContainerMapping StorageEntityContainer="HospitalKSRModelStoreContainer" CdmEntityContainer="HospitalKSREntities">
+    <EntitySetMapping Name="Alergies">
+      <EntityTypeMapping TypeName="HospitalKSRModel.Alergies">
+        <MappingFragment StoreEntitySet="Alergies">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Alergies">
-      <EntityTypeMapping TypeName="HospitalTestModel.Alergies">
-        <MappingFragment StoreEntitySet="Alergies">
-          <ScalarProperty Name="Name" ColumnName="Name" />
+    <EntitySetMapping Name="Patient">
+      <EntityTypeMapping TypeName="HospitalKSRModel.Patient">
+        <MappingFragment StoreEntitySet="Patient">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PatientAlergies">
-      <EntityTypeMapping TypeName="HospitalTestModel.PatientAlergies">
+      <EntityTypeMapping TypeName="HospitalKSRModel.PatientAlergies">
         <MappingFragment StoreEntitySet="PatientAlergies">
-          <ScalarProperty Name="WhenDiagnosed" ColumnName="WhenDiagnosed" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="AlergyId" ColumnName="AlergyId" />
-          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+          <ScalarProperty Name="AlergyId" ColumnName="AlergyId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="WhenDiagnosed" ColumnName="WhenDiagnosed" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

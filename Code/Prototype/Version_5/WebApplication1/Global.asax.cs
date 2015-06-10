@@ -52,14 +52,22 @@ namespace WebApplication1
 
 
             BusConfiguration busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("Samples.Mvc.WebApplication");
+            busConfiguration.EndpointName("PatientEndPoint");
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.UseContainer<AutofacBuilder>(c => c.ExistingLifetimeScope(container));
             busConfiguration.UsePersistence<InMemoryPersistence>();
             busConfiguration.EnableInstallers();
 
-            var startableBus = Bus.Create(busConfiguration);
-            bus = startableBus.Start();
+            try
+            {
+                var startableBus = Bus.Create(busConfiguration);
+                bus = startableBus.Start();
+            }
+            catch (Exception e)
+            {
+                var s = e.Message;
+            }
+            
 
             AreaRegistration.RegisterAllAreas();
 
