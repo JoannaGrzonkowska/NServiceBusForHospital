@@ -9,3 +9,14 @@ C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\obj\Debug\Ordering.Server.csprojResolveAssemblyReference.cache
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\obj\Debug\Ordering.Server.exe
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\obj\Debug\Ordering.Server.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\Ordering.Server.exe.config
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\Ordering.Server.exe
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\Ordering.Server.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\NServiceBus.Core.dll
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\Ordering.Shared.dll
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\Ordering.Shared.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\NServiceBus.Core.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\NServiceBus.Core.xml
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\obj\Debug\Ordering.Server.csprojResolveAssemblyReference.cache
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\obj\Debug\Ordering.Server.exe
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\obj\Debug\Ordering.Server.pdb

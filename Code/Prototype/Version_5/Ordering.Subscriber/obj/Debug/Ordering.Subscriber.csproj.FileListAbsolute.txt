@@ -9,3 +9,14 @@ C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\obj\Debug\Ordering.Subscriber.csprojResolveAssemblyReference.cache
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\obj\Debug\Ordering.Subscriber.exe
 C:\Studia\projekty\KSR\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\obj\Debug\Ordering.Subscriber.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\bin\Debug\Ordering.Subscriber.exe.config
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\bin\Debug\Ordering.Subscriber.exe
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\bin\Debug\Ordering.Subscriber.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\bin\Debug\NServiceBus.Core.dll
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\bin\Debug\Ordering.Shared.dll
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\bin\Debug\Ordering.Shared.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\bin\Debug\NServiceBus.Core.pdb
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\bin\Debug\NServiceBus.Core.xml
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\obj\Debug\Ordering.Subscriber.csprojResolveAssemblyReference.cache
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\obj\Debug\Ordering.Subscriber.exe
+D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Subscriber\obj\Debug\Ordering.Subscriber.pdb

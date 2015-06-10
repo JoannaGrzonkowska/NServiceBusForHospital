@@ -37,7 +37,7 @@ namespace WebApplicationSaga
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
             BusConfiguration busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("Samples.Mvc.WebApplicationSaga");
+            busConfiguration.EndpointName("WardEndPoint");
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.UseContainer<AutofacBuilder>(c => c.ExistingLifetimeScope(container));
             busConfiguration.UsePersistence<InMemoryPersistence>();
