@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SimpleCrypto">
+      <HintPath>..\packages\SimpleCrypto.0.3.30.26\lib\SimpleCrypto.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,7 +42,41 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\AddDieseaseToPatientCommandHandler.cs" />
+    <Compile Include="CommandHandlers\AddPatientCommandHandler.cs" />
+    <Compile Include="CommandHandlers\IAddDieseaseToPatientCommandHandler.cs" />
+    <Compile Include="CommandHandlers\IAddPatientCommandHandler.cs" />
+    <Compile Include="Models\Commands\AddDieseaseToPatientCommand.cs" />
+    <Compile Include="Models\Commands\AddPatientCommand.cs" />
+    <Compile Include="Models\DieseasesModel.cs" />
+    <Compile Include="Models\PatientsDieseasesModel.cs" />
+    <Compile Include="Models\PatientsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\DieseasesService.cs" />
+    <Compile Include="Services\IAccountService.cs" />
+    <Compile Include="Services\IDieseasesService.cs" />
+    <Compile Include="Services\IPatientsDieseasesService.cs" />
+    <Compile Include="Services\IPatientsService.cs" />
+    <Compile Include="Services\PatientsDieseasesService.cs" />
+    <Compile Include="Services\PatientsService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Enums\" />
+    <Folder Include="Tools\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{9ac22ecb-1a57-474a-9e99-4aaa892e50b8}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Messages\Messages.csproj">
+      <Project>{80e7903d-4c35-441a-bae9-30664174eeb8}</Project>
+      <Name>Messages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

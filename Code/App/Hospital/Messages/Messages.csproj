@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CommandResult.cs" />
     <Compile Include="Patient\IResults_PatientRecive.cs" />
     <Compile Include="IWardAcceptance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
