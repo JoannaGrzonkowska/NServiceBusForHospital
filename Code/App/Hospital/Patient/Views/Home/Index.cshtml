@@ -94,7 +94,7 @@
 <script id="patient-diesease-template" type="text/html">
     <div class="row">
         <div class="col-sm-3" data-toggle="tooltip"
-             data-placement="top" data-bind="attr: { 'title': AlergyId() }">
+             data-placement="top" data-bind="attr: { 'title': DieseaseName() }">
             <strong data-bind="text: DieseaseName"></strong>
         </div>
         <div class="col-sm-6">
@@ -141,10 +141,10 @@
             var urls = {
                 content: '@Url.Content("~/content")',
                 addDiesease: "@Url.RouteUrl("Default", new { httproute = "", controller = "PatientPersonalData", action = "AddDiesease" })",
-                getDieseases: "@Url.RouteUrl("Default", new { httproute = "", controller = "PatientPersonalData", action = "GetDieseases" })",
+                getDieseases: "@Url.RouteUrl("Default", new { httproute = "", controller = "PatientPersonalData", action = "GetPatientDieseases" })",
             };
 
-            var patientPersonalDataService = new PatientPersonalDataService(urls);
+            var patientPersonalDataService = new PatientsPersonalDataService(urls);
 
             var DieseasesViewModel = function () {
                 var self = this;
@@ -152,7 +152,6 @@
                 self.info = ko.observable();
                 self.patientDieseases = ko.observableArray([]);
                 self.dieseasesTypes = ko.observableArray([]);
-                self.patientLocalizations = ko.observable();
                 self.dieseaseDescriptionMaxLength = ko.observable();
 
                 self.selectedDieseasesTypeId = ko.observable();
@@ -177,14 +176,14 @@
                             self.selectedDieseasesTypeId(-1);
                             self.dieseaseDescription('');
 
-                            self.getpatientDieseases();
+                            self.getPatientDieseases();
                             self.isSendMessageVisible(true);
                         });
                 };
 
-                self.getpatientDieseases = function () {
+                self.getPatientDieseases = function () {
                     patientPersonalDataService.getDieseases(function (data) {
-                        self.patientsDieseases(data);
+                        self.patientDieseases(data);
                     });
                 }
             };
@@ -200,7 +199,7 @@
 
                 patientPersonalDataService.getPersonalData(function (data) {
                     dieseasesViewModel.info(data.Info);
-                    dieseasesViewModel.patientsDieseases(data.PatientDieseases());
+                    dieseasesViewModel.patientDieseases(data.PatientDieseases());
                     dieseasesViewModel.dieseasesTypes(data.DieseasesTypes());
                     dieseasesViewModel.dieseaseDescriptionMaxLength(data.DieseaseDescriptionMaxLength);
 

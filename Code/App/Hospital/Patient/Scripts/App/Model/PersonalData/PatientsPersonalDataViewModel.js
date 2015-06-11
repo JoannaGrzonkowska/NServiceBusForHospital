@@ -3,11 +3,11 @@
 
     this.Info = new PatientsModel(data.Info);
 
-    this.PatientsDieseases = ko.observableArray([]);
+    this.PatientDieseases = ko.observableArray([]);
 
-    if (data.PatientsDieseases != null) {
-        data.PatientsDieseases.forEach(function (item) {
-            self.PatientsDieseases.push(new PatientsDieseasesModel(item));
+    if (data.PatientDieseases != null) {
+        data.PatientDieseases.forEach(function (item) {
+            self.PatientDieseases.push(new PatientsDieseasesModel(item));
         });
     };
 

@@ -1,4 +1,4 @@
-﻿var PatientPersonalDataService = function (urls) {
+﻿var PatientsPersonalDataService = function (urls) {
     var self = this;
     self.urls = urls;
 

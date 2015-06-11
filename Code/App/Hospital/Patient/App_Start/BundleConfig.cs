@@ -34,7 +34,7 @@ namespace Patient
                     "~/Scripts/App/Model/PersonalData/PatientsDieseasesModel.js",
                     "~/Scripts/App/Model/PersonalData/DieseasesModel.js",
                     "~/Scripts/App/Model/PersonalData/PatientPersonalDataViewModel.js",
-                    "~/Scripts/App/Services/PatientPersonalDataService.js"
+                    "~/Scripts/App/Services/PatientsPersonalDataService.js"
                     ));
 
 

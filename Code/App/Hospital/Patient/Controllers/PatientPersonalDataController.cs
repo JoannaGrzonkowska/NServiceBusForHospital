@@ -44,7 +44,7 @@ namespace Patient.Controllers
         {
      //       var patient = _patientsService.GetModelByName(User.Identity.Name);
 
-            var patientId = 1;//patient.Id;
+            var patientId = 2;//patient.Id;
             var info = _patientsService.GetById(patientId);
             var dieseasesTypes = _dieseasesService.GetAll();
             var patientDieseases = _patientsDieseasesService.GetPatientsDieseases(patientId);
@@ -65,7 +65,7 @@ namespace Patient.Controllers
         public ActionResult AddDiesease(AddDieseaseToPatientCommand command)
         {
          //   var patient = _patientsService.GetModelByName(User.Identity.Name);
-            command.PatientId = 1;// patient.Id;
+            command.PatientId = 2;// patient.Id;
             if (command.Description != null && command.Description.Length > LengthConstraints.DieseasesDescriptionMaxLength)
                 return Json(new CommandResult(new[]{ 
                     string.Format("Description must be less than {0} characters.", LengthConstraints.DieseasesDescriptionMaxLength) }),
@@ -78,7 +78,7 @@ namespace Patient.Controllers
         public ActionResult GetPatientDieseases()
         {
            // var patient = _patientsService.GetModelByName(User.Identity.Name);
-            return Json(_patientsDieseasesService.GetPatientsDieseases(1/*patient.Id*/), JsonRequestBehavior.AllowGet);
+            return Json(_patientsDieseasesService.GetPatientsDieseases(2/*patient.Id*/), JsonRequestBehavior.AllowGet);
         }
     
     }
