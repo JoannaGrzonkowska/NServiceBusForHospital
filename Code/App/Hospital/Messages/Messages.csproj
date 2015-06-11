@@ -44,10 +44,10 @@
   <ItemGroup>
     <Compile Include="Common\CommandResult.cs" />
     <Compile Include="Patient\IResults_PatientRecive.cs" />
-    <Compile Include="IWardAcceptance.cs" />
+    <Compile Include="Ward\IWardAcceptance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Patient\Results_PatientRecive.cs" />
-    <Compile Include="WardAcceptance.cs" />
+    <Compile Include="Ward\WardAcceptance.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

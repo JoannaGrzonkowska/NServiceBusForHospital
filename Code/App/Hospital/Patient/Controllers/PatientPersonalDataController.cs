@@ -1,7 +1,9 @@
 ﻿using BusinessLogic.CommandHandlers;
 using BusinessLogic.Models.Commands;
 using BusinessLogic.Services;
+using Messages;
 using Messages.Common;
+using NServiceBus;
 using Patient.Models;
 using Patient.ViewModels;
 using System;
@@ -19,18 +21,21 @@ namespace Patient.Controllers
         private readonly IAddDieseaseToPatientCommandHandler _addDieseaseToPatientCommandHandler;
         private readonly IPatientsDieseasesService _patientsDieseasesService;
         private readonly IAccountService _accountService;
-
+        private readonly IBus _bus;
+        
         public PatientPersonalDataController(IPatientsService patientService,
             IDieseasesService dieseasesService,
             IAddDieseaseToPatientCommandHandler addDieseaseToPatientCommandHandler,
             IPatientsDieseasesService patientDieseasesService,
-            IAccountService accountService)
+            IAccountService accountService,
+            IBus bus)
         {
             _patientsService = patientService;
             _dieseasesService = dieseasesService;
             _addDieseaseToPatientCommandHandler = addDieseaseToPatientCommandHandler;
             _patientsDieseasesService = patientDieseasesService;
             _accountService = accountService;
+            _bus = bus;
         }
 
         public ActionResult Index()
@@ -64,14 +69,28 @@ namespace Patient.Controllers
         [HttpPost]
         public ActionResult AddDiesease(AddDieseaseToPatientCommand command)
         {
-         //   var patient = _patientsService.GetModelByName(User.Identity.Name);
+            //   var patient = _patientsService.GetModelByName(User.Identity.Name);
             command.PatientId = 2;// patient.Id;
             if (command.Description != null && command.Description.Length > LengthConstraints.DieseasesDescriptionMaxLength)
                 return Json(new CommandResult(new[]{ 
                     string.Format("Description must be less than {0} characters.", LengthConstraints.DieseasesDescriptionMaxLength) }),
                     JsonRequestBehavior.AllowGet);
 
-            return Json(_addDieseaseToPatientCommandHandler.Add(command), JsonRequestBehavior.AllowGet);
+            var addDieseaseCommand = _addDieseaseToPatientCommandHandler.Add(command);
+
+            if (addDieseaseCommand.IsSuccess)
+            {
+                //test message
+                var resultsMessage = new WardAcceptance
+                {
+                    PatientID = 2, 
+                    IssueDate = DateTime.Now
+                };
+                _bus.Send(resultsMessage);
+                addDieseaseCommand = new CommandResult();
+            }
+
+            return Json(addDieseaseCommand, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
