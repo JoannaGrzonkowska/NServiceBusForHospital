@@ -22,7 +22,6 @@ namespace BusinessLogic.Services
             return _patientsDieseasesRepository.GetPatientsDieseases(patientId)
                 .Select(s => new PatientsDieseasesModel
                 {
-                    PatientId = s.PatientId,
                     DieseaseName = s.Dieseases.Name,
                     Description = s.Description,
                 });

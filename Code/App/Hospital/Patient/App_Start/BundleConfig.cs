@@ -26,6 +26,23 @@ namespace Patient
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/patient_index").Include(
+                    "~/Scripts/select2.js",
+                    "~/Scripts/App/Model/PersonalData/PatientsModel.js",
+                    "~/Scripts/App/Model/PersonalData/PatientsDieseasesModel.js",
+                    "~/Scripts/App/Model/PersonalData/DieseasesModel.js",
+                    "~/Scripts/App/Model/PersonalData/PatientPersonalDataViewModel.js",
+                    "~/Scripts/App/Services/PatientPersonalDataService.js"
+                    ));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/common").Include(
+                     "~/Scripts/knockout-3.3.0.js",
+                     "~/Scripts/moment.min.js",
+                      "~/Scripts/App/Common.js",
+                     "~/Scripts/customBindingHandlers.js"));
         }
     }
 }

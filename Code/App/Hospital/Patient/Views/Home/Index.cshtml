@@ -1,47 +1,121 @@
-﻿@{
-    ViewBag.Title = "PATIENT Page";
+﻿@using Resources
+
+@{
+    ViewBag.Title = "Patient Data";
 }
-<ul id="discussion"></ul>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<h3>@ViewBag.Message</h3>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+<main id="patient-personal-data-content" class="container">
+
+    <div data-bind="template: { name: 'news-template'}"></div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div data-bind="template: { name: 'patient-info-template'}"></div>
+        </div>
+        <div class="col-sm-6">
+            <div data-bind="template: { name: 'add-diesease-template'}"></div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+    <div data-bind="template:{name:'patient-dieseases-template'}"></div>
+</main>
+
+<script id="news-template" type="text/html">
+    <ul id="discussion"></ul>
+</script>
+
+<script id="patient-info-template" type="text/html">
+    <section class="panel panel-info">
+        <div class="panel-heading">Patient's info</div>
+        <div class="panel-body">
+            <div class="row">
+                <label class="col-sm-2">Name:</label>
+                <span data-bind="text: info().Name"></span>
+            </div>
+            <div class="row">
+                <label class="col-sm-2">Age:</label>
+                <span data-bind="text: info().Age"></span>
+            </div>
+        </div>
+    </section>
+</script>
+
+<script id="add-diesease-template" type="text/html">
+    <div id="add-alergy-container">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h2>@Localizations.AddNewDiesease</h2></div>
+            <div class="panel-body">
+                <div data-bind="visible: isSendMessageVisible" class="alert alert-success">@Localizations.SendMessage</div>
+                <form id="add-alergy-form">
+                    <div class="form-group">
+                        <label>@Localizations.ChooseDieseaseType_Label</label>
+                        <div>
+                            <select class="form-control input-lg" id="dieseaseTypeSelect" data-bind="foreach: dieseasesTypes, value: selectedDieseasesTypeId, select2: { width: '100%', placeholder: '@Localizations.ChooseAlergyType_Placeholder' }">
+                                <option data-bind="text: Name(), value: Id"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>@Localizations.PatientDieseaseDescription_Label</label>
+                        <textarea id="activityDescriptionInput" class="form-control" rows="4" cols="70"
+                                  placeholder="@Localizations.PatientDieseaseDescription_Placeholder"
+                                  data-bind="value: dieseaseDescription, attr:{maxlength:dieseaseDescriptionMaxLength()}"></textarea>
+                    </div>
+                    <button class="btn btn-primary btn-lg" data-bind="click: addDieseaseToPatient, enable: isFormAddDieseaseValid">@Localizations.AddAlergyToPatient</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+</script>
+
+
+<script id="patient-dieseases-template" type="text/html">
+    <section id="dieseases-container" class="panel panel-info">
+        <div class="panel-heading"><h2 >Test choroby pacjenta</h2></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <strong>@Localizations.DieseasesNameHeader</strong>
+                </div>
+                <div class="col-sm-8">
+                    <span>@Localizations.DescriptionHeader</span>
+                </div>
+               
+            </div>
+            <div data-bind="template: { name: 'patient-diesease-template', foreach: patientDieseases}"></div>
+        </div>
+    </section>
+</script>
+
+
+<script id="patient-diesease-template" type="text/html">
+    <div class="row">
+        <div class="col-sm-3" data-toggle="tooltip"
+             data-placement="top" data-bind="attr: { 'title': AlergyId() }">
+            <strong data-bind="text: DieseaseName"></strong>
+        </div>
+        <div class="col-sm-6">
+            <span data-bind="text: Description"></span>
+        </div>
+        
     </div>
-</div>
+</script>
 
 @section scripts {
 
-
-<!--Script references. -->
-<!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
-<!--Reference the SignalR library. -->
-<script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
-<!--Reference the autogenerated SignalR hub script. -->
-<script src="~/signalr/hubs"></script>
-<!--SignalR script to update the chat page and send messages.-->
-<script>
+    @Scripts.Render("~/bundles/patient_index")
+<script src="~/Scripts/App/Model/PersonalData/PatientsPersonalDataViewModel.js"></script>
+    <!--Script references. -->
+    <!--The jQuery library is required and is referenced by default in _Layout.cshtml. -->
+    <!--Reference the SignalR library. -->
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="~/signalr/hubs"></script>
+    <!--SignalR script to update the chat page and send messages.-->
+    <script>
         $(function () {
             // Reference the auto-generated proxy for the hub.
             var chat = $.connection.patientHub;
@@ -59,5 +133,89 @@
             var encodedValue = $('<div />').text(value).html();
             return encodedValue;
         }
-</script>
+    </script>
+
+    <script type="text/javascript">
+
+        (function () {
+            var urls = {
+                content: '@Url.Content("~/content")',
+                addDiesease: "@Url.RouteUrl("Default", new { httproute = "", controller = "PatientPersonalData", action = "AddDiesease" })",
+                getDieseases: "@Url.RouteUrl("Default", new { httproute = "", controller = "PatientPersonalData", action = "GetDieseases" })",
+            };
+
+            var patientPersonalDataService = new PatientPersonalDataService(urls);
+
+            var DieseasesViewModel = function () {
+                var self = this;
+               
+                self.info = ko.observable();
+                self.patientDieseases = ko.observableArray([]);
+                self.dieseasesTypes = ko.observableArray([]);
+                self.patientLocalizations = ko.observable();
+                self.dieseaseDescriptionMaxLength = ko.observable();
+
+                self.selectedDieseasesTypeId = ko.observable();
+                self.dieseaseDescription = ko.observable('');
+
+                self.isSendMessageVisible = ko.observable(false);
+
+                self.contentPath = urls.content;
+
+                self.isFormAddDieseaseValid = ko.computed(function () {
+                    return self.selectedDieseasesTypeId() > 0 && self.dieseaseDescription !== '';
+                });
+
+
+                self.addDieseaseToPatient = function () {
+                    patientPersonalDataService.addDiesease(
+                        {
+                            DieseaseId: self.selectedDieseasesTypeId(),
+                            Description: self.dieseaseDescription()
+                        },
+                        function () {
+                            self.selectedDieseasesTypeId(-1);
+                            self.dieseaseDescription('');
+
+                            self.getpatientDieseases();
+                            self.isSendMessageVisible(true);
+                        });
+                };
+
+                self.getpatientDieseases = function () {
+                    patientPersonalDataService.getDieseases(function (data) {
+                        self.patientsDieseases(data);
+                    });
+                }
+            };
+
+
+            $(function () {
+
+                var dieseasesViewModel = new DieseasesViewModel();
+
+                $('add-alergy-form').submit(function () {
+                    return false;
+                });
+
+                patientPersonalDataService.getPersonalData(function (data) {
+                    dieseasesViewModel.info(data.Info);
+                    dieseasesViewModel.patientsDieseases(data.PatientDieseases());
+                    dieseasesViewModel.dieseasesTypes(data.DieseasesTypes());
+                    dieseasesViewModel.dieseaseDescriptionMaxLength(data.DieseaseDescriptionMaxLength);
+
+                    ko.applyBindings(dieseasesViewModel, document.getElementById("patient-personal-data-content"));
+                    $.data(document.body, "DieseasesViewModel", dieseasesViewModel);
+
+                    $('[data-toggle="tooltip"]').tooltip({
+                        container: 'body'
+                    });
+
+                });
+
+
+
+            });
+        })();
+    </script>
 }
