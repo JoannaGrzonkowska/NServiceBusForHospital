@@ -12,3 +12,11 @@ D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\NSe
 D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\NServiceBus.Core.xml
 D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\obj\Debug\Ordering.Shared.dll
 D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\obj\Debug\Ordering.Shared.pdb
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\Ordering.Shared.dll
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\Ordering.Shared.pdb
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\NServiceBus.Core.dll
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\NServiceBus.Core.pdb
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\bin\Debug\NServiceBus.Core.xml
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\obj\Debug\Ordering.Shared.csprojResolveAssemblyReference.cache
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\obj\Debug\Ordering.Shared.dll
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Shared\obj\Debug\Ordering.Shared.pdb

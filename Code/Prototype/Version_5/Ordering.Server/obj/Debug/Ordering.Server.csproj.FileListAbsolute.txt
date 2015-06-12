@@ -20,3 +20,14 @@ D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\NSe
 D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\obj\Debug\Ordering.Server.csprojResolveAssemblyReference.cache
 D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\obj\Debug\Ordering.Server.exe
 D:\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\obj\Debug\Ordering.Server.pdb
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\Ordering.Server.exe.config
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\Ordering.Server.exe
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\Ordering.Server.pdb
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\NServiceBus.Core.dll
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\Ordering.Shared.dll
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\Ordering.Shared.pdb
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\NServiceBus.Core.pdb
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\bin\Debug\NServiceBus.Core.xml
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\obj\Debug\Ordering.Server.csprojResolveAssemblyReference.cache
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\obj\Debug\Ordering.Server.exe
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\Prototype\Version_5\Ordering.Server\obj\Debug\Ordering.Server.pdb

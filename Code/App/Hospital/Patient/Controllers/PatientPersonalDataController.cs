@@ -7,9 +7,6 @@ using NServiceBus;
 using Patient.Models;
 using Patient.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Patient.Controllers
