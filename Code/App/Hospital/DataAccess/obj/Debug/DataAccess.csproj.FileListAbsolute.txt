@@ -1,0 +1,9 @@
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\App\Hospital\DataAccess\bin\Debug\DataAccess.dll.config
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\App\Hospital\DataAccess\bin\Debug\DataAccess.dll
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\App\Hospital\DataAccess\bin\Debug\DataAccess.pdb
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\App\Hospital\DataAccess\bin\Debug\EntityFramework.dll
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\App\Hospital\DataAccess\bin\Debug\log4net.dll
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\App\Hospital\DataAccess\bin\Debug\EntityFramework.xml
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\App\Hospital\DataAccess\bin\Debug\log4net.xml
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\App\Hospital\DataAccess\obj\Debug\DataAccess.dll
+D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\App\Hospital\DataAccess\obj\Debug\DataAccess.pdb
