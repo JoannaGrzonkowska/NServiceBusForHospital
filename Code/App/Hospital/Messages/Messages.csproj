@@ -45,8 +45,11 @@
     <Compile Include="Blood\BloodLabRequest.cs" />
     <Compile Include="Blood\IBloodLabRequest.cs" />
     <Compile Include="Common\CommandResult.cs" />
+    <Compile Include="Models\ExaminationType.cs" />
     <Compile Include="Laboratory\ILabWardResults.cs" />
     <Compile Include="Laboratory\LabWardResults.cs" />
+    <Compile Include="Ward\WardAddingExamination.cs" />
+    <Compile Include="Ward\IWardAddingExamination.cs" />
     <Compile Include="Ward\IResults_PatientRecive.cs" />
     <Compile Include="RTG\IRTGWardResults.cs" />
     <Compile Include="RTG\RTGWardResults.cs" />

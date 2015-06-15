@@ -26,6 +26,19 @@ namespace Ward
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/ward_index").Include(
+                      "~/Scripts/App/Models/PatientsModel.js",
+                      "~/Scripts/App/Models/WardPatientCurrentDieseaseViewModel.js",
+                      "~/Scripts/App/Models/WardPatientDeclarationViewModel.js",
+                      "~/Scripts/App/Services/WardExaminationService.js"
+                      ));
+
+            bundles.Add(new ScriptBundle("~/bundles/common").Include(
+                        "~/Scripts/knockout-3.3.0.js",
+                        "~/Scripts/moment.min.js",
+                         "~/Scripts/App/Common.js",
+                        "~/Scripts/customBindingHandlers.js"));
         }
     }
 }
