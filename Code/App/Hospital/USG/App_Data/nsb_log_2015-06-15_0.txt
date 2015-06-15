@@ -1,0 +1,8 @@
+﻿2015-06-15 20:52:04.037 INFO  DefaultFactory Logging to 'D:\KSRvol2\NServiceBusForHospital\Code\App\Hospital\USG\App_Data\' with level Info
+2015-06-15 20:52:04.257 INFO  NServiceBus.Persistence.PersistenceStartup Activating persistence 'InMemoryPersistence' to provide storage for 'NServiceBus.Persistence.StorageType+Sagas' storage.
+2015-06-15 20:52:04.303 INFO  NServiceBus.Persistence.PersistenceStartup Activating persistence 'InMemoryPersistence' to provide storage for 'NServiceBus.Persistence.StorageType+Timeouts' storage.
+2015-06-15 20:52:04.360 INFO  NServiceBus.Persistence.PersistenceStartup Activating persistence 'InMemoryPersistence' to provide storage for 'NServiceBus.Persistence.StorageType+Subscriptions' storage.
+2015-06-15 20:52:04.403 INFO  NServiceBus.Persistence.PersistenceStartup Activating persistence 'InMemoryPersistence' to provide storage for 'NServiceBus.Persistence.StorageType+Outbox' storage.
+2015-06-15 20:52:04.447 INFO  NServiceBus.Persistence.PersistenceStartup Activating persistence 'InMemoryPersistence' to provide storage for 'NServiceBus.Persistence.StorageType+GatewayDeduplication' storage.
+2015-06-15 20:52:05.034 INFO  NServiceBus.Licensing.LicenseManager Trial for Particular Service Platform is still active, trial expires on 2015-06-23.
+2015-06-15 20:52:05.369 INFO  NServiceBus.Features.UnicastBus Number of messages found: 23
