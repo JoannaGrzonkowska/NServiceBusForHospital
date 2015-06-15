@@ -8,8 +8,9 @@ namespace Messages
 {
     public class WardAcceptance:IWardAcceptance
     {
-       public int PatientID { get; set; }
-       public DateTime IssueDate { get; set; }
-        // string Uwagi { get; set; }
+        public int PatientID { get; set; }
+        public int DieseaseID { get; set; }
+        public DateTime IssueDate { get; set; }
+        public string Description { get; set; }
     }
 }

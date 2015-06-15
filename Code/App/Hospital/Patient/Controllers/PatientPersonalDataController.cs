@@ -66,8 +66,8 @@ namespace Patient.Controllers
         [HttpPost]
         public ActionResult AddDiesease(AddDieseaseToPatientCommand command)
         {
-            //   var patient = _patientsService.GetModelByName(User.Identity.Name);
-            command.PatientId = 2;// patient.Id;
+//               var patient = _patientsService.GetModelByName(User.Identity.Name);
+            command.PatientId = 2;//patient.Id;
             if (command.Description != null && command.Description.Length > LengthConstraints.DieseasesDescriptionMaxLength)
                 return Json(new CommandResult(new[]{ 
                     string.Format("Description must be less than {0} characters.", LengthConstraints.DieseasesDescriptionMaxLength) }),
@@ -81,7 +81,9 @@ namespace Patient.Controllers
                 var resultsMessage = new WardAcceptance
                 {
                     PatientID = 2, 
-                    IssueDate = DateTime.Now
+                    DieseaseID = command.DieseaseId,
+                    IssueDate = DateTime.Now,
+                    Description = command.Description
                 };
                 _bus.Send(resultsMessage);
                 addDieseaseCommand = new CommandResult();

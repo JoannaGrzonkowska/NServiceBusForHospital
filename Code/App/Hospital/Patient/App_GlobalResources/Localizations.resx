@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddAlergyToPatient" xml:space="preserve">
-    <value>Add new alergy</value>
+    <value>Submit</value>
   </data>
   <data name="AddNewDiesease" xml:space="preserve">
-    <value>Please Add new diesease</value>
+    <value>Inform about new patient's diesease</value>
   </data>
   <data name="ChooseAlergyType_Placeholder" xml:space="preserve">
     <value>Choose2</value>
@@ -136,7 +136,7 @@
     <value>Diesease</value>
   </data>
   <data name="PatientDieseaseDescription_Label" xml:space="preserve">
-    <value>label1</value>
+    <value>Description</value>
   </data>
   <data name="PatientDieseaseDescription_Placeholder" xml:space="preserve">
     <value>Please add new description</value>
