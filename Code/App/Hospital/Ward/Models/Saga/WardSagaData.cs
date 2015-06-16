@@ -14,5 +14,10 @@ namespace Ward
         public virtual String Originator { get; set; }
         public List<Examination> Examinations { get; set; }
         public int PatientId { get; set; }
+
+        public WardSagaData()
+        {
+            Examinations = new List<Examination>();
+        }
     }
 }

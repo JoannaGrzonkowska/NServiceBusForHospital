@@ -2,6 +2,7 @@
 using Messages;
 using NServiceBus;
 using NServiceBus.Saga;
+using System.Collections.Generic;
 using System.Linq;
 using Ward.Hubs.Services;
 using Ward.Models;
@@ -35,7 +36,9 @@ namespace Ward
             mapper.ConfigureMapping<IUSGWardResults>(s => s.PatientID)
                    .ToSaga(m => m.PatientId);
             mapper.ConfigureMapping<IRTGWardResults>(s => s.PatientID)
-                   .ToSaga(m => m.PatientId);
+                   .ToSaga(m => m.PatientId); 
+            mapper.ConfigureMapping<IWardAddingExamination>(s => s.PatientID)
+                    .ToSaga(m => m.PatientId);
         }
 
         public void Handle(IWardAcceptance message)
@@ -63,7 +66,7 @@ namespace Ward
                     Bus.Send(new WardBloodExaminationRequest
                     {
                         PatientID = message.PatientID,
-                        Comment = "Comment TEST"
+                        Comment = message.Comment
                     });
                    break;
             }

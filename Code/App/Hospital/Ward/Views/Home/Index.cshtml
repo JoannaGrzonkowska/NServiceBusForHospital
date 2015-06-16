@@ -29,6 +29,14 @@
             <div class="col-sm-6">
                 <span data-bind="text: CurrentDiesease.DieseaseDescription"></span>
             </div>
+
+
+            <div class="form-group">
+                <textarea id="examinaationDescriptionInput" class="form-control" rows="4" cols="70"
+                          data-bind="value: examinaationDescription"></textarea>
+            </div>
+
+
             <button data-bind="click: $root.sendToExamination">Blood</button>
         </div>
     </div>
@@ -73,16 +81,18 @@
                 var self = this;
 
                 self.wardData = ko.observableArray([]);
-                               
+
+                self.examinaationDescription = ko.observable('');
+
                 self.sendToExamination = function (item) {
                     wardExaminationService.sendToExamination(
                         {
-                            PatientID: item.PatientInfo.Id(),
-                            Comment : "Comment TEST", 
+                            PatientID: 2,//item.PatientInfo.Id(),
+                            Comment: "Blood",//self.examinaationDescription(),
                             Type : 1 
                         },
                         function () {
-                            
+                            self.examinaationDescription('');
                            // self.isSendMessageVisible(true);
                         });
                 };
