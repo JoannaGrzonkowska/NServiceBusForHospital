@@ -15,11 +15,11 @@
                         <div class="panel-body">
                             <div class="row">
                                 <label class="col-sm-2">Name:</label>
-                                <span data-bind="text: PatientInfo().Name"></span>
+                                <span data-bind="text: PatientInfo.Name"></span>
                             </div>
                             <div class="row">
                                 <label class="col-sm-2">Age:</label>
-                                <span data-bind="text: PatientInfo().Age"></span>
+                                <span data-bind="text: PatientInfo.Age"></span>
                             </div>
                         </div>
                     </section>
@@ -27,7 +27,7 @@
             </div>
 
             <div class="col-sm-6">
-                <span data-bind="text: CurrentDiesease().DieseaseDescription"></span>
+                <span data-bind="text: CurrentDiesease.DieseaseDescription"></span>
             </div>
             <button data-bind="click: $root.sendToExamination">Blood</button>
         </div>
@@ -77,7 +77,7 @@
                 self.sendToExamination = function (item) {
                     wardExaminationService.sendToExamination(
                         {
-                            PatientID : PatientInfo().Id,
+                            PatientID: item.PatientInfo.Id(),
                             Comment : "Comment TEST", 
                             Type : 1 
                         },

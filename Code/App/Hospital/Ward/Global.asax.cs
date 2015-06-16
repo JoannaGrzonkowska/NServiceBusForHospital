@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Ward.Hubs.Services;
 
 namespace Ward
 {
@@ -32,9 +33,10 @@ namespace Ward
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
-                 builder.RegisterModule(new DataModule());
-                 builder.RegisterModule(new BusinessLogicModel());
+            builder.RegisterModule(new DataModule());
+            builder.RegisterModule(new BusinessLogicModel());
 
+            builder.RegisterInstance<IShowToUIHubService>(new ShowToUIHubService());
             IContainer container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -4,9 +4,10 @@ using NServiceBus;
 using NServiceBus.Saga;
 using System.Linq;
 using Ward.Hubs.Services;
+using Ward.Models;
 using Ward.ViewModels;
 
-namespace Ward.Models.Saga
+namespace Ward
 {
     public class WardSaga : Saga<WardSagaData>,
         IAmStartedByMessages<IWardAcceptance>,
@@ -15,13 +16,14 @@ namespace Ward.Models.Saga
         IHandleMessages<IUSGWardResults>,
         IHandleMessages<IWardAddingExamination>
     {
-        private IShowToUIHubService _showToUIHubService;
         private readonly IPatientsService _patientsService;
+        private readonly IShowToUIHubService _showToUIHubService;
 
-        public WardSaga(IPatientsService patientService)
+        public WardSaga(IShowToUIHubService showToUIHubService,
+            IPatientsService patientService)
         {
-            _showToUIHubService = new ShowToUIHubService();
             _patientsService = patientService;
+            _showToUIHubService = showToUIHubService;
         }
 
         protected override void ConfigureHowToFindSaga(SagaPropertyMapper<WardSagaData> mapper)
@@ -49,7 +51,6 @@ namespace Ward.Models.Saga
             };
 
             _showToUIHubService.ShowWardAcceptance(patientDeclaration);
-
         }
 
         public void Handle(IWardAddingExamination message)
@@ -72,7 +73,7 @@ namespace Ward.Models.Saga
         public void Handle(IRTGWardResults message)
         {
             base.Data.PatientId = message.PatientID;
-            _showToUIHubService.ShowRTGWardResults(message);
+            //_showToUIHubService.ShowRTGWardResults(message);
 
             ConcludeExaminationAndTryFinish(ExaminationType.RTG);
         }
@@ -80,7 +81,7 @@ namespace Ward.Models.Saga
         public void Handle(IUSGWardResults message)
         {
             base.Data.PatientId = message.PatientID;
-            _showToUIHubService.ShowUSGWardResults(message);
+            //_showToUIHubService.ShowUSGWardResults(message);
 
             ConcludeExaminationAndTryFinish(ExaminationType.USG);
         }
@@ -88,7 +89,7 @@ namespace Ward.Models.Saga
         public void Handle(ILabWardResults message)
         {
             base.Data.PatientId = message.PatientID;
-            _showToUIHubService.ShowLabWardResults(message);
+            //_showToUIHubService.ShowLabWardResults(message);
             ConcludeExaminationAndTryFinish(ExaminationType.BLOOD);
         }
 

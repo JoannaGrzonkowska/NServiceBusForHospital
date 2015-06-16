@@ -18,7 +18,7 @@ namespace Ward.Hubs.Services
 
         public void ShowWardAcceptance(WardPatientDeclarationViewModel message)
         {
-
+            _hubContext.Clients.All.addNewDeclarationToWard(message);
         }
 
         public void ShowRTGWardResults(Messages.IRTGWardResults message)

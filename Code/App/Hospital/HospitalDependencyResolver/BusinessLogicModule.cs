@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using BusinessLogic.CommandHandlers;
 using BusinessLogic.Services;
+using DataAccess;
+using DataAccess.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,14 @@ namespace HospitalDependencyResolver
 
             builder.RegisterType<AddPatientCommandHandler>().As<IAddPatientCommandHandler>().InstancePerRequest();
             builder.RegisterType<AddDieseaseToPatientCommandHandler>().As<IAddDieseaseToPatientCommandHandler>().InstancePerRequest();
+
+            var context = new HospitalKSREntities();
+            var patientsRepository = new PatientsRepository(context);
+
+            builder.RegisterInstance<IPatientsRepository>(patientsRepository);
+
+            builder.RegisterInstance<IPatientsService>(new PatientsService(patientsRepository));
+           
 
             base.Load(builder);
         }
