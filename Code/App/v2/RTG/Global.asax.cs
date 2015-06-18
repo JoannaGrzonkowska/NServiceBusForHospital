@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using HospitalDependencyResolver;
 using NServiceBus;
+using RTG.Hubs.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +33,10 @@ namespace RTG
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
-                 builder.RegisterModule(new DataModule());
-                 builder.RegisterModule(new BusinessLogicModel());
+            builder.RegisterModule(new DataModule());
+            builder.RegisterModule(new BusinessLogicModel());
 
+            builder.RegisterInstance<IShowToUIHubService>(new ShowToUIHubService());            
             IContainer container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

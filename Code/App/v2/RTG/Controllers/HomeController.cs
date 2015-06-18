@@ -1,4 +1,10 @@
-﻿using System;
+﻿using BusinessLogic.Services;
+using Messages;
+using Messages.Common;
+using NServiceBus;
+using RTG.Hubs.Services;
+using RTG.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,8 +12,20 @@ using System.Web.Mvc;
 
 namespace RTG.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Controller,
+        IHandleMessages<IWardRTGExaminationRequest>
     {
+        private readonly IBus _bus;
+        private readonly IPatientsService _patientsService;
+        private readonly IShowToUIHubService _showToUIHubService;
+
+        public HomeController(IBus bus, IShowToUIHubService showToUIHubService,
+            IPatientsService patientService)
+        {
+            _patientsService = patientService;
+            _showToUIHubService = showToUIHubService;
+            _bus = bus;
+        }
         public ActionResult Index()
         {
             return View();
@@ -25,6 +43,31 @@ namespace RTG.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public void Handle(IWardRTGExaminationRequest message)
+        {
+
+            var patientInfo = _patientsService.GetById(message.PatientID);
+            var currentRTGExamination = new RTGExaminationCommentViewModel
+            {
+                RTGExaminationComment = message.Comment
+            };
+            var rtgExamination = new RTGExaminationViewModel
+            {
+                PatientInfo = patientInfo,
+                RTGComment = currentRTGExamination
+            };
+
+
+            _showToUIHubService.ShowRTGExamination(rtgExamination);
+        }
+        [HttpPost]
+        public ActionResult SendResultsToWard(RTGWardResults message)
+        {
+            _bus.Send(message);
+            return Json(new CommandResult(), JsonRequestBehavior.AllowGet);
+
         }
     }
 }

@@ -66,21 +66,21 @@ namespace Ward
                     Bus.Send(new WardBloodExaminationRequest
                     {
                         PatientID = message.PatientID,
-                        Comment = "Comment TEST Blood"
+                        Comment = message.Comment
                     });
                    break;
                 case ExaminationType.RTG:
-                   Bus.Send(new WardBloodExaminationRequest
+                   Bus.Send(new WardRTGExaminationRequest
                    {
                        PatientID = message.PatientID,
-                       Comment = "Comment TEST RTG"
+                       Comment = message.Comment
                    });
                    break;
                 case ExaminationType.USG:
-                   Bus.Send(new WardBloodExaminationRequest
+                   Bus.Send(new WardUSGExaminationRequest
                    {
                        PatientID = message.PatientID,
-                       Comment = "Comment TEST USG"
+                       Comment = message.Comment
                    });
                    break;
             }

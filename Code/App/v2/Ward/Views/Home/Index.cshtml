@@ -27,20 +27,20 @@
                 <span data-bind="text: CurrentDiesease.DieseaseDescription"></span>
                 <div class="row">
                     <div class="form-group col-sm-4">
-                        <textarea id="examinaationDescriptionInput" class="form-control" rows="4" cols="70"
+                        <textarea id="examinationDescriptionInput" class="form-control" rows="4" cols="70"
                                   data-bind="value: examinationDescriptionBlood"></textarea>
                         <button data-bind="click: $root.sendToExamination">Blood</button>
                     </div>
 
                     <div class="form-group col-sm-4">
-                        <textarea id="examinaationDescriptionInput1" class="form-control" rows="4" cols="70"
+                        <textarea id="examinationDescriptionInput1" class="form-control" rows="4" cols="70"
                                   data-bind="value: examinationDescriptionUSG"></textarea>
                         <button data-bind="click: $root.sendToExamination1">USG</button>
 
                     </div>
 
                     <div class="form-group col-sm-4">
-                        <textarea id="examinaationDescriptionInput2" class="form-control" rows="4" cols="70"
+                        <textarea id="examinationDescriptionInput2" class="form-control" rows="4" cols="70"
                                   data-bind="value: examinationDescriptionRTG"></textarea>
                         <button data-bind="click: $root.sendToExamination2">RTG</button>
 
@@ -101,19 +101,19 @@
                         {
                             PatientID: item.PatientInfo.Id(),
                             Comment: item.examinationDescriptionUSG(),
-                            Type: 2
+                            Type: 3
                         },
                         function () {
 
                         });
                 };
 
-                self.sendToExamination1 = function (item) {
+                self.sendToExamination2 = function (item) {
                     wardExaminationService.sendToExamination(
                         {
                             PatientID:  item.PatientInfo.Id(),
                             Comment: self.examinationDescriptionRTG(),
-                            Type: 3
+                            Type: 2
                         },
                         function () {
 

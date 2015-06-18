@@ -1,10 +1,12 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using Laboratory.Hubs.Services;
 using HospitalDependencyResolver;
 using NServiceBus;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+
 namespace Laboratory
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -30,6 +32,7 @@ namespace Laboratory
             builder.RegisterModule(new DataModule());
             builder.RegisterModule(new BusinessLogicModel());
 
+            builder.RegisterInstance<IShowToUIHubService>(new ShowToUIHubService());            
             IContainer container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

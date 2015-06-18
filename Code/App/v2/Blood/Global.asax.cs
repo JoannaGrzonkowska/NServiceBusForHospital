@@ -31,8 +31,7 @@ namespace Blood
 
             builder.RegisterModule(new DataModule());
             builder.RegisterModule(new BusinessLogicModel());
-
-
+            
             builder.RegisterInstance<IShowToUIHubService>(new ShowToUIHubService());
             IContainer container = builder.Build();
 
