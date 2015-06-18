@@ -79,7 +79,7 @@
             $(function () {
 
                 var rtgViewModel = new RTGViewModel();
-                var chat = $.connection.rtgHub;
+                var chat = $.connection.rTGHub;
                 chat.client.addNewRequestToRTG = function (declaration) {
                     rtgViewModel.rtgData.push(new RTGExaminationViewModel(declaration))
 

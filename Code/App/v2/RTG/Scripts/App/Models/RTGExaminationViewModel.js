@@ -4,6 +4,6 @@
     this.PatientInfo = new PatientsModel(data.PatientInfo);
     this.RTGComment = new
         RTGExaminationCommentViewModel(data.RTGComment);
-    this.resultsDescriptionRTG = ko.observable();
+    this.examinationDescriptionRTG = ko.observable();
 
 };

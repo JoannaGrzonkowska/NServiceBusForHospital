@@ -112,7 +112,7 @@
                     wardExaminationService.sendToExamination(
                         {
                             PatientID:  item.PatientInfo.Id(),
-                            Comment: self.examinationDescriptionRTG(),
+                            Comment: item.examinationDescriptionRTG(),
                             Type: 2
                         },
                         function () {
