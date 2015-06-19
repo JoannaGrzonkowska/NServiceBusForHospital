@@ -110,7 +110,7 @@
                                         {
                                             PatientID: item.PatientInfo.Id(),
                                             Comment: item.examinationDescriptionBlood(),
-                                            ExaminationName: "Blood"
+                                            ExaminationName: "[ZLECENIE] : Blood"
                                         }))
                                 }
 
@@ -126,7 +126,17 @@
                             Type: 3
                         },
                         function () {
+                            self.wardData().forEach(function (logitem) {
+                                if (logitem.PatientInfo.Id() == item.PatientInfo.Id()) {
+                                    logitem.PatientLogs.push(new PatientLogViewModel(
+                                        {
+                                            PatientID: item.PatientInfo.Id(),
+                                            Comment: item.examinationDescriptionBlood(),
+                                            ExaminationName: "[ZLECENIE] : USG"
+                                        }))
+                                }
 
+                            });
                         });
                 };
 
@@ -138,7 +148,17 @@
                             Type: 2
                         },
                         function () {
+                            self.wardData().forEach(function (logitem) {
+                                if (logitem.PatientInfo.Id() == item.PatientInfo.Id()) {
+                                    logitem.PatientLogs.push(new PatientLogViewModel(
+                                        {
+                                            PatientID: item.PatientInfo.Id(),
+                                            Comment: item.examinationDescriptionBlood(),
+                                            ExaminationName: "[ZLECENIE] : RTG"
+                                        }))
+                                }
 
+                            });
                         });
                 };
             };

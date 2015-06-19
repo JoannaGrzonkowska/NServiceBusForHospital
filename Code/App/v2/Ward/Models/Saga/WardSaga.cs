@@ -90,7 +90,14 @@ namespace Ward
         public void Handle(IRTGWardResults message)
         {
             base.Data.PatientId = message.PatientID;
-            //_showToUIHubService.ShowRTGWardResults(message);
+            var log = new PatientLogViewModel
+            {
+                Comment = message.Comment,
+                PatientId = message.PatientID,
+                ExaminationName = "[WYNIKI] : RTG"
+            };
+
+            _showToUIHubService.ShowPatientLog(log);
 
             ConcludeExaminationAndTryFinish(ExaminationType.RTG);
         }
@@ -98,7 +105,14 @@ namespace Ward
         public void Handle(IUSGWardResults message)
         {
             base.Data.PatientId = message.PatientID;
-            //_showToUIHubService.ShowUSGWardResults(message);
+            var log = new PatientLogViewModel
+            {
+                Comment = message.Comment,
+                PatientId = message.PatientID,
+                ExaminationName = "[WYNIKI] : USG"
+            };
+
+            _showToUIHubService.ShowPatientLog(log);
 
             ConcludeExaminationAndTryFinish(ExaminationType.USG);
         }
@@ -111,7 +125,7 @@ namespace Ward
             {
                 Comment = message.Comment,
                 PatientId = message.PatientID,
-                ExaminationName = "Lab"
+                ExaminationName = "[WYNIKI] : Lab-Blood"
             };
 
             _showToUIHubService.ShowPatientLog(log);
