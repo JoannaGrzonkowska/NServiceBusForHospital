@@ -8,4 +8,7 @@
     this.examinationDescriptionUSG = ko.observable();
     this.examinationDescriptionRTG = ko.observable();
 
+    this.PatientLogs = ko.observableArray([]);
+
+    
 };

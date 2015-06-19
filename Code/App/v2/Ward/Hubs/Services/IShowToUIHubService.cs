@@ -11,8 +11,6 @@ namespace Ward.Hubs.Services
     public interface IShowToUIHubService
     {
         void ShowWardAcceptance(WardPatientDeclarationViewModel message);
-        void ShowRTGWardResults(IRTGWardResults message);
-        void ShowUSGWardResults(IUSGWardResults message);
-        void ShowLabWardResults(ILabWardResults message);
+        void ShowPatientLog(PatientLogViewModel log);
     }
 }

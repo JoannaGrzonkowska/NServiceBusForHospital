@@ -20,20 +20,10 @@ namespace Ward.Hubs.Services
         {
             _hubContext.Clients.All.addNewDeclarationToWard(message);
         }
-
-        public void ShowRTGWardResults(Messages.IRTGWardResults message)
+            
+        public void ShowPatientLog(PatientLogViewModel log)
         {
-
-        }
-
-        public void ShowUSGWardResults(Messages.IUSGWardResults message)
-        {
-
-        }
-
-        public void ShowLabWardResults(Messages.ILabWardResults message)
-        {
-
+            _hubContext.Clients.All.addNewPatientLog(log);        
         }
     }
 }

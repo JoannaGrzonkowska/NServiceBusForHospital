@@ -105,9 +105,18 @@ namespace Ward
 
         public void Handle(ILabWardResults message)
         {
-            base.Data.PatientId = message.PatientID;
-            //_showToUIHubService.ShowLabWardResults(message);
+            base.Data.PatientId = message.PatientID;            
+            
+            var log = new PatientLogViewModel
+            {
+                Comment = message.Comment,
+                PatientId = message.PatientID,
+                ExaminationName = "Lab"
+            };
+
+            _showToUIHubService.ShowPatientLog(log);
             ConcludeExaminationAndTryFinish(ExaminationType.BLOOD);
+
         }
 
 

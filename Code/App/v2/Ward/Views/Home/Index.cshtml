@@ -46,7 +46,19 @@
 
                     </div>
 
-                </div>
+                    <div data-bind="foreach: PatientLogs">
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <span data-bind="text: ExaminationName"></span>
+                            </div>
+                            <div class="col-sm-9">
+                                <span data-bind="text: Comment"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    </div>
 
             </div>
 
@@ -92,7 +104,17 @@
                             Type: 1
                         },
                         function () {
+                            self.wardData().forEach(function (logitem) {
+                                if (logitem.PatientInfo.Id() == item.PatientInfo.Id()) {
+                                    logitem.PatientLogs.push(new PatientLogViewModel(
+                                        {
+                                            PatientID: item.PatientInfo.Id(),
+                                            Comment: item.examinationDescriptionBlood(),
+                                            ExaminationName: "Blood"
+                                        }))
+                                }
 
+                            });
                         });
                 };
 
@@ -131,6 +153,14 @@
                 chat.client.addNewDeclarationToWard = function (declaration) {
                     wardViewModel.wardData.push(new WardPatientDeclarationViewModel(declaration))
 
+                };
+                chat.client.addNewPatientLog = function (log) {
+                    wardViewModel.wardData().forEach(function (item) {
+                        if (item.PatientInfo.Id() == log.PatientId) {
+                            item.PatientLogs.push(new PatientLogViewModel(log))
+                        }
+
+                    });
                 };
                 $.connection.hub.start().done(function () {
 

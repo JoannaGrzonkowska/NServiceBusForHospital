@@ -31,7 +31,8 @@ namespace Ward
                       "~/Scripts/App/Models/PatientsModel.js",
                       "~/Scripts/App/Models/WardPatientCurrentDieseaseViewModel.js",
                       "~/Scripts/App/Models/WardPatientDeclarationViewModel.js",
-                      "~/Scripts/App/Services/WardExaminationService.js"
+                      "~/Scripts/App/Services/WardExaminationService.js",
+                      "~/Scripts/App/Models/PatientLogViewModel.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/common").Include(

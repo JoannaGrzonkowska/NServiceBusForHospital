@@ -159,6 +159,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Models\Saga\WardSaga.cs" />
     <Compile Include="Models\Saga\WardSagaData.cs" />
+    <Compile Include="ViewModels\PatientLogViewModel.cs" />
     <Compile Include="ViewModels\WardPatientCurrentDieseaseViewModel.cs" />
     <Compile Include="ViewModels\WardPatientDeclarationViewModel.cs" />
   </ItemGroup>
@@ -179,6 +180,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
+    <Content Include="Scripts\App\Models\PatientLogViewModel.js" />
     <Content Include="Scripts\App\Models\PatientsModel.js" />
     <Content Include="Scripts\App\Models\WardPatientCurrentDieseaseViewModel.js" />
     <Content Include="Scripts\App\Models\WardPatientDeclarationViewModel.js" />
