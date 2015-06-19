@@ -19,7 +19,7 @@ namespace BusinessLogic.CommandHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public CommandResult Add(AddDieseaseToPatientCommand command)
+        public CommandResult Add(AddDieseaseToPatientCommand command, ref int patientDieseaseId)
         {
             var patientAlergy = new PatientsDieseases
             {
@@ -29,6 +29,8 @@ namespace BusinessLogic.CommandHandlers
             };
             _patientsDieseasesRepository.Add(patientAlergy);
             _unitOfWork.SaveChanges();
+
+            patientDieseaseId = patientAlergy.Id;
 
             return new CommandResult();
         }
