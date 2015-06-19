@@ -5,6 +5,7 @@ using NServiceBus;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using USG.Hubs.Services;
 
 namespace USG
 {
@@ -31,6 +32,7 @@ namespace USG
             builder.RegisterModule(new DataModule());
             builder.RegisterModule(new BusinessLogicModel());
 
+            builder.RegisterInstance<IShowToUIHubService>(new ShowToUIHubService());
             IContainer container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
