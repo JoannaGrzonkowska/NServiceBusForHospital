@@ -63,7 +63,7 @@ namespace USG.Controllers
             _showToUIHubService.ShowUSGExamination(usgExamination);
         }
         [HttpPost]
-        public ActionResult SendResultsToWard(RTGWardResults message)
+        public ActionResult SendResultsToWard(USGWardResults message)
         {
             _bus.Send(message);
             return Json(new CommandResult(), JsonRequestBehavior.AllowGet);
