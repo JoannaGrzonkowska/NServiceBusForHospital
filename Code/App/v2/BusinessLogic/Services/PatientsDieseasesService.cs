@@ -26,5 +26,16 @@ namespace BusinessLogic.Services
                     Description = s.Description,
                 });
         }
+
+        public PatientsModel GetPatientById(int id)
+        {
+            var patient = _patientsDieseasesRepository.GetById(id).Patients;
+            return new PatientsModel
+            {
+                Name = patient.Name,
+                Age = patient.Age,
+                Id = patient.Id
+            };
+        }
     }
 }
