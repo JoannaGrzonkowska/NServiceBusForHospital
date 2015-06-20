@@ -73,7 +73,8 @@ namespace Patient.Controllers
                     string.Format("Description must be less than {0} characters.", LengthConstraints.DieseasesDescriptionMaxLength) }),
                     JsonRequestBehavior.AllowGet);
 
-            var addDieseaseCommand = _addDieseaseToPatientCommandHandler.Add(command);
+            int patientDieseaseId = -1;
+            var addDieseaseCommand = _addDieseaseToPatientCommandHandler.Add(command, ref patientDieseaseId);
 
             if (addDieseaseCommand.IsSuccess)
             {
@@ -83,7 +84,8 @@ namespace Patient.Controllers
                     PatientID = 2, 
                     DieseaseID = command.DieseaseId,
                     IssueDate = DateTime.Now,
-                    Description = command.Description
+                    Description = command.Description,
+                    PatientDieseaseId = patientDieseaseId
                 };
                 _bus.Send(resultsMessage);
                 addDieseaseCommand = new CommandResult();

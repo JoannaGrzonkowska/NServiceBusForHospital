@@ -17,13 +17,16 @@ namespace Ward
         IHandleMessages<IWardAddingExamination>
     {
         private readonly IPatientsService _patientsService;
+        private readonly IPatientsDieseasesService _patientsDieseasesService;
         private readonly IShowToUIHubService _showToUIHubService;
 
         public WardSaga(IShowToUIHubService showToUIHubService,
-            IPatientsService patientService)
+            IPatientsService patientService,
+            IPatientsDieseasesService patientsDieseasesService)
         {
             _patientsService = patientService;
             _showToUIHubService = showToUIHubService;
+            _patientsDieseasesService = patientsDieseasesService;
         }
 
         protected override void ConfigureHowToFindSaga(SagaPropertyMapper<WardSagaData> mapper)
@@ -42,9 +45,9 @@ namespace Ward
 
         public void Handle(IWardAcceptance message)
         {
-            base.Data.PatientId = message.PatientID;
+            var patientInfo = _patientsDieseasesService.GetPatientById(message.PatientDieseaseId);
+            base.Data.PatientId = patientInfo.Id;
 
-            var patientInfo = _patientsService.GetById(message.PatientID);
             var currentDiesease = new WardPatientCurrentDieseaseViewModel { DieseaseDescription = message.Description };
             var patientDeclaration = new WardPatientDeclarationViewModel
             {

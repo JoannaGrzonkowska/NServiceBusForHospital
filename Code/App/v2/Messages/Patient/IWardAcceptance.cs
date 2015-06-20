@@ -13,5 +13,6 @@ namespace Messages
         int DieseaseID { get; set; }
         DateTime IssueDate { get; set; }
         string Description { get; set; }
+        int PatientDieseaseId { get; set; }
     }
 }

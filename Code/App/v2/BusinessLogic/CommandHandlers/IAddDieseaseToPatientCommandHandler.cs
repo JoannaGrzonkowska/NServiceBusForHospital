@@ -5,6 +5,6 @@ namespace BusinessLogic.CommandHandlers
 {
     public interface IAddDieseaseToPatientCommandHandler
     {
-        CommandResult Add(AddDieseaseToPatientCommand command);
+        CommandResult Add(AddDieseaseToPatientCommand command, ref int patientDieseaseId);
     }
 }
