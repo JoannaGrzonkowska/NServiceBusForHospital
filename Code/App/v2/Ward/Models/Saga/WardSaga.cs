@@ -31,15 +31,15 @@ namespace Ward
 
         protected override void ConfigureHowToFindSaga(SagaPropertyMapper<WardSagaData> mapper)
         {
-            mapper.ConfigureMapping<IWardAcceptance>(s => s.PatientID)
+            mapper.ConfigureMapping<IWardAcceptance>(s => s.PatientID) //TODO : PatientDieseaseId
                     .ToSaga(m => m.PatientId);
-            mapper.ConfigureMapping<ILabWardResults>(s => s.PatientID)
+            mapper.ConfigureMapping<ILabWardResults>(s => s.PatientID)//TODO : PatientDieseaseId
                    .ToSaga(m => m.PatientId);
-            mapper.ConfigureMapping<IUSGWardResults>(s => s.PatientID)
+            mapper.ConfigureMapping<IUSGWardResults>(s => s.PatientID)//TODO : PatientDieseaseId
                    .ToSaga(m => m.PatientId);
-            mapper.ConfigureMapping<IRTGWardResults>(s => s.PatientID)
+            mapper.ConfigureMapping<IRTGWardResults>(s => s.PatientID)//TODO : PatientDieseaseId
                    .ToSaga(m => m.PatientId);
-            mapper.ConfigureMapping<IWardAddingExamination>(s => s.PatientID)
+            mapper.ConfigureMapping<IWardAddingExamination>(s => s.PatientID)//TODO : PatientDieseaseId
                    .ToSaga(m => m.PatientId);
         }
 
