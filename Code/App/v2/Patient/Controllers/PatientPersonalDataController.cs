@@ -41,12 +41,12 @@ namespace Patient.Controllers
         }
 
         [HttpGet]
-      //  [Authorize]
+        [Authorize]
         public ActionResult GetPersonalData()
         {//todo - logowanie
-     //       var patient = _patientsService.GetModelByName(User.Identity.Name);
+           var patient = _patientsService.GetModelByName(User.Identity.Name);
 
-            var patientId = 2;//patient.Id;
+            var patientId = patient.Id;
             var info = _patientsService.GetById(patientId);
             var dieseasesTypes = _dieseasesService.GetAll();
             var patientDieseases = _patientsDieseasesService.GetPatientsDieseases(patientId);
@@ -66,8 +66,8 @@ namespace Patient.Controllers
         [HttpPost]
         public ActionResult AddDiesease(AddDieseaseToPatientCommand command)
         {//todo - logowanie
-//               var patient = _patientsService.GetModelByName(User.Identity.Name);
-            command.PatientId = 2;//patient.Id;
+            var patient = _patientsService.GetModelByName(User.Identity.Name);
+            command.PatientId = patient.Id;
             if (command.Description != null && command.Description.Length > LengthConstraints.DieseasesDescriptionMaxLength)
                 return Json(new CommandResult(new[]{ 
                     string.Format("Description must be less than {0} characters.", LengthConstraints.DieseasesDescriptionMaxLength) }),
@@ -81,7 +81,7 @@ namespace Patient.Controllers
                 //test message
                 var resultsMessage = new WardAcceptance
                 {//todo - logowanie
-                    PatientID = 2, //TODO
+                    PatientID = patient.Id,
                     DieseaseID = command.DieseaseId,
                     IssueDate = DateTime.Now,
                     Description = command.Description,
@@ -97,8 +97,8 @@ namespace Patient.Controllers
         [HttpGet]
         public ActionResult GetPatientDieseases()
         {//todo - logowanie
-           // var patient = _patientsService.GetModelByName(User.Identity.Name);
-            return Json(_patientsDieseasesService.GetPatientsDieseases(2/*patient.Id*/), JsonRequestBehavior.AllowGet);
+            var patient = _patientsService.GetModelByName(User.Identity.Name);
+            return Json(_patientsDieseasesService.GetPatientsDieseases(patient.Id), JsonRequestBehavior.AllowGet);
         }
     
     }
