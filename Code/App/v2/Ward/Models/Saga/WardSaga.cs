@@ -2,6 +2,7 @@
 using Messages;
 using NServiceBus;
 using NServiceBus.Saga;
+using System;
 using System.Linq;
 using Ward.Hubs.Services;
 using Ward.Models;
@@ -31,22 +32,24 @@ namespace Ward
 
         protected override void ConfigureHowToFindSaga(SagaPropertyMapper<WardSagaData> mapper)
         {
-            mapper.ConfigureMapping<IWardAcceptance>(s => s.PatientDieseaseId) //TODO : PatientDieseaseId
+            mapper.ConfigureMapping<IWardAddingExamination>(s => s.PatientDieseaseId)
                     .ToSaga(m => m.PatientDieseaseId);
-            mapper.ConfigureMapping<ILabWardResults>(s => s.PatientDieseaseId)//TODO : PatientDieseaseId
+            mapper.ConfigureMapping<IWardAcceptance>(s => s.PatientDieseaseId) 
+                    .ToSaga(m => m.PatientDieseaseId);
+            mapper.ConfigureMapping<ILabWardResults>(s => s.PatientDieseaseId)
                    .ToSaga(m => m.PatientDieseaseId);
-            mapper.ConfigureMapping<IUSGWardResults>(s => s.PatientDieseaseId)//TODO : PatientDieseaseId
+            mapper.ConfigureMapping<IUSGWardResults>(s => s.PatientDieseaseId)
                    .ToSaga(m => m.PatientDieseaseId);
-            mapper.ConfigureMapping<IRTGWardResults>(s => s.PatientDieseaseId)//TODO : PatientDieseaseId
+            mapper.ConfigureMapping<IRTGWardResults>(s => s.PatientDieseaseId)
                    .ToSaga(m => m.PatientDieseaseId);
-            mapper.ConfigureMapping<IWardAddingExamination>(s => s.PatientDieseaseId)//TODO : PatientDieseaseId
+            mapper.ConfigureMapping<IWardAddingExamination>(s => s.PatientDieseaseId)
                    .ToSaga(m => m.PatientDieseaseId);
         }
 
         public void Handle(IWardAcceptance message)
         {
             var patientInfo = _patientsDieseasesService.GetPatientById(message.PatientDieseaseId);
-            base.Data.PatientDieseaseId = patientInfo.Id;
+            base.Data.PatientDieseaseId = message.PatientDieseaseId;
 
             var currentDiesease = new WardPatientCurrentDieseaseViewModel { DieseaseDescription = message.Description };
             var patientDeclaration = new WardPatientDeclarationViewModel
@@ -61,19 +64,20 @@ namespace Ward
 
         public void Handle(IWardAddingExamination message)
         {
+            message.When = DateTime.Now;
             Data.Examinations.Add(new Examination(message.Type));
 
             switch(message.Type)
             {
-                case ExaminationType.BLOOD:
+                case ExaminationTypeEnum.ExaminationType.BLOOD:
                     Bus.Send(new WardBloodExaminationRequest
                     {
                         PatientDieseaseId = message.PatientDieseaseId,
                         PatientID = message.PatientID,
-                        Comment = message.Comment
+                        Comment = message.Comment 
                     });
                    break;
-                case ExaminationType.RTG:
+                case ExaminationTypeEnum.ExaminationType.RTG:
                    Bus.Send(new WardRTGExaminationRequest
                    {
                        PatientDieseaseId = message.PatientDieseaseId,
@@ -81,7 +85,7 @@ namespace Ward
                        Comment = message.Comment
                    });
                    break;
-                case ExaminationType.USG:
+                case ExaminationTypeEnum.ExaminationType.USG:
                    Bus.Send(new WardUSGExaminationRequest
                    {
                        PatientDieseaseId = message.PatientDieseaseId,
@@ -93,56 +97,50 @@ namespace Ward
 
         }
 
+        private void AddLogToUIAndTryFinish(PatientLogViewModel log)
+        {
+            log.LogType = Messages.Models.LogTypeEnum.LogType.Response;
+            _showToUIHubService.ShowPatientLog(log);
+            ConcludeExaminationAndTryFinish(log.ExaminationType);
+        }
+
         public void Handle(IRTGWardResults message)
         {
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
             base.Data.PatientId = message.PatientID;
-            var log = new PatientLogViewModel
+
+            AddLogToUIAndTryFinish(new PatientLogViewModel
             {
                 Comment = message.Comment,
                 PatientDieseaseId = message.PatientDieseaseId,
                 PatientId = message.PatientID,
-                ExaminationName = "[WYNIKI] : RTG"
-            };
-
-            _showToUIHubService.ShowPatientLog(log);
-
-            ConcludeExaminationAndTryFinish(ExaminationType.RTG);
+                ExaminationType = ExaminationTypeEnum.ExaminationType.RTG
+            });
         }
 
         public void Handle(IUSGWardResults message)
         {
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
             base.Data.PatientId = message.PatientID;
-            var log = new PatientLogViewModel
-            {
-                Comment = message.Comment,
-                PatientDieseaseId = message.PatientDieseaseId,
-                PatientId = message.PatientID,
-                ExaminationName = "[WYNIKI] : USG"
-            };
-
-            _showToUIHubService.ShowPatientLog(log);
-
-            ConcludeExaminationAndTryFinish(ExaminationType.USG);
+            AddLogToUIAndTryFinish(new PatientLogViewModel
+           {
+               Comment = message.Comment,
+               PatientId = message.PatientID,
+               ExaminationType = ExaminationTypeEnum.ExaminationType.USG
+           });
         }
 
         public void Handle(ILabWardResults message)
         {
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
-            base.Data.PatientId = message.PatientID;            
-            
-            var log = new PatientLogViewModel
+
+            AddLogToUIAndTryFinish(new PatientLogViewModel
             {
                 Comment = message.Comment,
                 PatientDieseaseId = message.PatientDieseaseId,
                 PatientId = message.PatientID,
-                ExaminationName = "[WYNIKI] : Lab-Blood"
-            };
-
-            _showToUIHubService.ShowPatientLog(log);
-            ConcludeExaminationAndTryFinish(ExaminationType.BLOOD);
-
+                ExaminationType = ExaminationTypeEnum.ExaminationType.LAB
+            });
         }
 
 
@@ -160,13 +158,13 @@ namespace Ward
             }
         }
 
-        private void ConcludeExamination(ExaminationType type)
+        private void ConcludeExamination(ExaminationTypeEnum.ExaminationType type)
         {
             var examination = Data.Examinations.Where(x => x.Type == type && !x.IsReceived ).First();
             examination.IsReceived = true;
         }
 
-        private void ConcludeExaminationAndTryFinish(ExaminationType type)
+        private void ConcludeExaminationAndTryFinish(ExaminationTypeEnum.ExaminationType type)
         {
             ConcludeExamination(type);
             CheckIfTreatmentComplete();

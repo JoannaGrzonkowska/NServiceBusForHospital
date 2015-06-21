@@ -29,42 +29,34 @@
                     <div class="form-group col-sm-4">
                         <textarea id="examinationDescriptionInput" class="form-control" rows="4" cols="70"
                                   data-bind="value: examinationDescriptionBlood"></textarea>
-                        <button data-bind="click: $root.sendToExamination">Blood</button>
+                        <button data-bind="click: $root.sendToExaminationBlood">Blood</button>
                     </div>
 
                     <div class="form-group col-sm-4">
                         <textarea id="examinationDescriptionInput1" class="form-control" rows="4" cols="70"
                                   data-bind="value: examinationDescriptionUSG"></textarea>
-                        <button data-bind="click: $root.sendToExamination1">USG</button>
+                        <button data-bind="click: $root.sendToExaminationUSG">USG</button>
 
                     </div>
 
                     <div class="form-group col-sm-4">
                         <textarea id="examinationDescriptionInput2" class="form-control" rows="4" cols="70"
                                   data-bind="value: examinationDescriptionRTG"></textarea>
-                        <button data-bind="click: $root.sendToExamination2">RTG</button>
+                        <button data-bind="click: $root.sendToExaminationRTG">RTG</button>
 
                     </div>
-
-                    <div data-bind="foreach: PatientLogs">
-
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <span data-bind="text: ExaminationName"></span>
-                            </div>
-                            <div class="col-sm-9">
-                                <span data-bind="text: Comment"></span>
-                            </div>
-                        </div>
-
-                    </div>
-                    </div>
-
+                </div>
             </div>
-
         </div>
-
+        <!-- ko foreach: PatientLogs -->
+        <div class="row log-row" data-bind="css: ExaminationCssClassName()">
+            <span class="col-sm-2" data-bind="text: When"></span>
+            <span class="col-sm-2" data-bind="text: ExaminationName"></span>
+            <span class="col-sm-8" data-bind="text: Comment"></span>
+        </div>
+        <!-- /ko -->
     </div>
+
 </main>
 
 @section scripts {
@@ -95,72 +87,55 @@
                 var self = this;
 
                 self.wardData = ko.observableArray([]);
-                
-                self.sendToExamination = function (item) {
+
+                self.sendToExamination = function (patientId, description, examinationType) {
+                    var log = new PatientLogViewModel(
+                                        {
+                                            PatientId: patientId,
+                                            Comment: description,
+                                            ExaminationType: examinationType,
+                                            LogType: LogType.Request
+                                        });
                     wardExaminationService.sendToExamination(
                         {
-                            PatientID: item.PatientInfo.Id(),
-                            Comment: item.examinationDescriptionBlood(),
-                            Type: 1
+                            PatientID: log.PatientId(),
+                            Comment: log.Comment(),
+                            Type: log.ExaminationType()
                         },
                         function () {
                             self.wardData().forEach(function (logitem) {
-                                if (logitem.PatientInfo.Id() == item.PatientInfo.Id()) {
-                                    logitem.PatientLogs.push(new PatientLogViewModel(
-                                        {
-                                            PatientID: item.PatientInfo.Id(),
-                                            Comment: item.examinationDescriptionBlood(),
-                                            ExaminationName: "[ZLECENIE] : Blood"
-                                        }))
+                                if (logitem.PatientInfo.Id() == patientId) {
+                                    logitem.PatientLogs.push(log);
                                 }
 
                             });
                         });
                 };
 
-                self.sendToExamination1 = function (item) {
-                    wardExaminationService.sendToExamination(
-                        {
-                            PatientID: item.PatientInfo.Id(),
-                            Comment: item.examinationDescriptionUSG(),
-                            Type: 3
-                        },
-                        function () {
-                            self.wardData().forEach(function (logitem) {
-                                if (logitem.PatientInfo.Id() == item.PatientInfo.Id()) {
-                                    logitem.PatientLogs.push(new PatientLogViewModel(
-                                        {
-                                            PatientID: item.PatientInfo.Id(),
-                                            Comment: item.examinationDescriptionUSG(),
-                                            ExaminationName: "[ZLECENIE] : USG"
-                                        }))
-                                }
-
-                            });
-                        });
+                self.sendToExaminationBlood = function (item) {
+                    self.sendToExamination(
+                        item.PatientInfo.Id(),
+                        item.examinationDescriptionBlood(),
+                        ExaminationType.BLOOD
+                        );
                 };
 
-                self.sendToExamination2 = function (item) {
-                    wardExaminationService.sendToExamination(
-                        {
-                            PatientID:  item.PatientInfo.Id(),
-                            Comment: item.examinationDescriptionRTG(),
-                            Type: 2
-                        },
-                        function () {
-                            self.wardData().forEach(function (logitem) {
-                                if (logitem.PatientInfo.Id() == item.PatientInfo.Id()) {
-                                    logitem.PatientLogs.push(new PatientLogViewModel(
-                                        {
-                                            PatientID: item.PatientInfo.Id(),
-                                            Comment: item.examinationDescriptionRTG(),
-                                            ExaminationName: "[ZLECENIE] : RTG"
-                                        }))
-                                }
-
-                            });
-                        });
+                self.sendToExaminationUSG = function (item) {
+                    self.sendToExamination(
+                        item.PatientInfo.Id(),
+                        item.examinationDescriptionUSG(),
+                        ExaminationType.USG
+                        );
                 };
+
+                self.sendToExaminationRTG = function (item) {
+                    self.sendToExamination(
+                        item.PatientInfo.Id(),
+                        item.examinationDescriptionRTG(),
+                        ExaminationType.RTG
+                        );
+                };
+
             };
 
 

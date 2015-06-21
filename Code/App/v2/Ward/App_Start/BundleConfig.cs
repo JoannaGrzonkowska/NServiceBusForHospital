@@ -25,7 +25,8 @@ namespace Ward
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css",
+                       "~/Content/WardStyles.css"));
 
             bundles.Add(new StyleBundle("~/bundles/ward_index").Include(
                       "~/Scripts/App/Models/PatientsModel.js",
@@ -39,7 +40,8 @@ namespace Ward
                         "~/Scripts/knockout-3.3.0.js",
                         "~/Scripts/moment.min.js",
                          "~/Scripts/App/Common.js",
-                        "~/Scripts/customBindingHandlers.js"));
+                        "~/Scripts/customBindingHandlers.js",
+                         "~/Scripts/App/Enums.js"));
         }
     }
 }

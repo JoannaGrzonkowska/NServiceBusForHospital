@@ -10,7 +10,8 @@ namespace Messages
     {
         public int PatientID { get; set; }
         public string Comment { get; set; }
-        public ExaminationType Type { get; set; }
+        public DateTime When { get; set; }
+        public ExaminationTypeEnum.ExaminationType Type { get; set; }
         public int PatientDieseaseId { get; set; }
     }
 }

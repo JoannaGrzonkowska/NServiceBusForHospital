@@ -1,0 +1,41 @@
+﻿body {
+}
+
+.log-row{
+    height:25px;
+    width:auto;
+}
+
+.Blood-Request{
+    background-color: yellowgreen;
+}
+
+.Blood-Response{
+    background-color: lightsalmon;
+}
+
+.RTG-Request{
+    background-color: ActiveCaption;
+}
+
+.RTG-Response{
+    background-color: bisque;
+}
+
+.USG-Request{
+    background-color: chocolate;
+}
+
+.USG-Response{
+    background-color: darkkhaki;
+}
+
+.Lab-Request{
+    background-color: lemonchiffon;
+}
+
+.Lab-Response{
+    background-color: wheat;
+}
+
+.clear{ clear:both; height:0px; width:0px; display:table; content:"";}
