@@ -2,6 +2,7 @@
 using Messages;
 using NServiceBus;
 using NServiceBus.Saga;
+using System;
 using System.Linq;
 using Ward.Hubs.Services;
 using Ward.Models;
@@ -61,25 +62,26 @@ namespace Ward
 
         public void Handle(IWardAddingExamination message)
         {
+            message.When = DateTime.Now;
             Data.Examinations.Add(new Examination(message.Type));
 
             switch(message.Type)
             {
-                case ExaminationType.BLOOD:
+                case ExaminationTypeEnum.ExaminationType.BLOOD:
                     Bus.Send(new WardBloodExaminationRequest
                     {
                         PatientID = message.PatientID,
-                        Comment = message.Comment
+                        Comment = message.Comment //todo passing when
                     });
                    break;
-                case ExaminationType.RTG:
+                case ExaminationTypeEnum.ExaminationType.RTG:
                    Bus.Send(new WardRTGExaminationRequest
                    {
                        PatientID = message.PatientID,
                        Comment = message.Comment
                    });
                    break;
-                case ExaminationType.USG:
+                case ExaminationTypeEnum.ExaminationType.USG:
                    Bus.Send(new WardUSGExaminationRequest
                    {
                        PatientID = message.PatientID,
@@ -90,50 +92,46 @@ namespace Ward
 
         }
 
+        private void AddLogToUIAndTryFinish(PatientLogViewModel log)
+        {
+            log.LogType = Messages.Models.LogTypeEnum.LogType.Response;
+            _showToUIHubService.ShowPatientLog(log);
+            ConcludeExaminationAndTryFinish(log.ExaminationType);
+        }
+
         public void Handle(IRTGWardResults message)
         {
             base.Data.PatientId = message.PatientID;
-            var log = new PatientLogViewModel
+
+            AddLogToUIAndTryFinish(new PatientLogViewModel
             {
                 Comment = message.Comment,
                 PatientId = message.PatientID,
-                ExaminationName = "[WYNIKI] : RTG"
-            };
-
-            _showToUIHubService.ShowPatientLog(log);
-
-            ConcludeExaminationAndTryFinish(ExaminationType.RTG);
+                ExaminationType = ExaminationTypeEnum.ExaminationType.RTG
+            });
         }
 
         public void Handle(IUSGWardResults message)
         {
             base.Data.PatientId = message.PatientID;
-            var log = new PatientLogViewModel
-            {
-                Comment = message.Comment,
-                PatientId = message.PatientID,
-                ExaminationName = "[WYNIKI] : USG"
-            };
-
-            _showToUIHubService.ShowPatientLog(log);
-
-            ConcludeExaminationAndTryFinish(ExaminationType.USG);
+            AddLogToUIAndTryFinish(new PatientLogViewModel
+           {
+               Comment = message.Comment,
+               PatientId = message.PatientID,
+               ExaminationType = ExaminationTypeEnum.ExaminationType.USG
+           });
         }
 
         public void Handle(ILabWardResults message)
         {
-            base.Data.PatientId = message.PatientID;            
-            
-            var log = new PatientLogViewModel
+            base.Data.PatientId = message.PatientID;
+
+            AddLogToUIAndTryFinish(new PatientLogViewModel
             {
                 Comment = message.Comment,
                 PatientId = message.PatientID,
-                ExaminationName = "[WYNIKI] : Lab-Blood"
-            };
-
-            _showToUIHubService.ShowPatientLog(log);
-            ConcludeExaminationAndTryFinish(ExaminationType.BLOOD);
-
+                ExaminationType = ExaminationTypeEnum.ExaminationType.LAB
+            });
         }
 
 
@@ -150,13 +148,13 @@ namespace Ward
             }
         }
 
-        private void ConcludeExamination(ExaminationType type)
+        private void ConcludeExamination(ExaminationTypeEnum.ExaminationType type)
         {
             var examination = Data.Examinations.Where(x => x.Type == type && !x.IsReceived ).First();
             examination.IsReceived = true;
         }
 
-        private void ConcludeExaminationAndTryFinish(ExaminationType type)
+        private void ConcludeExaminationAndTryFinish(ExaminationTypeEnum.ExaminationType type)
         {
             ConcludeExamination(type);
             CheckIfTreatmentComplete();

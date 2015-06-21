@@ -1,4 +1,5 @@
 ﻿using NServiceBus;
+using System;
 
 namespace Messages
 {
@@ -6,6 +7,7 @@ namespace Messages
     {
         int PatientID { get; set; }
         string Comment { get; set; }
-        ExaminationType Type { get; set; }
+        DateTime When { get; set; }
+        ExaminationTypeEnum.ExaminationType Type { get; set; }
     }
 }
