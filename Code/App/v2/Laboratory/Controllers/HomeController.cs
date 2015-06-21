@@ -55,7 +55,7 @@ namespace Laboratory.Controllers
             var patientInfo = _patientsDieseasesService.GetPatientById(message.PatientDieseaseId);
             var currentLabExamination = new LabExaminationCommentViewModel
             {
-                LabExaminationComment = message.Comment
+                LabExaminationComment = ""//message.Comment
             };
             var labExamination = new LabExaminationViewModel
             {

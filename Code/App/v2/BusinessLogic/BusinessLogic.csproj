@@ -52,6 +52,7 @@
     <Compile Include="Models\Commands\AddExaminationToPatientCommand.cs" />
     <Compile Include="Models\Commands\AddPatientCommand.cs" />
     <Compile Include="Models\DieseasesModel.cs" />
+    <Compile Include="Models\Examination.cs" />
     <Compile Include="Models\ExaminationsModel.cs" />
     <Compile Include="Models\PatientsDieseasesModel.cs" />
     <Compile Include="Models\PatientsModel.cs" />

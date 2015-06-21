@@ -76,13 +76,14 @@ namespace Ward
         {
             Data.Examinations.Add(new Examination(message.Type));
             int examinationId = -1;
-           var addExaminationCommand =  _addExaminationToPatientCommandHandler.Add(new AddExaminationToPatientCommand
-            {
-                PatientDieseaseId = message.PatientDieseaseId,
-                ExaminationType = message.Type,
-                LogType = Messages.Models.LogTypeEnum.LogType.Request,
-                Comment = message.Comment
-            }, ref examinationId); 
+                 var addExaminationCommand = _addExaminationToPatientCommandHandler.Add(new AddExaminationToPatientCommand
+                 {
+                     PatientDieseaseId = message.PatientDieseaseId,
+                     ExaminationType = message.Type,
+                     LogType = Messages.Models.LogTypeEnum.LogType.Request,
+                     Comment = message.Comment
+                 }, ref examinationId);
+        
 
            if (addExaminationCommand.IsSuccess)
            {

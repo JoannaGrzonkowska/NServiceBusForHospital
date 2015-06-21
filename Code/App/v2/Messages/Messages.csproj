@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blood\BloodLabRequest.cs" />
+    <Compile Include="Blood\BloodRequestData.cs" />
     <Compile Include="Blood\IBloodLabRequest.cs" />
     <Compile Include="Common\CommandResult.cs" />
     <Compile Include="Models\ExaminationTypeEnum.cs" />

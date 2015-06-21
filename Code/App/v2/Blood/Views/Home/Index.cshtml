@@ -65,9 +65,8 @@
                 self.sendToLab = function (item) {
                     bloodExaminationService.sendToLab(
                         {
-                            PatientID: item.PatientInfo.Id(),
+                            PatientDieseaseId: item.PatientDieseaseId,
                             Comment: item.examinationDescriptionBlood()
-
                         },
                         function () {
 

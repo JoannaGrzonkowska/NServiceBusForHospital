@@ -10,6 +10,6 @@ namespace Blood.ViewModels
     {
         public PatientsModel PatientInfo { get; set; }
         public BloodExaminationCommentViewModel BloodComment { get; set; }
-
+        public int PatientDieseaseId { get; set; }
     }
 }
