@@ -7,5 +7,6 @@ namespace Messages
         int PatientID { get; set; }
         string Comment { get; set; }
         ExaminationType Type { get; set; }
+          int PatientDieseaseId { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace RTG.Controllers
         public void Handle(IWardRTGExaminationRequest message)
         {
 
-            var patientInfo = _patientsService.GetById(message.PatientID);
+            var patientInfo = _patientsService.GetById(message.PatientDieseaseId);
             var currentRTGExamination = new RTGExaminationCommentViewModel
             {
                 RTGExaminationComment = message.Comment

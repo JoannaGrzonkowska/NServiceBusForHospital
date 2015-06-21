@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\NServiceBusForHospital\Code\App\Hospital\DataAccess\HospitalModel.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\STUDIA\SEM_XII\KOMPONENTOWE_SYSTEMY_ROZPROSZONE\LAB\PROJEKT\NServiceBusForHospital\Code\App\v2\DataAccess\HospitalModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

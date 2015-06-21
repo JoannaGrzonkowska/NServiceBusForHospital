@@ -48,7 +48,7 @@ namespace USG.Controllers
         public void Handle(IWardUSGExaminationRequest message)
         {
 
-            var patientInfo = _patientsService.GetById(message.PatientID);
+            var patientInfo = _patientsService.GetById(message.PatientDieseaseId);
             var currentUSGExamination = new USGExaminationCommentViewModel
             {
                 USGExaminationComment = message.Comment

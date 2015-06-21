@@ -7,6 +7,7 @@ namespace Ward.ViewModels
 {
     public class PatientLogViewModel
     {
+        public int PatientDieseaseId { get; set; }
         public int PatientId { get; set; }
         public string ExaminationName { get; set; }
         public string Comment { get; set; }

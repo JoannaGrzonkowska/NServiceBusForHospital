@@ -11,5 +11,6 @@ namespace Messages
     {
         string Comment { get; set; }
         int PatientId { get; set; }
+        int PatientDieseaseId { get; set; }
     }
 }

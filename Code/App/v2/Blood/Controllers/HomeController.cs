@@ -48,7 +48,7 @@ namespace Blood.Controllers
 
         public void Handle(IWardBloodExaminationRequest message)
         {
-            var patientInfo = _patientsService.GetById(message.PatientID);
+            var patientInfo = _patientsService.GetById(message.PatientDieseaseId);
             var currentBloodExamination = new BloodExaminationCommentViewModel
             {
                 BloodExaminationComment = message.Comment

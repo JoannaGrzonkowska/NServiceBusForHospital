@@ -31,22 +31,22 @@ namespace Ward
 
         protected override void ConfigureHowToFindSaga(SagaPropertyMapper<WardSagaData> mapper)
         {
-            mapper.ConfigureMapping<IWardAcceptance>(s => s.PatientID) //TODO : PatientDieseaseId
-                    .ToSaga(m => m.PatientId);
-            mapper.ConfigureMapping<ILabWardResults>(s => s.PatientID)//TODO : PatientDieseaseId
-                   .ToSaga(m => m.PatientId);
-            mapper.ConfigureMapping<IUSGWardResults>(s => s.PatientID)//TODO : PatientDieseaseId
-                   .ToSaga(m => m.PatientId);
-            mapper.ConfigureMapping<IRTGWardResults>(s => s.PatientID)//TODO : PatientDieseaseId
-                   .ToSaga(m => m.PatientId);
-            mapper.ConfigureMapping<IWardAddingExamination>(s => s.PatientID)//TODO : PatientDieseaseId
-                   .ToSaga(m => m.PatientId);
+            mapper.ConfigureMapping<IWardAcceptance>(s => s.PatientDieseaseId) //TODO : PatientDieseaseId
+                    .ToSaga(m => m.PatientDieseaseId);
+            mapper.ConfigureMapping<ILabWardResults>(s => s.PatientDieseaseId)//TODO : PatientDieseaseId
+                   .ToSaga(m => m.PatientDieseaseId);
+            mapper.ConfigureMapping<IUSGWardResults>(s => s.PatientDieseaseId)//TODO : PatientDieseaseId
+                   .ToSaga(m => m.PatientDieseaseId);
+            mapper.ConfigureMapping<IRTGWardResults>(s => s.PatientDieseaseId)//TODO : PatientDieseaseId
+                   .ToSaga(m => m.PatientDieseaseId);
+            mapper.ConfigureMapping<IWardAddingExamination>(s => s.PatientDieseaseId)//TODO : PatientDieseaseId
+                   .ToSaga(m => m.PatientDieseaseId);
         }
 
         public void Handle(IWardAcceptance message)
         {
             var patientInfo = _patientsDieseasesService.GetPatientById(message.PatientDieseaseId);
-            base.Data.PatientId = patientInfo.Id;
+            base.Data.PatientDieseaseId = patientInfo.Id;
 
             var currentDiesease = new WardPatientCurrentDieseaseViewModel { DieseaseDescription = message.Description };
             var patientDeclaration = new WardPatientDeclarationViewModel
@@ -68,6 +68,7 @@ namespace Ward
                 case ExaminationType.BLOOD:
                     Bus.Send(new WardBloodExaminationRequest
                     {
+                        PatientDieseaseId = message.PatientDieseaseId,
                         PatientID = message.PatientID,
                         Comment = message.Comment
                     });
@@ -75,6 +76,7 @@ namespace Ward
                 case ExaminationType.RTG:
                    Bus.Send(new WardRTGExaminationRequest
                    {
+                       PatientDieseaseId = message.PatientDieseaseId,
                        PatientID = message.PatientID,
                        Comment = message.Comment
                    });
@@ -82,6 +84,7 @@ namespace Ward
                 case ExaminationType.USG:
                    Bus.Send(new WardUSGExaminationRequest
                    {
+                       PatientDieseaseId = message.PatientDieseaseId,
                        PatientID = message.PatientID,
                        Comment = message.Comment
                    });
@@ -92,10 +95,12 @@ namespace Ward
 
         public void Handle(IRTGWardResults message)
         {
+            base.Data.PatientDieseaseId = message.PatientDieseaseId;
             base.Data.PatientId = message.PatientID;
             var log = new PatientLogViewModel
             {
                 Comment = message.Comment,
+                PatientDieseaseId = message.PatientDieseaseId,
                 PatientId = message.PatientID,
                 ExaminationName = "[WYNIKI] : RTG"
             };
@@ -107,10 +112,12 @@ namespace Ward
 
         public void Handle(IUSGWardResults message)
         {
+            base.Data.PatientDieseaseId = message.PatientDieseaseId;
             base.Data.PatientId = message.PatientID;
             var log = new PatientLogViewModel
             {
                 Comment = message.Comment,
+                PatientDieseaseId = message.PatientDieseaseId,
                 PatientId = message.PatientID,
                 ExaminationName = "[WYNIKI] : USG"
             };
@@ -122,11 +129,13 @@ namespace Ward
 
         public void Handle(ILabWardResults message)
         {
+            base.Data.PatientDieseaseId = message.PatientDieseaseId;
             base.Data.PatientId = message.PatientID;            
             
             var log = new PatientLogViewModel
             {
                 Comment = message.Comment,
+                PatientDieseaseId = message.PatientDieseaseId,
                 PatientId = message.PatientID,
                 ExaminationName = "[WYNIKI] : Lab-Blood"
             };
@@ -144,6 +153,7 @@ namespace Ward
                 ReplyToOriginator(new Results_PatientRecive
                 {
                     Comment = "Treatment Completed YOLO",
+                    PatientDieseaseId = Data.PatientDieseaseId,
                     PatientId = Data.PatientId
                 });
                 MarkAsComplete();

@@ -50,7 +50,7 @@ namespace Laboratory.Controllers
 
         public void Handle(IBloodLabRequest message)
         {
-            var patientInfo = _patientsService.GetById(message.PatientID);
+            var patientInfo = _patientsService.GetById(message.PatientDieseaseId);
             var currentLabExamination = new LabExaminationCommentViewModel
             {
                 LabExaminationComment = message.Comment

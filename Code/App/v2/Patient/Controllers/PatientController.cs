@@ -13,19 +13,16 @@ namespace Patient.Controllers
     {
         private readonly IAccountService _accountService;
 
-
         public PatientController(IAccountService accountService)
         {
             _accountService = accountService;
         }
-
 
         // GET: Patient
         public ActionResult Index()
         {
             return View();
         }
-
 
         //LOGIN
         [HttpGet]
@@ -76,10 +73,5 @@ namespace Patient.Controllers
 
             return View();
         }
-
-
-
-
-
     }
 }

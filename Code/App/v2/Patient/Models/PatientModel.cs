@@ -10,13 +10,13 @@ namespace Patient.Models
     public class PatientModel
     {
         [Required(ErrorMessage = "Name is required")]
-        [StringLength(30, MinimumLength = 10)]
+        [StringLength(30, MinimumLength = 3)]
         [DisplayName("Name")]
         public string Name { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(30, MinimumLength = 10)]
+        [StringLength(30, MinimumLength = 3)]
         [DisplayName("Password")]
         public string Password { get; set; }
 
