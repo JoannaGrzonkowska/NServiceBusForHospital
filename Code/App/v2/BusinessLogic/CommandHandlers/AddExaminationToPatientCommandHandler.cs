@@ -30,11 +30,12 @@ namespace BusinessLogic.CommandHandlers
                 PatientDieseaseId = command.PatientDieseaseId,
                 ExaminationType = (int) command.ExaminationType,
                 LogType = (int)command.LogType,
-                Comment = command.Comment
+                Comment = command.Comment,
+                WhenExamined = DateTime.Now
             };
             _examinationsRepository.Add(examination);
             _unitOfWork.SaveChanges();
-
+            
             examinationId = examination.Id;
 
             return new CommandResult();
