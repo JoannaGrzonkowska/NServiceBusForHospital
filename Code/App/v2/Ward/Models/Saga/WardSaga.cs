@@ -1,4 +1,6 @@
-﻿using BusinessLogic.Services;
+﻿using BusinessLogic.CommandHandlers;
+using BusinessLogic.Models.Commands;
+using BusinessLogic.Services;
 using Messages;
 using NServiceBus;
 using NServiceBus.Saga;
@@ -20,14 +22,17 @@ namespace Ward
         private readonly IPatientsService _patientsService;
         private readonly IPatientsDieseasesService _patientsDieseasesService;
         private readonly IShowToUIHubService _showToUIHubService;
+        private readonly IAddExaminationToPatientCommandHandler _addExaminationToPatientCommandHandler;
 
         public WardSaga(IShowToUIHubService showToUIHubService,
             IPatientsService patientService,
-            IPatientsDieseasesService patientsDieseasesService)
+            IPatientsDieseasesService patientsDieseasesService,
+            IAddExaminationToPatientCommandHandler addExaminationToPatientCommandHandler)
         {
             _patientsService = patientService;
             _showToUIHubService = showToUIHubService;
             _patientsDieseasesService = patientsDieseasesService;
+            _addExaminationToPatientCommandHandler = addExaminationToPatientCommandHandler;
         }
 
         protected override void ConfigureHowToFindSaga(SagaPropertyMapper<WardSagaData> mapper)
@@ -69,34 +74,43 @@ namespace Ward
 
         public void Handle(IWardAddingExamination message)
         {
-            message.When = DateTime.Now;
             Data.Examinations.Add(new Examination(message.Type));
-
-            switch(message.Type)
+            int examinationId = -1;
+           var addExaminationCommand =  _addExaminationToPatientCommandHandler.Add(new AddExaminationToPatientCommand
             {
-                case ExaminationTypeEnum.ExaminationType.BLOOD:
-                    Bus.Send(new WardBloodExaminationRequest
-                    {
-                        PatientDieseaseId = message.PatientDieseaseId,
-                        Comment = message.Comment 
-                    });
-                   break;
-                case ExaminationTypeEnum.ExaminationType.RTG:
-                   Bus.Send(new WardRTGExaminationRequest
-                   {
-                       PatientDieseaseId = message.PatientDieseaseId,
-                       Comment = message.Comment
-                   });
-                   break;
-                case ExaminationTypeEnum.ExaminationType.USG:
-                   Bus.Send(new WardUSGExaminationRequest
-                   {
-                       PatientDieseaseId = message.PatientDieseaseId,
-                       Comment = message.Comment
-                   });
-                   break;
-            }
+                PatientDieseaseId = message.PatientDieseaseId,
+                ExaminationType = message.Type,
+                LogType = Messages.Models.LogTypeEnum.LogType.Request,
+                Comment = message.Comment
+            }, ref examinationId); 
 
+           if (addExaminationCommand.IsSuccess)
+           {
+               switch (message.Type)
+               {
+                   case ExaminationTypeEnum.ExaminationType.BLOOD:
+                       Bus.Send(new WardBloodExaminationRequest
+                       {
+                           PatientDieseaseId = message.PatientDieseaseId,
+                           ExaminationId = examinationId
+                       });
+                       break;
+                   case ExaminationTypeEnum.ExaminationType.RTG:
+                       Bus.Send(new WardRTGExaminationRequest
+                       {
+                           PatientDieseaseId = message.PatientDieseaseId,
+                           Comment = message.Comment
+                       });
+                       break;
+                   case ExaminationTypeEnum.ExaminationType.USG:
+                       Bus.Send(new WardUSGExaminationRequest
+                       {
+                           PatientDieseaseId = message.PatientDieseaseId,
+                           Comment = message.Comment
+                       });
+                       break;
+               }
+           }
         }
 
         private void AddLogToUIAndTryFinish(PatientLogViewModel log)

@@ -19,15 +19,19 @@ namespace Blood.Controllers
         private readonly IPatientsService _patientsService;
         private readonly IShowToUIHubService _showToUIHubService;
         private readonly IPatientsDieseasesService _patientsDieseasesService;
+        private readonly IExaminationsService _examinationsService;
 
-
-        public HomeController(IBus bus, IShowToUIHubService showToUIHubService,
-            IPatientsService patientService, IPatientsDieseasesService patientsDieseasesService)
+        public HomeController(IBus bus, 
+            IShowToUIHubService showToUIHubService,
+            IPatientsService patientService,
+			IPatientsDieseasesService patientsDieseasesService,
+            IExaminationsService examinationsService)
         {
             _patientsDieseasesService = patientsDieseasesService;
             _patientsService = patientService;
             _showToUIHubService = showToUIHubService;
             _bus = bus;
+            _examinationsService = examinationsService;
         }
 
         public ActionResult Index()
@@ -52,9 +56,10 @@ namespace Blood.Controllers
         public void Handle(IWardBloodExaminationRequest message)
         {
             var patientInfo = _patientsDieseasesService.GetPatientById(message.PatientDieseaseId);
+            var examination = _examinationsService.GetById(message.ExaminationId);
             var currentBloodExamination = new BloodExaminationCommentViewModel
             {
-                BloodExaminationComment = message.Comment
+                BloodExaminationComment = examination.Comment
             };
             var bloodExamination = new BloodExaminationViewModel
             {

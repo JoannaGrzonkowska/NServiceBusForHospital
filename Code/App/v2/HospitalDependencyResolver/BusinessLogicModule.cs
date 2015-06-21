@@ -28,11 +28,14 @@ namespace HospitalDependencyResolver
             var patientsRepository = new PatientsRepository(context);
             var dieseasesRepository = new DieseasesRepository(context);
             var patientsDieseasesRepository = new PatientsDieseasesRepository(context);
+            var examinationsRepository = new ExaminationsRepository(context);
+
             var unitOfWork = new UnitOfWork(context);
 
             builder.RegisterInstance<IPatientsRepository>(patientsRepository);
             builder.RegisterInstance<IDieseasesRepository>(dieseasesRepository);
             builder.RegisterInstance<IPatientsDieseasesRepository>(patientsDieseasesRepository);
+            builder.RegisterInstance<IExaminationsRepository>(examinationsRepository);
 
             builder.RegisterInstance<IUnitOfWork>(unitOfWork);
 
@@ -43,8 +46,10 @@ namespace HospitalDependencyResolver
             builder.RegisterInstance<IDieseasesService>(new DieseasesService(dieseasesRepository));
             builder.RegisterInstance<IPatientsDieseasesService>(new PatientsDieseasesService(patientsDieseasesRepository));
             builder.RegisterInstance<IAccountService>(new AccountService(patientService, addPatientCommandHandler));
+            builder.RegisterInstance<IExaminationsService>(new ExaminationsService(examinationsRepository));
 
             builder.RegisterInstance<IAddDieseaseToPatientCommandHandler>(new AddDieseaseToPatientCommandHandler(patientsDieseasesRepository, unitOfWork));
+            builder.RegisterInstance<IAddExaminationToPatientCommandHandler>(new AddExaminationToPatientCommandHandler(examinationsRepository, unitOfWork));
            
 
             base.Load(builder);
