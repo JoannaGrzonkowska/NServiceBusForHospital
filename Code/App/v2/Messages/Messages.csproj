@@ -46,6 +46,7 @@
     <Compile Include="Blood\BloodRequestData.cs" />
     <Compile Include="Blood\IBloodLabRequest.cs" />
     <Compile Include="Common\CommandResult.cs" />
+    <Compile Include="Laboratory\LabRequestData.cs" />
     <Compile Include="Models\ExaminationTypeEnum.cs" />
     <Compile Include="Laboratory\ILabWardResults.cs" />
     <Compile Include="Laboratory\LabWardResults.cs" />

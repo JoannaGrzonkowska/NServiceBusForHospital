@@ -1,5 +1,7 @@
 ﻿using BusinessLogic.Models;
 using DataAccess.Repositories;
+using Messages;
+using Messages.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +21,29 @@ namespace BusinessLogic.Services
 
         public IEnumerable<PatientsDieseasesModel> GetPatientsDieseases(int patientId)
         {
-            return _patientsDieseasesRepository.GetPatientsDieseases(patientId)
-                .Select(s => new PatientsDieseasesModel
+            var patientDieseasesAndExaminations = _patientsDieseasesRepository.GetPatientsDieseases(patientId);
+            List<PatientsDieseasesModel> result = new List<PatientsDieseasesModel>();
+
+            patientDieseasesAndExaminations.ToList().ForEach(x => {
+                IEnumerable<ExaminationsModel> examinations = x.Examinations.Select(t => new ExaminationsModel 
+                    {
+                        Comment = t.Comment,
+                        ExaminationType = (ExaminationTypeEnum.ExaminationType)t.ExaminationType,
+                        Id = t.Id,
+                        LogType = (LogTypeEnum.LogType)t.LogType,
+                        PatientDieseaseId = t.PatientDieseaseId,
+                        When = t.WhenExamined
+                    });
+                result.Add(new PatientsDieseasesModel
                 {
-                    DieseaseName = s.Dieseases.Name,
-                    Description = s.Description,
+                    DieseaseName = x.Dieseases.Name,
+                    Description = x.Description,
+                    DieseasesExaminations = examinations
                 });
+            });
+
+
+            return result;
         }
 
         public PatientsModel GetPatientById(int id)

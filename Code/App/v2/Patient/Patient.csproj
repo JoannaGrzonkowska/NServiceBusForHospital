@@ -185,6 +185,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\App\Common.js" />
+    <Content Include="Scripts\App\Model\PersonalData\ExaminationModel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\customBindingHandlers.js" />

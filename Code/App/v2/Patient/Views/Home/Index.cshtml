@@ -1,4 +1,5 @@
-﻿@using Resources
+﻿@model BusinessLogic.Models.PatientsModel
+@using Resources
 
 @{
     ViewBag.Title = "Patient Data";
@@ -100,8 +101,14 @@
         <div class="col-sm-6">
             <span data-bind="text: Description"></span>
         </div>
-        
-    </div>
+
+        <div data-bind="foreach: DieseasesExaminations">
+            <div class="row">
+                <span class="col-sm-3"  data-bind="text: Comment"></span>
+            </div>
+        </div>
+
+        </div>
 </script>
 
 @section scripts {
@@ -120,10 +127,13 @@
             // Reference the auto-generated proxy for the hub.
             var chat = $.connection.patientHub;
             // Create a function that the hub can call back to display messages.
-            chat.client.addNewMessageToPage = function (name, message) {
+            chat.client.addNewMessageToPage = function (examinationResults) {
                 // Add the message to the page.
-                $('#discussion').append('<li><strong>' + htmlEncode(name)
+                var patientId = '@Model.Id';
+                if (patientId === examinationResults.Id) {
+                    $('#discussion').append('<li><strong>' + htmlEncode(name)
                     + '</strong>: ' + htmlEncode(message) + '</li>');
+                }
             };
             $.connection.hub.start().done(function () {
             });

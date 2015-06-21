@@ -102,7 +102,7 @@
                         function () {
                             self.wardData().forEach(function (patientItem) {
                                 patientItem.DieseaseLogs().forEach(function (dieseseLog) {
-                                    if (dieseseLog.PatientDieseaseId == patientDieseaseId) {
+                                    if (dieseseLog.CurrentDiesease.PatientDieseaseId == patientDieseaseId) {
                                         dieseseLog.PatientLogs.push(log);
                                     }
                                 });

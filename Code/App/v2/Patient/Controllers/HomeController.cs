@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,18 @@ namespace Patient.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IPatientsService _patientsService;
+
+        public HomeController(IPatientsService patientsService)
+        {
+            _patientsService = patientsService;
+        }
+
+
         public ActionResult Index()
         {
-            return View();
+            var patient = _patientsService.GetModelByName(User.Identity.Name);
+            return View(patient);
         }
 
         public ActionResult About()

@@ -94,7 +94,7 @@ namespace Patient.Controllers
 
         [HttpGet]
         public ActionResult GetPatientDieseases()
-        {//todo - logowanie
+        {
             var patient = _patientsService.GetModelByName(User.Identity.Name);
             return Json(_patientsDieseasesService.GetPatientsDieseases(patient.Id), JsonRequestBehavior.AllowGet);
         }

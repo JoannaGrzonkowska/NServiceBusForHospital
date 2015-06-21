@@ -149,7 +149,7 @@ namespace Ward
 
             AddLogToUIAndTryFinish(new PatientLogViewModel
             {
-                Comment = message.Comment,
+                Comment = "",//message.Comment,
                 PatientDieseaseId = message.PatientDieseaseId,
                 ExaminationType = ExaminationTypeEnum.ExaminationType.LAB
             });

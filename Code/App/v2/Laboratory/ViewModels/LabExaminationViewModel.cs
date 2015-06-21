@@ -10,6 +10,6 @@ namespace Laboratory.ViewModels
     {
         public PatientsModel PatientInfo { get; set; }
         public LabExaminationCommentViewModel LabComment { get; set; }
-
+        public int PatientDieseaseId { get; set; }
     }
 }

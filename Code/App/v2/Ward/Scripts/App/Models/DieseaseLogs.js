@@ -3,6 +3,7 @@
     
     this.CurrentDiesease = new
         WardPatientCurrentDieseaseViewModel(data.CurrentDiesease);
+
     this.examinationDescriptionBlood = ko.observable();
     this.examinationDescriptionUSG = ko.observable();
     this.examinationDescriptionRTG = ko.observable();
