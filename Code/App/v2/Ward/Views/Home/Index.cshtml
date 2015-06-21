@@ -5,8 +5,6 @@
 <h3>@ViewBag.Message</h3>
 <main id="ward-patient-data-content" class="container">
     <div data-bind="foreach: wardData">
-        <div class="row">
-            <div class="col-sm-4">
                 <section class="panel panel-info">
                     <div class="panel-heading">Patient's info</div>
                     <div class="panel-body">
@@ -21,9 +19,8 @@
                     </div>
                 </section>
 
-            </div>
-
-            <div class="col-sm-8">
+        <div data-bind="foreach: DieseaseLogs">
+            <div class="row">
                 <span data-bind="text: CurrentDiesease.DieseaseDescription"></span>
                 <div class="row">
                     <div class="form-group col-sm-4">
@@ -47,16 +44,16 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- ko foreach: PatientLogs -->
-        <div class="row log-row" data-bind="css: ExaminationCssClassName()">
-            <span class="col-sm-2" data-bind="text: When"></span>
-            <span class="col-sm-2" data-bind="text: ExaminationName"></span>
-            <span class="col-sm-8" data-bind="text: Comment"></span>
-        </div>
-        <!-- /ko -->
-    </div>
 
+            <!-- ko foreach: PatientLogs -->
+            <div class="row log-row" data-bind="css: ExaminationCssClassName()">
+                <span class="col-sm-2" data-bind="text: When"></span>
+                <span class="col-sm-2" data-bind="text: ExaminationName"></span>
+                <span class="col-sm-8" data-bind="text: Comment"></span>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
 </main>
 
 @section scripts {
@@ -88,33 +85,34 @@
 
                 self.wardData = ko.observableArray([]);
 
-                self.sendToExamination = function (patientId, description, examinationType) {
+                self.sendToExamination = function (patientDieseaseId, description, examinationType) {
                     var log = new PatientLogViewModel(
                                         {
-                                            PatientId: patientId,
+                                            PatientDieseaseId: patientDieseaseId,
                                             Comment: description,
                                             ExaminationType: examinationType,
                                             LogType: LogType.Request
                                         });
                     wardExaminationService.sendToExamination(
                         {
-                            PatientID: log.PatientId(),
+                            PatientDieseaseId: log.PatientDieseaseId(),
                             Comment: log.Comment(),
                             Type: log.ExaminationType()
                         },
                         function () {
-                            self.wardData().forEach(function (logitem) {
-                                if (logitem.PatientInfo.Id() == patientId) {
-                                    logitem.PatientLogs.push(log);
-                                }
-
+                            self.wardData().forEach(function (patientItem) {
+                                patientItem.DieseaseLogs().forEach(function (dieseseLog) {
+                                    if (dieseseLog.PatientDieseaseId == patientDieseaseId) {
+                                        dieseseLog.PatientLogs.push(log);
+                                    }
+                                });
                             });
                         });
                 };
 
                 self.sendToExaminationBlood = function (item) {
                     self.sendToExamination(
-                        item.PatientInfo.Id(),
+                        item.CurrentDiesease.PatientDieseaseId,
                         item.examinationDescriptionBlood(),
                         ExaminationType.BLOOD
                         );
@@ -122,7 +120,7 @@
 
                 self.sendToExaminationUSG = function (item) {
                     self.sendToExamination(
-                        item.PatientInfo.Id(),
+                        item.CurrentDiesease.PatientDieseaseId,
                         item.examinationDescriptionUSG(),
                         ExaminationType.USG
                         );
@@ -130,7 +128,7 @@
 
                 self.sendToExaminationRTG = function (item) {
                     self.sendToExamination(
-                        item.PatientInfo.Id(),
+                        item.CurrentDiesease.PatientDieseaseId,
                         item.examinationDescriptionRTG(),
                         ExaminationType.RTG
                         );
@@ -146,13 +144,12 @@
                 var chat = $.connection.wardHub;
                 // Create a function that the hub can call back to display messages.
                 chat.client.addNewDeclarationToWard = function (declaration) {
-                    wardViewModel.wardData.push(new WardPatientDeclarationViewModel(declaration))
-
+                    wardViewModel.wardData.push(new WardPatientDeclarationViewModel(declaration));
                 };
                 chat.client.addNewPatientLog = function (log) {
                     wardViewModel.wardData().forEach(function (item) {
-                        if (item.PatientInfo.Id() == log.PatientId) {
-                            item.PatientLogs.push(new PatientLogViewModel(log))
+                        if (item.PatientDieseaseId() == log.PatientDieseaseId) {
+                            item.PatientLogs.push(new PatientLogViewModel(log));
                         }
 
                     });

@@ -155,7 +155,9 @@
     <Compile Include="Hubs\PatientHub.cs" />
     <Compile Include="Hubs\Results_PatientReciveHandler.cs" />
     <Compile Include="Models\LengthConstraints.cs" />
+    <Compile Include="Models\PatientLoginModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
+    <Compile Include="Models\PatientRegisterModel.cs" />
     <Compile Include="Models\StaticData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

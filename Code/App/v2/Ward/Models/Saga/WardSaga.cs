@@ -51,7 +51,12 @@ namespace Ward
             var patientInfo = _patientsDieseasesService.GetPatientById(message.PatientDieseaseId);
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
 
-            var currentDiesease = new WardPatientCurrentDieseaseViewModel { DieseaseDescription = message.Description };
+            var currentDiesease = new WardPatientCurrentDieseaseViewModel 
+            { 
+                DieseaseDescription = message.Description, 
+                PatientDieseaseId = message.PatientDieseaseId 
+            };
+
             var patientDeclaration = new WardPatientDeclarationViewModel
             {
                 PatientInfo = patientInfo,
@@ -73,7 +78,6 @@ namespace Ward
                     Bus.Send(new WardBloodExaminationRequest
                     {
                         PatientDieseaseId = message.PatientDieseaseId,
-                        PatientID = message.PatientID,
                         Comment = message.Comment 
                     });
                    break;
@@ -81,7 +85,6 @@ namespace Ward
                    Bus.Send(new WardRTGExaminationRequest
                    {
                        PatientDieseaseId = message.PatientDieseaseId,
-                       PatientID = message.PatientID,
                        Comment = message.Comment
                    });
                    break;
@@ -89,7 +92,6 @@ namespace Ward
                    Bus.Send(new WardUSGExaminationRequest
                    {
                        PatientDieseaseId = message.PatientDieseaseId,
-                       PatientID = message.PatientID,
                        Comment = message.Comment
                    });
                    break;
@@ -107,13 +109,11 @@ namespace Ward
         public void Handle(IRTGWardResults message)
         {
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
-            base.Data.PatientId = message.PatientID;
 
             AddLogToUIAndTryFinish(new PatientLogViewModel
             {
                 Comment = message.Comment,
                 PatientDieseaseId = message.PatientDieseaseId,
-                PatientId = message.PatientID,
                 ExaminationType = ExaminationTypeEnum.ExaminationType.RTG
             });
         }
@@ -121,11 +121,9 @@ namespace Ward
         public void Handle(IUSGWardResults message)
         {
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
-            base.Data.PatientId = message.PatientID;
             AddLogToUIAndTryFinish(new PatientLogViewModel
            {
                Comment = message.Comment,
-               PatientId = message.PatientID,
                ExaminationType = ExaminationTypeEnum.ExaminationType.USG
            });
         }
@@ -138,7 +136,6 @@ namespace Ward
             {
                 Comment = message.Comment,
                 PatientDieseaseId = message.PatientDieseaseId,
-                PatientId = message.PatientID,
                 ExaminationType = ExaminationTypeEnum.ExaminationType.LAB
             });
         }
@@ -152,7 +149,6 @@ namespace Ward
                 {
                     Comment = "Treatment Completed YOLO",
                     PatientDieseaseId = Data.PatientDieseaseId,
-                    PatientId = Data.PatientId
                 });
                 MarkAsComplete();
             }

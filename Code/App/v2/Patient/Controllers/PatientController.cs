@@ -32,7 +32,7 @@ namespace Patient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(PatientModel user)
+        public ActionResult Login(PatientLoginModel user)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace Patient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(PatientModel user)
+        public ActionResult Register(PatientRegisterModel user)
         {
             if (ModelState.IsValid)
             {

@@ -9,7 +9,6 @@ namespace Messages
 {
     public interface IBloodLabRequest : ICommand
     {
-        int PatientID { get; set; }
         string Comment { get; set; }
         int PatientDieseaseId { get; set; }
     }

@@ -5,7 +5,7 @@ namespace Messages
 {
     public interface IWardAddingExamination : ICommand
     {
-        int PatientID { get; set; }
+        
         string Comment { get; set; }
         DateTime When { get; set; }
         ExaminationTypeEnum.ExaminationType Type { get; set; }

@@ -9,7 +9,7 @@ namespace Messages
 {
     public interface IWardAcceptance:ICommand
     {
-        int PatientID { get; set; }
+        
         int DieseaseID { get; set; }
         DateTime IssueDate { get; set; }
         string Description { get; set; }

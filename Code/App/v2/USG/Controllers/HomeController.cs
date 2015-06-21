@@ -18,10 +18,13 @@ namespace USG.Controllers
         private readonly IBus _bus;
         private readonly IPatientsService _patientsService;
         private readonly IShowToUIHubService _showToUIHubService;
+        private readonly IPatientsDieseasesService _patientsDieseasesService;
+
 
         public HomeController(IBus bus, IShowToUIHubService showToUIHubService,
-            IPatientsService patientService)
+            IPatientsService patientService, IPatientsDieseasesService patientsDieseasesService)
         {
+            _patientsDieseasesService = patientsDieseasesService;
             _patientsService = patientService;
             _showToUIHubService = showToUIHubService;
             _bus = bus;
@@ -47,8 +50,7 @@ namespace USG.Controllers
 
         public void Handle(IWardUSGExaminationRequest message)
         {
-
-            var patientInfo = _patientsService.GetById(message.PatientDieseaseId);
+            var patientInfo = _patientsDieseasesService.GetPatientById(message.PatientDieseaseId);
             var currentUSGExamination = new USGExaminationCommentViewModel
             {
                 USGExaminationComment = message.Comment

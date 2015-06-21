@@ -8,7 +8,6 @@ namespace Messages
 {
     public class BloodLabRequest : IBloodLabRequest
     {
-        public int PatientID { get; set; }
         public string Comment { get; set; }
         public int PatientDieseaseId { get; set; }
     }
