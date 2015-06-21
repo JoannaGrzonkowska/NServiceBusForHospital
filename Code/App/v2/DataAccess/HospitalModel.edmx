@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HospitalKSRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HospitalKSRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Dieseases">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,11 +13,22 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Examinations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientDieseaseId" Type="int" Nullable="false" />
+          <Property Name="ExaminationType" Type="int" Nullable="false" />
+          <Property Name="LogType" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="WhenExamined" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Patients">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Age" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="200" Nullable="false" />
@@ -32,6 +43,18 @@
           <Property Name="DieseaseId" Type="int" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Examinations_PatientsDieseases">
+          <End Role="PatientsDieseases" Type="Self.PatientsDieseases" Multiplicity="1" />
+          <End Role="Examinations" Type="Self.Examinations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientsDieseases">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Examinations">
+              <PropertyRef Name="PatientDieseaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PatientsDieseases_Dieseases">
           <End Role="Dieseases" Type="Self.Dieseases" Multiplicity="1" />
           <End Role="PatientsDieseases" Type="Self.PatientsDieseases" Multiplicity="*" />
@@ -58,8 +81,13 @@
         </Association>
         <EntityContainer Name="HospitalKSRModelStoreContainer">
           <EntitySet Name="Dieseases" EntityType="Self.Dieseases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Examinations" EntityType="Self.Examinations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientsDieseases" EntityType="Self.PatientsDieseases" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Examinations_PatientsDieseases" Association="Self.FK_Examinations_PatientsDieseases">
+            <End Role="PatientsDieseases" EntitySet="PatientsDieseases" />
+            <End Role="Examinations" EntitySet="Examinations" />
+          </AssociationSet>
           <AssociationSet Name="FK_PatientsDieseases_Dieseases" Association="Self.FK_PatientsDieseases_Dieseases">
             <End Role="Dieseases" EntitySet="Dieseases" />
             <End Role="PatientsDieseases" EntitySet="PatientsDieseases" />
@@ -69,8 +97,7 @@
             <End Role="PatientsDieseases" EntitySet="PatientsDieseases" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HospitalKSRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -104,6 +131,7 @@
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Dieseases" Relationship="Self.FK_PatientsDieseases_Dieseases" FromRole="PatientsDieseases" ToRole="Dieseases" />
           <NavigationProperty Name="Patients" Relationship="Self.FK_PatientsDieseases_Patients" FromRole="PatientsDieseases" ToRole="Patients" />
+          <NavigationProperty Name="Examinations" Relationship="HospitalKSRModel.FK_Examinations_PatientsDieseases" FromRole="PatientsDieseases" ToRole="Examinations" />
         </EntityType>
         <Association Name="FK_PatientsDieseases_Dieseases">
           <End Role="Dieseases" Type="Self.Dieseases" Multiplicity="1" />
@@ -141,7 +169,36 @@
             <End Role="Patients" EntitySet="Patients" />
             <End Role="PatientsDieseases" EntitySet="PatientsDieseases" />
           </AssociationSet>
+          <EntitySet Name="Examinations" EntityType="HospitalKSRModel.Examinations" />
+          <AssociationSet Name="FK_Examinations_PatientsDieseases" Association="HospitalKSRModel.FK_Examinations_PatientsDieseases">
+            <End Role="PatientsDieseases" EntitySet="PatientsDieseases" />
+            <End Role="Examinations" EntitySet="Examinations" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Examinations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientDieseaseId" Type="Int32" Nullable="false" />
+          <Property Name="ExaminationType" Type="Int32" Nullable="false" />
+          <Property Name="LogType" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="WhenExamined" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PatientsDieseases" Relationship="HospitalKSRModel.FK_Examinations_PatientsDieseases" FromRole="Examinations" ToRole="PatientsDieseases" />
+        </EntityType>
+        <Association Name="FK_Examinations_PatientsDieseases">
+          <End Type="HospitalKSRModel.PatientsDieseases" Role="PatientsDieseases" Multiplicity="1" />
+          <End Type="HospitalKSRModel.Examinations" Role="Examinations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientsDieseases">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Examinations">
+              <PropertyRef Name="PatientDieseaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -175,6 +232,18 @@
                 <ScalarProperty Name="PatientId" ColumnName="PatientId" />
                 <ScalarProperty Name="DieseaseId" ColumnName="DieseaseId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Examinations">
+            <EntityTypeMapping TypeName="HospitalKSRModel.Examinations">
+              <MappingFragment StoreEntitySet="Examinations">
+                <ScalarProperty Name="WhenExamined" ColumnName="WhenExamined" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="LogType" ColumnName="LogType" />
+                <ScalarProperty Name="ExaminationType" ColumnName="ExaminationType" />
+                <ScalarProperty Name="PatientDieseaseId" ColumnName="PatientDieseaseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

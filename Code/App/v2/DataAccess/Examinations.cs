@@ -15,26 +15,24 @@ namespace DataAccess
 using System;
     using System.Collections.Generic;
     
-public partial class Dieseases
+public partial class Examinations
 {
-
-    public Dieseases()
-    {
-
-        this.PatientsDieseases = new HashSet<PatientsDieseases>();
-
-    }
-
 
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    public int PatientDieseaseId { get; set; }
 
-    public string Type { get; set; }
+    public int ExaminationType { get; set; }
+
+    public int LogType { get; set; }
+
+    public string Comment { get; set; }
+
+    public System.DateTime WhenExamined { get; set; }
 
 
 
-    public virtual ICollection<PatientsDieseases> PatientsDieseases { get; set; }
+    public virtual PatientsDieseases PatientsDieseases { get; set; }
 
 }
 

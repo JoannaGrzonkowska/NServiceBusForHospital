@@ -9,6 +9,6 @@ namespace Messages
         string Comment { get; set; }
         DateTime When { get; set; }
         ExaminationTypeEnum.ExaminationType Type { get; set; }
-          int PatientDieseaseId { get; set; }
+        int PatientDieseaseId { get; set; }
     }
 }
