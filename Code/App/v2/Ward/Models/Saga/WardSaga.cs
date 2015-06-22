@@ -23,16 +23,19 @@ namespace Ward
         private readonly IPatientsDieseasesService _patientsDieseasesService;
         private readonly IShowToUIHubService _showToUIHubService;
         private readonly IAddExaminationToPatientCommandHandler _addExaminationToPatientCommandHandler;
+        private readonly IExaminationsService _examinationsService;
 
         public WardSaga(IShowToUIHubService showToUIHubService,
             IPatientsService patientService,
             IPatientsDieseasesService patientsDieseasesService,
-            IAddExaminationToPatientCommandHandler addExaminationToPatientCommandHandler)
+            IAddExaminationToPatientCommandHandler addExaminationToPatientCommandHandler,
+            IExaminationsService examinationsService)
         {
             _patientsService = patientService;
             _showToUIHubService = showToUIHubService;
             _patientsDieseasesService = patientsDieseasesService;
             _addExaminationToPatientCommandHandler = addExaminationToPatientCommandHandler;
+            _examinationsService = examinationsService;
         }
 
         protected override void ConfigureHowToFindSaga(SagaPropertyMapper<WardSagaData> mapper)
@@ -100,14 +103,14 @@ namespace Ward
                        Bus.Send(new WardRTGExaminationRequest
                        {
                            PatientDieseaseId = message.PatientDieseaseId,
-                           Comment = message.Comment
+                           ExaminationId = examinationId
                        });
                        break;
                    case ExaminationTypeEnum.ExaminationType.USG:
                        Bus.Send(new WardUSGExaminationRequest
                        {
                            PatientDieseaseId = message.PatientDieseaseId,
-                           Comment = message.Comment
+                           ExaminationId = examinationId
                        });
                        break;
                }
@@ -124,10 +127,10 @@ namespace Ward
         public void Handle(IRTGWardResults message)
         {
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
-
+            var examination = _examinationsService.GetById(message.ExaminationId);
             AddLogToUIAndTryFinish(new PatientLogViewModel
             {
-                Comment = message.Comment,
+                Comment = examination.Comment,
                 PatientDieseaseId = message.PatientDieseaseId,
                 ExaminationType = ExaminationTypeEnum.ExaminationType.RTG
             });
@@ -136,9 +139,10 @@ namespace Ward
         public void Handle(IUSGWardResults message)
         {
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
+            var examination = _examinationsService.GetById(message.ExaminationId);
             AddLogToUIAndTryFinish(new PatientLogViewModel
            {
-               Comment = message.Comment,
+               Comment = examination.Comment,
                ExaminationType = ExaminationTypeEnum.ExaminationType.USG
            });
         }
@@ -147,9 +151,13 @@ namespace Ward
         {
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
 
+
+            var examination = _examinationsService.GetById(message.ExaminationId);
+
+
             AddLogToUIAndTryFinish(new PatientLogViewModel
             {
-                Comment = "",//message.Comment,
+                Comment = examination.Comment,//"",//message.Comment,
                 PatientDieseaseId = message.PatientDieseaseId,
                 ExaminationType = ExaminationTypeEnum.ExaminationType.LAB
             });

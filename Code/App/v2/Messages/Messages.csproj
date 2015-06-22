@@ -51,6 +51,8 @@
     <Compile Include="Laboratory\ILabWardResults.cs" />
     <Compile Include="Laboratory\LabWardResults.cs" />
     <Compile Include="Models\LogTypeEnum.cs" />
+    <Compile Include="RTG\RTGRequestData.cs" />
+    <Compile Include="USG\USGRequestData.cs" />
     <Compile Include="Ward\WardAddingExamination.cs" />
     <Compile Include="Ward\IWardAddingExamination.cs" />
     <Compile Include="Ward\IResults_PatientRecive.cs" />

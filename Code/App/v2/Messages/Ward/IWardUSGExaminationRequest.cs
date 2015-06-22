@@ -9,8 +9,7 @@ namespace Messages
 {
     public interface IWardUSGExaminationRequest:ICommand
     {
-        
-        string Comment { get; set; }
-          int PatientDieseaseId { get; set; }
+         int PatientDieseaseId { get; set; }
+         int ExaminationId { get; set; }
     }
 }

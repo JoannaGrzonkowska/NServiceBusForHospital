@@ -8,8 +8,7 @@ namespace Messages
 {
     public class WardUSGExaminationRequest : IWardUSGExaminationRequest
     {
-        
-        public string Comment { get; set; }
         public int PatientDieseaseId { get; set; }
+        public int ExaminationId { get; set; }
     }
 }

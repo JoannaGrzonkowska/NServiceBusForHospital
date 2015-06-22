@@ -8,8 +8,7 @@ namespace Messages
 {
     public class RTGWardResults : IRTGWardResults
     {
-        
-        public string Comment { get; set; }
+        public int ExaminationId { get; set; }
         public int PatientDieseaseId { get; set; }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Messages
 {
-    public class USGWardResults : IUSGWardResults
+    public class LabRequestData
     {
-        public int ExaminationId { get; set; }
+        public string Comment { get; set; }
         public int PatientDieseaseId { get; set; }
     }
 }

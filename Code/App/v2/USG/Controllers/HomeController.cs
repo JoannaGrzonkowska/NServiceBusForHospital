@@ -53,7 +53,7 @@ namespace USG.Controllers
             var patientInfo = _patientsDieseasesService.GetPatientById(message.PatientDieseaseId);
             var currentUSGExamination = new USGExaminationCommentViewModel
             {
-                USGExaminationComment = message.Comment
+                USGExaminationComment = ""//TODO message.Comment
             };
             var usgExamination = new USGExaminationViewModel
             {
