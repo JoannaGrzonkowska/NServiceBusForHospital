@@ -4,26 +4,21 @@
 }
 
 <main id="patient-personal-data-content" class="container">    
-    <div data-bind="template: { name: 'add-diesease-template'}"></div>        
-    <div data-bind="template:{name:'patient-dieseases-template'}"></div>
-</main>
-
-<script id="add-diesease-template" type="text/html">
     <div id="add-alergy-container">
         <div class="panel panel-primary">
             <div class="panel-heading"><h2>@Localizations.AddNewNotification</h2></div>
-                                                                                                                                        <div class="panel-body">
+            <div class="panel-body">
                 <div data-bind="visible: isSendMessageVisible" class="alert alert-success">@Localizations.SendMessage</div>
                 <form id="add-alergy-form">
                     <div class="form-group">
                         <label>@Localizations.ChooseMessageType_Label</label>
-                            <div>
-                                <select class="form-control input-lg" id="dieseaseTypeSelect"  }">
-                                    <option value="patient">Patient</option>
-                                    <option value="ward">Ward</option>
-                                </select>
-                            </div>
-                     </div>
+                        <div>
+                            <select class="form-control input-lg" id="dieseaseTypeSelect" }">
+                                <option value="patient">Patient</option>
+                                <option value="ward">Ward</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label>@Localizations.MessageContent</label>
@@ -36,7 +31,7 @@
             </div>
         </div>
     </div>
-</script>
+</main>
 
 @section scripts {
 

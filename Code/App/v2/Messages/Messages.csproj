@@ -47,6 +47,12 @@
     <Compile Include="Blood\IBloodLabRequest.cs" />
     <Compile Include="Common\CommandResult.cs" />
     <Compile Include="Laboratory\LabRequestData.cs" />
+    <Compile Include="Manager\DirectorMessage.cs" />
+    <Compile Include="Manager\DirectorPatientMessage.cs" />
+    <Compile Include="Manager\DirectorWardMessage.cs" />
+    <Compile Include="Manager\IDirectorMessage.cs" />
+    <Compile Include="Manager\IDirectorPatientMessage.cs" />
+    <Compile Include="Manager\IDirectorWardMessage.cs" />
     <Compile Include="Models\ExaminationTypeEnum.cs" />
     <Compile Include="Laboratory\ILabWardResults.cs" />
     <Compile Include="Laboratory\LabWardResults.cs" />
