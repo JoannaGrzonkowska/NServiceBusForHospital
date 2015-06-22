@@ -80,7 +80,7 @@
                 var labViewModel = new LabViewModel();
                 var chat = $.connection.labHub;
                 chat.client.addNewRequestToLab = function (declaration) {
-                    labViewModel.labData.push(new LabExaminationViewModel(declaration))
+                    labViewModel.labData().push(new LabExaminationViewModel(declaration))
 
                 };
                 $.connection.hub.start().done(function () {
