@@ -18,12 +18,14 @@ namespace USG.Controllers
         private readonly IShowToUIHubService _showToUIHubService;
         private readonly IPatientsDieseasesService _patientsDieseasesService;
         private readonly IAddExaminationToPatientCommandHandler _addExaminationToPatientCommandHandler;
+        private readonly IExaminationsService _examinationsService;
 
 
         public HomeController(IBus bus, 
             IShowToUIHubService showToUIHubService,
-            IPatientsService patientService, 
+            IPatientsService patientService,
             IPatientsDieseasesService patientsDieseasesService,
+            IExaminationsService examinationsService,
             IAddExaminationToPatientCommandHandler addExaminationToPatientCommandHandler)
         {
             _patientsDieseasesService = patientsDieseasesService;
@@ -31,6 +33,7 @@ namespace USG.Controllers
             _showToUIHubService = showToUIHubService;
             _bus = bus;
             _addExaminationToPatientCommandHandler = addExaminationToPatientCommandHandler;
+            _examinationsService = examinationsService;
         }
         public ActionResult Index()
         {
@@ -54,6 +57,8 @@ namespace USG.Controllers
         public void Handle(IWardUSGExaminationRequest message)
         {
             var patientInfo = _patientsDieseasesService.GetPatientById(message.PatientDieseaseId);
+            var examination = _examinationsService.GetById(message.ExaminationId);
+
             var currentUSGExamination = new USGExaminationCommentViewModel
             {
                 USGExaminationComment = examination.Comment
@@ -61,7 +66,8 @@ namespace USG.Controllers
             var usgExamination = new USGExaminationViewModel
             {
                 PatientInfo = patientInfo,
-                USGComment = currentUSGExamination
+                USGComment = currentUSGExamination,
+                PatientDieseaseId = message.PatientDieseaseId
             };
 
             _showToUIHubService.ShowUSGExamination(usgExamination);
