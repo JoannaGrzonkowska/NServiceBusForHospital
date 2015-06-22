@@ -148,7 +148,7 @@
                 };
                 chat.client.addNewPatientLog = function (log) {
                     wardViewModel.wardData().forEach(function (item) {
-                        if (item.PatientDieseaseId() == log.PatientDieseaseId) {
+                        if (item.PatientDieseaseId == log.PatientDieseaseId) {
                             item.PatientLogs.push(new PatientLogViewModel(log));
                         }
 
