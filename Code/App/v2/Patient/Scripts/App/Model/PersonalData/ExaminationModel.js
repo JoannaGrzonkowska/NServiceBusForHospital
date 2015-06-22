@@ -7,4 +7,16 @@
     this.When = ko.observable(data.When);
     this.ExaminationType = ko.observable(data.ExaminationType);
     this.LogType = ko.observable(data.LogType);
+
+    this.ExaminationName = ko.computed(function () {
+        return getExaminationTypeName(self.ExaminationType());
+    }, this);
+
+    this.LogName = ko.computed(function () {
+        return getLogTypeName(self.LogType());
+    }, this);
+
+    this.ExaminationCssClassName = ko.computed(function () {
+        return getExaminationTypeName(self.ExaminationType()) + "-" + getLogTypeName(self.LogType());
+    }, this);
 };

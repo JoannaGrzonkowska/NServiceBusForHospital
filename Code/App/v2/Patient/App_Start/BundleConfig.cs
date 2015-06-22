@@ -24,7 +24,9 @@ namespace Patient
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/PatientStyles.css"));
+                      
 
 
             bundles.Add(new ScriptBundle("~/bundles/patient_index").Include(
@@ -42,7 +44,8 @@ namespace Patient
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
                      "~/Scripts/knockout-3.3.0.js",
                      "~/Scripts/moment.min.js",
-                      "~/Scripts/App/Common.js",
+                     "~/Scripts/App/Common.js",
+                     "~/Scripts/App/Enums.js",
                      "~/Scripts/customBindingHandlers.js"));
         }
     }
