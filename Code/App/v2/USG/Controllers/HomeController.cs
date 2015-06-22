@@ -1,4 +1,6 @@
-﻿using BusinessLogic.Services;
+﻿using BusinessLogic.CommandHandlers;
+using BusinessLogic.Models.Commands;
+using BusinessLogic.Services;
 using Messages;
 using Messages.Common;
 using NServiceBus;
@@ -15,15 +17,20 @@ namespace USG.Controllers
         private readonly IPatientsService _patientsService;
         private readonly IShowToUIHubService _showToUIHubService;
         private readonly IPatientsDieseasesService _patientsDieseasesService;
+        private readonly IAddExaminationToPatientCommandHandler _addExaminationToPatientCommandHandler;
 
 
-        public HomeController(IBus bus, IShowToUIHubService showToUIHubService,
-            IPatientsService patientService, IPatientsDieseasesService patientsDieseasesService)
+        public HomeController(IBus bus, 
+            IShowToUIHubService showToUIHubService,
+            IPatientsService patientService, 
+            IPatientsDieseasesService patientsDieseasesService,
+            IAddExaminationToPatientCommandHandler addExaminationToPatientCommandHandler)
         {
             _patientsDieseasesService = patientsDieseasesService;
             _patientsService = patientService;
             _showToUIHubService = showToUIHubService;
             _bus = bus;
+            _addExaminationToPatientCommandHandler = addExaminationToPatientCommandHandler;
         }
         public ActionResult Index()
         {
@@ -61,9 +68,27 @@ namespace USG.Controllers
             _showToUIHubService.ShowUSGExamination(usgExamination);
         }
         [HttpPost]
-        public ActionResult SendResultsToWard(USGWardResults message)
+        public ActionResult SendResultsToWard(USGRequestData appData)
         {
-            _bus.Send(message);
+            int examinationId = -1;
+            var addExaminationCommand = _addExaminationToPatientCommandHandler.Add(new AddExaminationToPatientCommand
+            {
+                PatientDieseaseId = appData.PatientDieseaseId,
+                ExaminationType = ExaminationTypeEnum.ExaminationType.LAB,
+                LogType = Messages.Models.LogTypeEnum.LogType.Request,
+                Comment = appData.Comment
+            }, ref examinationId);
+
+
+            if (addExaminationCommand.IsSuccess)
+            {
+                USGWardResults message = new USGWardResults
+                {
+                    PatientDieseaseId = appData.PatientDieseaseId,
+                    ExaminationId = examinationId
+                };
+                _bus.Send(message);
+            }
             return Json(new CommandResult(), JsonRequestBehavior.AllowGet);
 
         }
