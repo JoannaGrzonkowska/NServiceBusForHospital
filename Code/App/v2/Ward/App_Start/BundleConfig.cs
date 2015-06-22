@@ -33,7 +33,8 @@ namespace Ward
                       "~/Scripts/App/Models/WardPatientDeclarationViewModel.js",
                       "~/Scripts/App/Services/WardExaminationService.js",
                       "~/Scripts/App/Models/PatientLogViewModel.js",
-                      "~/Scripts/App/Models/DieseaseLogs.js"
+                      "~/Scripts/App/Models/DieseaseLogs.js",
+                      "~/Scripts/App/Models/DirectorWardMessage.js"
                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/common").Include(

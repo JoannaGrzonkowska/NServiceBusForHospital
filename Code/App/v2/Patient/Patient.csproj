@@ -146,7 +146,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DirectorPatientMessageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IHandleMessages.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\PatientPersonalDataController.cs" />
     <Compile Include="Global.asax.cs">
@@ -154,6 +156,8 @@
     </Compile>
     <Compile Include="Hubs\PatientHub.cs" />
     <Compile Include="Hubs\Results_PatientReciveHandler.cs" />
+    <Compile Include="Hubs\Services\IShowToUIHubService.cs" />
+    <Compile Include="Hubs\Services\ShowToUIHubService.cs" />
     <Compile Include="Models\LengthConstraints.cs" />
     <Compile Include="Models\PatientLoginModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
@@ -185,6 +189,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Icon.png" />
     <Content Include="Scripts\App\Common.js" />
+    <Content Include="Scripts\App\Model\DirectorPatientMessage.js" />
     <Content Include="Scripts\App\Model\PersonalData\ExaminationModel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -283,6 +288,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\DirectorPatientMessage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

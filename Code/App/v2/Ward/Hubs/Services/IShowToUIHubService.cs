@@ -1,4 +1,5 @@
-﻿using Ward.ViewModels;
+﻿using Messages;
+using Ward.ViewModels;
 
 namespace Ward.Hubs.Services
 {
@@ -6,5 +7,6 @@ namespace Ward.Hubs.Services
     {
         void ShowWardAcceptance(WardPatientDeclarationViewModel message);
         void ShowPatientLog(PatientLogViewModel log);
+        void ShowPublishedDirectorMessage(DirectorWardMessage message);
     }
 }

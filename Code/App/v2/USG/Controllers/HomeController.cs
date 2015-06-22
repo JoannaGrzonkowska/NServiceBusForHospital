@@ -64,7 +64,6 @@ namespace USG.Controllers
                 USGComment = currentUSGExamination
             };
 
-
             _showToUIHubService.ShowUSGExamination(usgExamination);
         }
         [HttpPost]

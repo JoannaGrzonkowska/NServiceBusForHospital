@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using Messages;
+using Microsoft.AspNet.SignalR;
 using Ward.ViewModels;
 
 namespace Ward.Hubs.Services
@@ -20,6 +21,11 @@ namespace Ward.Hubs.Services
         public void ShowPatientLog(PatientLogViewModel log)
         {
             _hubContext.Clients.All.addNewPatientLog(log);        
+        }
+
+        public void ShowPublishedDirectorMessage(DirectorWardMessage message)
+        {
+            _hubContext.Clients.All.addPublishedDirectorMessage(message);
         }
     }
 }

@@ -2,12 +2,14 @@
 using Messages.Common;
 using NServiceBus;
 using System.Web.Mvc;
+using Ward.Hubs.Services;
 
 namespace Ward.Controllers
 {
     public class WardExaminationController : Controller
     {
         private readonly IBus _bus;
+       
         public WardExaminationController(IBus bus)
         {
             _bus = bus;

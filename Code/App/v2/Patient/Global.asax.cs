@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using HospitalDependencyResolver;
 using NServiceBus;
+using Patient.Hubs.Services;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -32,7 +33,8 @@ namespace Patient
 
             builder.RegisterModule(new DataModule());
             builder.RegisterModule(new BusinessLogicModel());
-
+            
+            builder.RegisterInstance<IShowToUIHubService>(new ShowToUIHubService());
             IContainer container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

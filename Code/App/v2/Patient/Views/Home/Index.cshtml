@@ -9,6 +9,14 @@
 
 <main id="patient-personal-data-content" class="container">
 
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <div data-bind="foreach: publishedMessages">
+                <div data-bind="text: Content"></div>
+            </div>
+        </div>
+    </div>
+
     <div data-bind="template: { name: 'news-template'}"></div>
 
     <div class="row">
@@ -75,7 +83,7 @@
 
 <script id="patient-dieseases-template" type="text/html">
     <section id="dieseases-container" class="panel panel-info">
-        <div class="panel-heading"><h2 >Choroby pacjenta</h2></div>
+        <div class="panel-heading"><h2>Choroby pacjenta</h2></div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-sm-4">
@@ -84,7 +92,7 @@
                 <div class="col-sm-8">
                     <span>@Localizations.DescriptionHeader</span>
                 </div>
-               
+
             </div>
             <div data-bind="template: { name: 'patient-diesease-template', foreach: patientDieseases}"></div>
         </div>
@@ -104,11 +112,11 @@
 
         <div data-bind="foreach: DieseasesExaminations">
             <div class="row">
-                <span class="col-sm-3"  data-bind="text: Comment"></span>
+                <span class="col-sm-3" data-bind="text: Comment"></span>
             </div>
         </div>
 
-        </div>
+    </div>
 </script>
 
 @section scripts {
@@ -117,28 +125,6 @@
     <script src="~/Scripts/App/Model/PersonalData/PatientsPersonalDataViewModel.js"></script>
     <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
     <script src="~/signalr/hubs"></script>
-    <script>
-        $(function () {
-            // Reference the auto-generated proxy for the hub.
-            var chat = $.connection.patientHub;
-            // Create a function that the hub can call back to display messages.
-            chat.client.addNewMessageToPage = function (examinationResults) {
-                // Add the message to the page.
-                var patientId = '@Model.Id';
-                if (patientId === examinationResults.Id) {
-                    $('#discussion').append('<li><strong>' + htmlEncode(name)
-                    + '</strong>: ' + htmlEncode(message) + '</li>');
-                }
-            };
-            $.connection.hub.start().done(function () {
-            });
-        });
-        // This optional function html-encodes messages for display in the page.
-        function htmlEncode(value) {
-            var encodedValue = $('<div />').text(value).html();
-            return encodedValue;
-        }
-    </script>
 
     <script type="text/javascript">
 
@@ -153,7 +139,9 @@
 
             var DieseasesViewModel = function () {
                 var self = this;
-               
+
+                self.publishedMessages = ko.observableArray([]);
+
                 self.info = ko.observable();
                 self.patientDieseases = ko.observableArray([]);
                 self.dieseasesTypes = ko.observableArray([]);
@@ -202,19 +190,28 @@
                     return false;
                 });
 
-                patientPersonalDataService.getPersonalData(function (data) {
-                    dieseasesViewModel.info(data.Info);
-                    dieseasesViewModel.patientDieseases(data.PatientDieseases());
-                    dieseasesViewModel.dieseasesTypes(data.DieseasesTypes());
-                    dieseasesViewModel.dieseaseDescriptionMaxLength(data.DieseaseDescriptionMaxLength);
+                var chat = $.connection.patientHub;
 
-                    ko.applyBindings(dieseasesViewModel, document.getElementById("patient-personal-data-content"));
-                    $.data(document.body, "DieseasesViewModel", dieseasesViewModel);
+                chat.client.addPublishedDirectorMessage = function (message) {
+                    dieseasesViewModel.publishedMessages.push(new DirectorPatientMessage(message));
+                }
 
-                    $('[data-toggle="tooltip"]').tooltip({
-                        container: 'body'
+                $.connection.hub.start().done(function () {
+
+                    patientPersonalDataService.getPersonalData(function (data) {
+                        dieseasesViewModel.info(data.Info);
+                        dieseasesViewModel.patientDieseases(data.PatientDieseases());
+                        dieseasesViewModel.dieseasesTypes(data.DieseasesTypes());
+                        dieseasesViewModel.dieseaseDescriptionMaxLength(data.DieseaseDescriptionMaxLength);
+
+                        ko.applyBindings(dieseasesViewModel, document.getElementById("patient-personal-data-content"));
+                        $.data(document.body, "DieseasesViewModel", dieseasesViewModel);
+
+                        $('[data-toggle="tooltip"]').tooltip({
+                            container: 'body'
+                        });
+
                     });
-
                 });
 
 

@@ -146,7 +146,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DirectorWardMessageHandler.cs" />
+    <Compile Include="Controllers\DirectorWardMessageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WardExaminationController.cs" />
     <Compile Include="Models\Examination.cs" />
@@ -184,6 +184,7 @@
     <Content Include="Icon.png" />
     <Content Include="Scripts\App\Enums.js" />
     <Content Include="Scripts\App\Models\DieseaseLogs.js" />
+    <Content Include="Scripts\App\Models\DirectorWardMessage.js" />
     <Content Include="Scripts\App\Models\PatientLogViewModel.js" />
     <Content Include="Scripts\App\Models\PatientsModel.js" />
     <Content Include="Scripts\App\Models\WardPatientCurrentDieseaseViewModel.js" />

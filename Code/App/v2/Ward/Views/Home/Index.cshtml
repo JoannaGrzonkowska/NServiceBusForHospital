@@ -4,20 +4,29 @@
 }
 <h3>@ViewBag.Message</h3>
 <main id="ward-patient-data-content" class="container">
+
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <div data-bind="foreach: publishedMessages">
+                <div data-bind="text: Content"></div>
+            </div>
+        </div>
+    </div>
+
     <div data-bind="foreach: wardData">
-                <section class="panel panel-info">
-                    <div class="panel-heading">Patient's info</div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <label class="col-sm-2">Name:</label>
-                            <span data-bind="text: PatientInfo.Name"></span>
-                        </div>
-                        <div class="row">
-                            <label class="col-sm-2">Age:</label>
-                            <span data-bind="text: PatientInfo.Age"></span>
-                        </div>
-                    </div>
-                </section>
+        <section class="panel panel-info">
+            <div class="panel-heading">Patient's info</div>
+            <div class="panel-body">
+                <div class="row">
+                    <label class="col-sm-2">Name:</label>
+                    <span data-bind="text: PatientInfo.Name"></span>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2">Age:</label>
+                    <span data-bind="text: PatientInfo.Age"></span>
+                </div>
+            </div>
+        </section>
 
         <div data-bind="foreach: DieseaseLogs">
             <div class="row">
@@ -83,6 +92,7 @@
             var WardViewModel = function () {
                 var self = this;
 
+                self.publishedMessages = ko.observableArray([]);
                 self.wardData = ko.observableArray([]);
 
                 self.sendToExamination = function (patientDieseaseId, description, examinationType) {
@@ -153,6 +163,9 @@
                         }
                     });
                 };
+                chat.client.addPublishedDirectorMessage = function (message) {
+                    wardViewModel.publishedMessages.push(new DirectorWardMessage(message));
+                }
                 $.connection.hub.start().done(function () {
 
                     ko.applyBindings(wardViewModel, document.getElementById("ward-patient-data-content"));
