@@ -70,6 +70,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Destination.
+        /// </summary>
+        internal static string ChooseMessageType_Label {
+            get {
+                return ResourceManager.GetString("ChooseMessageType_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message Content.
+        /// </summary>
+        internal static string MessageContent {
+            get {
+                return ResourceManager.GetString("MessageContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type here.
+        /// </summary>
+        internal static string PatientDieseaseDescription_Placeholder {
+            get {
+                return ResourceManager.GetString("PatientDieseaseDescription_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message send.
         /// </summary>
         internal static string SendMessage {

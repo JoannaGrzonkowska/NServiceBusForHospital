@@ -120,6 +120,15 @@
   <data name="AddNewNotification" xml:space="preserve">
     <value>Send Spam</value>
   </data>
+  <data name="ChooseMessageType_Label" xml:space="preserve">
+    <value>Destination</value>
+  </data>
+  <data name="MessageContent" xml:space="preserve">
+    <value>Message Content</value>
+  </data>
+  <data name="PatientDieseaseDescription_Placeholder" xml:space="preserve">
+    <value>Type here</value>
+  </data>
   <data name="SendMessage" xml:space="preserve">
     <value>Message send</value>
   </data>

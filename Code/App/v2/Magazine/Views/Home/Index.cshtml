@@ -1,13 +1,10 @@
-﻿@{
+﻿@using Resources
+@{
     ViewBag.Title = "Magazine Page";
 }
 
-<main id="patient-personal-data-content" class="container">
-
-    <div data-bind="template: { name: 'news-template'}"></div>
-
-        <div data-bind="template: { name: 'add-diesease-template'}"></div>
-        
+<main id="patient-personal-data-content" class="container">    
+    <div data-bind="template: { name: 'add-diesease-template'}"></div>        
     <div data-bind="template:{name:'patient-dieseases-template'}"></div>
 </main>
 
@@ -15,27 +12,32 @@
     <div id="add-alergy-container">
         <div class="panel panel-primary">
             <div class="panel-heading"><h2>@Localizations.AddNewNotification</h2></div>
-            <div class="panel-body">
+                                                                                                                                        <div class="panel-body">
                 <div data-bind="visible: isSendMessageVisible" class="alert alert-success">@Localizations.SendMessage</div>
                 <form id="add-alergy-form">
                     <div class="form-group">
-                        <label>@Localizations.ChooseDieseaseType_Label</label>
-                        <div>
-                            <select class="form-control input-lg" id="dieseaseTypeSelect" data-bind="foreach: dieseasesTypes, value: selectedDieseasesTypeId, select2: { width: '100%', placeholder: '@Localizations.ChooseAlergyType_Placeholder' }">
-                                <option data-bind="text: Name(), value: Id"></option>
-                            </select>
-                        </div>
-                    </div>
+                        <label>@Localizations.ChooseMessageType_Label</label>
+                            <div>
+                                <select class="form-control input-lg" id="dieseaseTypeSelect"  }">
+                                    <option value="patient">Patient</option>
+                                    <option value="ward">Ward</option>
+                                </select>
+                            </div>
+                     </div>
 
                     <div class="form-group">
-                        <label>@Localizations.PatientDieseaseDescription_Label</label>
+                        <label>@Localizations.MessageContent</label>
                         <textarea id="activityDescriptionInput" class="form-control" rows="4" cols="70"
                                   placeholder="@Localizations.PatientDieseaseDescription_Placeholder"
                                   data-bind="value: dieseaseDescription, attr:{maxlength:dieseaseDescriptionMaxLength()}"></textarea>
                     </div>
-                    <button class="btn btn-primary btn-lg" data-bind="click: addDieseaseToPatient, enable: isFormAddDieseaseValid">@Localizations.AddAlergyToPatient</button>
+                    <button class="btn btn-primary btn-lg" data-bind="click: addDieseaseToPatient, enable: isFormAddDieseaseValid">Send Message</button>
                 </form>
             </div>
         </div>
     </div>
 </script>
+
+@section scripts {
+
+}
