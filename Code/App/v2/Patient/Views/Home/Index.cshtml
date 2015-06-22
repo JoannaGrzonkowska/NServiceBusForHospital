@@ -101,13 +101,13 @@
 
 
 <script id="patient-diesease-template" type="text/html">
-    <div class="row">
+    <div class="row" style="font-size:large">
         <strong class="col-sm-3" data-bind="text: DieseaseName"></strong>
         <span class="col-sm-9" data-bind="text: Description"></span>
     </div>
 
     <div data-bind="foreach: DieseasesExaminations">
-        <div class="row">
+        <div class="row log-row" data-bind="css: ExaminationCssClassName()">
             <span class="col-sm-3" data-bind="localizedDateTime: When"></span>
             <span class="col-sm-3" data-bind="text: ExaminationName"></span>
             <span class="col-sm-3" data-bind="text: LogName"></span>

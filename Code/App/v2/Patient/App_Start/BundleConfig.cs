@@ -24,7 +24,9 @@ namespace Patient
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/PatientStyles.css"));
+                      
 
 
             bundles.Add(new ScriptBundle("~/bundles/patient_index").Include(
