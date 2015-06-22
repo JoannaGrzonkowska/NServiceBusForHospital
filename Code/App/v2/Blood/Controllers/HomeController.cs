@@ -1,7 +1,6 @@
 ﻿using Blood.Hubs.Services;
 using Blood.ViewModels;
 using BusinessLogic.CommandHandlers;
-using BusinessLogic.Models;
 using BusinessLogic.Models.Commands;
 using BusinessLogic.Services;
 using Messages;
