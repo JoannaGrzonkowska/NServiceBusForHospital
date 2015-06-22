@@ -19,8 +19,16 @@ namespace Patient.Controllers
 
         public ActionResult Index()
         {
-            var patient = _patientsService.GetModelByName(User.Identity.Name);
-            return View(patient);
+            try
+            {
+                var patient = _patientsService.GetModelByName(User.Identity.Name);
+
+                return View(patient);
+            }
+            catch
+            {
+                return RedirectToAction("Login", "Patient");
+            }
         }
 
         public ActionResult About()
