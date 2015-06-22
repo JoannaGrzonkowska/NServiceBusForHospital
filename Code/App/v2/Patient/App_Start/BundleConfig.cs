@@ -42,7 +42,8 @@ namespace Patient
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
                      "~/Scripts/knockout-3.3.0.js",
                      "~/Scripts/moment.min.js",
-                      "~/Scripts/App/Common.js",
+                     "~/Scripts/App/Common.js",
+                     "~/Scripts/App/Enums.js",
                      "~/Scripts/customBindingHandlers.js"));
         }
     }

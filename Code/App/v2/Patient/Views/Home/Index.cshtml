@@ -102,20 +102,17 @@
 
 <script id="patient-diesease-template" type="text/html">
     <div class="row">
-        <div class="col-sm-3" data-toggle="tooltip"
-             data-placement="top" data-bind="attr: { 'title': DieseaseName() }">
-            <strong data-bind="text: DieseaseName"></strong>
-        </div>
-        <div class="col-sm-6">
-            <span data-bind="text: Description"></span>
-        </div>
+        <strong class="col-sm-3" data-bind="text: DieseaseName"></strong>
+        <span class="col-sm-9" data-bind="text: Description"></span>
+    </div>
 
-        <div data-bind="foreach: DieseasesExaminations">
-            <div class="row">
-                <span class="col-sm-3" data-bind="text: Comment"></span>
-            </div>
+    <div data-bind="foreach: DieseasesExaminations">
+        <div class="row">
+            <span class="col-sm-3" data-bind="localizedDateTime: When"></span>
+            <span class="col-sm-3" data-bind="text: ExaminationName"></span>
+            <span class="col-sm-3" data-bind="text: LogName"></span>
+            <span class="col-sm-3" data-bind="text: Comment"></span>
         </div>
-
     </div>
 </script>
 
