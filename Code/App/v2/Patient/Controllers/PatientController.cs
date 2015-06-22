@@ -52,7 +52,7 @@ namespace Patient.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Patient");
         }
 
         //REGISTER
@@ -68,7 +68,7 @@ namespace Patient.Controllers
             if (ModelState.IsValid)
             {
                 _accountService.AddUser(user.Name, user.Password, user.Age);
-                RedirectToAction("Index", "Home");
+                RedirectToAction("Login", "Patient");
             }
 
             return View();
