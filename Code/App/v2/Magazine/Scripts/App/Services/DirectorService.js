@@ -2,9 +2,9 @@
     var self = this;
     self.urls = urls;
 
-    self.sendMessageService = function (data, handler) {
+    self.sendMessages = function (data, handler) {
         $.ajaxSetup({ cache: false });
-        $.post(self.urls.sendMessageService, data, function (result) {
+        $.post(self.urls.sendMessages, data, function (result) {
             handler(result);
             if (result.IsSuccess === false) {
                 showError(result.Errors.join('\n'));

@@ -39,7 +39,7 @@ namespace Magazine.Controllers
         public ActionResult SendMessages(DirectorMessage message)
         {
             object messageToSend;
-            if (message.Type == 1)
+            if (message.Type == 0)
             {
                 messageToSend = new DirectorPatientMessage
                 {

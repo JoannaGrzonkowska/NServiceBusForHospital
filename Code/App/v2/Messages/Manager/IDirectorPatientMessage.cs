@@ -2,7 +2,7 @@
 
 namespace Messages
 {
-    public interface IDirectorPatientMessage
+    public interface IDirectorPatientMessage : IEvent
     {
         string Content { get; set; }
     }

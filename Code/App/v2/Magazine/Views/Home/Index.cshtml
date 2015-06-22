@@ -3,7 +3,7 @@
     ViewBag.Title = "Magazine Page";
 }
 
-<main id="patient-personal-data-content" class="container">    
+<main id="director-data-content" class="container">
     <div id="add-alergy-container">
         <div class="panel panel-primary">
             <div class="panel-heading"><h2>@Localizations.AddNewNotification</h2></div>
@@ -14,9 +14,10 @@
                         <label>@Localizations.ChooseMessageType_Label</label>
                         <div>
                             <select class="form-control input-lg" id="dieseaseTypeSelect" data-bind="value: selectedMessageType">
-                                <option value=" patient">
-                                Patient</option>
-                                <option value="ward">Ward</option>
+                                <option value="0">
+                                    Patient
+                                </option>
+                                <option value="1">Ward</option>
                             </select>
                         </div>
                     </div>
@@ -47,26 +48,24 @@
         };
 
         var directorService = new DirectorService(urls);
-        self.isSendMessageVisible = ko.observable(false);
-        self.selectedMessageType = ko.observable();
-        self.messageContent = ko.observable();
-        self.dieseaseDescriptionMaxLength = ko.observable();
-
-        self.isFormAddMessageValid = ko.computed(function () {
-            return self.messageContent !== '';
-        });
-
 
         var WardViewModel = function () {
             var self = this;
 
             self.wardData = ko.observableArray([]);
-                        
+            self.isSendMessageVisible = ko.observable(false);
+            self.selectedMessageType = ko.observable();
+            self.messageContent = ko.observable();
+            self.dieseaseDescriptionMaxLength = ko.observable();
+
+            self.isFormAddMessageValid = ko.computed(function () {
+                return self.messageContent !== '';
+            });
 
             self.sendMessages = function () {
-                self.sendMessages(
+                directorService.sendMessages(
                         {
-                            Comment: self.messageContent,
+                            Content: self.messageContent(),
                             Type: self.selectedMessageType()
                         },
                         function () {
@@ -85,7 +84,7 @@
             
             $.connection.hub.start().done(function () {
 
-                ko.applyBindings(wardViewModel, document.getElementById("ward-patient-data-content"));
+                ko.applyBindings(wardViewModel, document.getElementById("director-data-content"));
                 $.data(document.body, "WardViewModel", wardViewModel);
             });
 

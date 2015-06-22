@@ -1,7 +1,8 @@
 ﻿
+using NServiceBus;
 namespace Messages
 {
-    public interface IDirectorWardMessage
+    public interface IDirectorWardMessage:IEvent
     {
         string Content { get; set; }
     }
