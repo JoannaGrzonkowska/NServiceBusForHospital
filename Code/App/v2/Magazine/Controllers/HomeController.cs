@@ -24,7 +24,7 @@ namespace Magazine.Controllers
 
 
         public ActionResult About()
-        {            
+        {
             return View();
         }
 
@@ -38,21 +38,19 @@ namespace Magazine.Controllers
         [HttpPost]
         public ActionResult SendMessages(DirectorMessage message)
         {
-            object messageToSend ;
-            if( message.Type == 1 )
+            object messageToSend;
+            if (message.Type == 1)
             {
                 messageToSend = new DirectorPatientMessage
                 {
-                    Content = message.Content,
-                    MessageId = message.MessageId
+                    Content = message.Content
                 };
             }
             else
             {
                 messageToSend = new DirectorWardMessage
                 {
-                    Content = message.Content,
-                    MessageId = message.MessageId
+                    Content = message.Content
                 };
             }
 

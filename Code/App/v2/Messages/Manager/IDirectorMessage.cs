@@ -8,7 +8,6 @@ namespace Messages
 {
     public interface IDirectorMessage
     {
-        int MessageId { get; set; }
         string Content { get; set; }
         int Type { get; set; }
     }
