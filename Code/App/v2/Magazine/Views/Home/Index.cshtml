@@ -27,7 +27,7 @@
                                   placeholder="@Localizations.PatientDieseaseDescription_Placeholder"
                                   data-bind="value: messageContent, attr:{maxlength:dieseaseDescriptionMaxLength()}"></textarea>
                     </div>
-                    <button class="btn btn-primary btn-lg" data-bind="click: addDieseaseToPatient, enable: isFormAddDieseaseValid">Send Message</button>
+                    <button class="btn btn-primary btn-lg" data-bind="click: sendMessages, enable: isFormAddMessageValid">Send Message</button>
                 </form>
             </div>
         </div>
@@ -35,6 +35,9 @@
 </main>
 
 @section scripts {
+@Scripts.Render("~/bundles/director_index")
+<script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+<script src="~/signalr/hubs"></script>
 <script type="text/javascript">
 
     (function () {
@@ -44,6 +47,15 @@
         };
 
         var directorService = new DirectorService(urls);
+        self.isSendMessageVisible = ko.observable(false);
+        self.selectedMessageType = ko.observable();
+        self.messageContent = ko.observable();
+        self.dieseaseDescriptionMaxLength = ko.observable();
+
+        self.isFormAddMessageValid = ko.computed(function () {
+            return self.messageContent !== '';
+        });
+
 
         var WardViewModel = function () {
             var self = this;
@@ -58,7 +70,7 @@
                             Type: self.selectedMessageType()
                         },
                         function () {
-
+                            self.isSendMessageVisible(true);
                         });
             };        
          };
