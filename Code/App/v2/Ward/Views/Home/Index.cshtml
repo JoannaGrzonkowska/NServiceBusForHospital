@@ -151,7 +151,6 @@
                         if (item.PatientDieseaseId == log.PatientDieseaseId) {
                             item.PatientLogs.push(new PatientLogViewModel(log));
                         }
-
                     });
                 };
                 $.connection.hub.start().done(function () {
