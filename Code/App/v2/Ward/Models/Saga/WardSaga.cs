@@ -171,7 +171,7 @@ namespace Ward
             {
                 ReplyToOriginator(new Results_PatientRecive
                 {
-                    Comment = "Treatment Completed YOLO",
+                    Comment = "Treatment Completed. YOLO",
                     PatientDieseaseId = Data.PatientDieseaseId,
                 });
                 MarkAsComplete();
