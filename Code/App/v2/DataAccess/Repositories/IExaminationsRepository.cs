@@ -9,5 +9,7 @@ namespace DataAccess.Repositories
     public interface IExaminationsRepository : IRepository<Examinations>
     {
         IEnumerable<Examinations> GetExaminationsByPatientDieseaseId(int patientDieseaseId);
+        IEnumerable<Examinations> GetExaminationsByPatientDieseaseIdWithFilter(int patientDieseaseId, int logType);
+    
     }
 }

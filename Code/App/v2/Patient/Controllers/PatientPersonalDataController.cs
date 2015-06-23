@@ -85,6 +85,7 @@ namespace Patient.Controllers
                     Description = command.Description,
                     PatientDieseaseId = patientDieseaseId
                 };
+
                 _bus.Send(resultsMessage);
                 addDieseaseCommand = new CommandResult();
             }

@@ -70,7 +70,7 @@
                     <div class="form-group">
                         <label>@Localizations.PatientDieseaseDescription_Label</label>
                         <textarea id="activityDescriptionInput" class="form-control" rows="4" cols="70"
-                                  placeholder="@Localizations.PatientDieseaseDescription_Placeholder" onfocus="sendFalse()"
+                                  placeholder="@Localizations.PatientDieseaseDescription_Placeholder" 
                                   data-bind="value: dieseaseDescription, attr:{maxlength:dieseaseDescriptionMaxLength()} "></textarea>
                     </div>
                     <button class="btn btn-primary btn-lg" data-bind="click: addDieseaseToPatient, enable: isFormAddDieseaseValid">@Localizations.AddAlergyToPatient</button>
@@ -123,13 +123,6 @@
     <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
     <script src="~/signalr/hubs"></script>
 
-    <script>
-        function sendFalse() {
-            self.isSendMessageVisible = ko.observable(false);
-
-        }
-
-    </script>
     <script type="text/javascript">
 
         (function () {
@@ -187,9 +180,8 @@
 
 
             $(function () {
-
+                
                 var dieseasesViewModel = new DieseasesViewModel();
-
                 $('add-alergy-form').submit(function () {
                     return false;
                 });
@@ -199,6 +191,14 @@
                 chat.client.addPublishedDirectorMessage = function (message) {
                     dieseasesViewModel.publishedMessages.push(new DirectorPatientMessage(message));
                 }
+
+                chat.client.addExaminationsResults = function (examinationsResultsList) {
+                    examinationsResultsList.forEach(function (examinationResult) {
+                        DieseasesExaminations.push(examinationResult);
+
+                    })
+                }
+                
 
                 $.connection.hub.start().done(function () {
 

@@ -1,10 +1,12 @@
 ﻿using BusinessLogic.Models;
+using DataAccess;
 using DataAccess.Repositories;
 using Messages;
+using System.Collections.Generic;
 
 namespace BusinessLogic.Services
 {
-    public class ExaminationsService:IExaminationsService
+    public class ExaminationsService : IExaminationsService
     {
         private readonly IExaminationsRepository _examinationsRepository;
 
@@ -25,6 +27,28 @@ namespace BusinessLogic.Services
                 Comment = examination.Comment,
                 When = examination.WhenExamined
             };
+        }
+
+
+
+        public List<ExaminationsModel> GetExaminationsByPatientDieseaseIdWithFilter(int patientDieseaseId, int logType)
+        {
+            var examinations = _examinationsRepository.GetExaminationsByPatientDieseaseIdWithFilter(patientDieseaseId, logType);
+            List<ExaminationsModel> examinationModelsList = new List<ExaminationsModel>();
+            foreach(var examination in examinations)
+            {
+                examinationModelsList.Add(new ExaminationsModel
+                {
+                    Id = examination.Id,
+                    ExaminationType = (Messages.ExaminationTypeEnum.ExaminationType)examination.ExaminationType,
+                    PatientDieseaseId = examination.PatientDieseaseId,
+                    LogType = (Messages.Models.LogTypeEnum.LogType)examination.LogType,
+                    Comment = examination.Comment,
+                    When = examination.WhenExamined
+
+                });
+            }
+            return examinationModelsList;
         }
     }
 }

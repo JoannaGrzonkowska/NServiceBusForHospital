@@ -1,4 +1,5 @@
-﻿using Messages;
+﻿using BusinessLogic.Models;
+using Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace Patient.Hubs.Services
     public interface IShowToUIHubService
     {
         void ShowPublishedDirectorMessage(DirectorPatientMessage message);
+        void ShowFinalExaminationsResults(List<ExaminationsModel> examinationsResults);
+    
     }
 }
