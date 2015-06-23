@@ -15,6 +15,7 @@ namespace Patient.Hubs.Services
         {
             _hubContext = GlobalHost.ConnectionManager.GetHubContext<PatientHub>();
         }
+
         public void ShowPublishedDirectorMessage(DirectorPatientMessage message)
         {
             _hubContext.Clients.All.addPublishedDirectorMessage(message);

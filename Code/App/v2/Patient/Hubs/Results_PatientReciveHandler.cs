@@ -11,7 +11,7 @@ namespace Patient.Hubs
             IHubContext hubContext = GlobalHost.ConnectionManager.GetHubContext<PatientHub>();
 
 
-            hubContext.Clients.All.addNewMessageToPage("Comment", message.Comment);//TODO + 1 kalsa + id pacjetna
+            hubContext.Clients.All.addNewMessageToPage("Comment", message.Comment);
         }
     }
 }
