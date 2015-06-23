@@ -70,7 +70,6 @@ namespace Ward
                 CurrentDiesease = currentDiesease
             };
 
-            
             _showToUIHubService.ShowWardAcceptance(patientDeclaration);
         }
 
@@ -118,27 +117,24 @@ namespace Ward
 
         public void Handle(IRTGWardResults message)
         {
-            base.Data.PatientDieseaseId = message.PatientDieseaseId;
-            var examination = _examinationsService.GetById(message.ExaminationId);
-            AddLogToUIAndTryFinish(examination, ExaminationTypeEnum.ExaminationType.RTG);
+            AddLogToUIAndTryFinish(message.ExaminationId, message.PatientDieseaseId, ExaminationTypeEnum.ExaminationType.RTG);
         }
 
         public void Handle(IUSGWardResults message)
         {
-            base.Data.PatientDieseaseId = message.PatientDieseaseId;
-            var examination = _examinationsService.GetById(message.ExaminationId);
-            AddLogToUIAndTryFinish(examination, ExaminationTypeEnum.ExaminationType.USG);
+            AddLogToUIAndTryFinish(message.ExaminationId, message.PatientDieseaseId, ExaminationTypeEnum.ExaminationType.USG);
         }
 
         public void Handle(ILabWardResults message)
         {
-            base.Data.PatientDieseaseId = message.PatientDieseaseId;
-            var examination = _examinationsService.GetById(message.ExaminationId);
-            AddLogToUIAndTryFinish(examination, ExaminationTypeEnum.ExaminationType.LAB);
+            AddLogToUIAndTryFinish(message.ExaminationId, message.PatientDieseaseId, ExaminationTypeEnum.ExaminationType.LAB);
         }
 
-        private void AddLogToUIAndTryFinish(BusinessLogic.Models.ExaminationsModel examination, ExaminationTypeEnum.ExaminationType examinationType)
+        private void AddLogToUIAndTryFinish(int examinationId, int patientDieseaseId, ExaminationTypeEnum.ExaminationType examinationType)
         {
+            base.Data.PatientDieseaseId = patientDieseaseId;
+            var examination = _examinationsService.GetById(examinationId);
+        
             var log = new PatientLogViewModel
             {
                 Comment = examination.Comment,

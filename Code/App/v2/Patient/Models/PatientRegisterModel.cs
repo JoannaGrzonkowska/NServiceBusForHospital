@@ -17,8 +17,7 @@ namespace Patient.Models
         public string Password { get; set; }
 
         [Required]
-        //[DataType(DataType.Currency)]
-        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")] // found on : http://stackoverflow.com/questions/4816822/int-or-number-datatype-for-dataannotation-validation-attribute
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid integer Number")]
         [DisplayName("Age")]
         public int Age { get; set; }
     }
