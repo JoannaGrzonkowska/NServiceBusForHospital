@@ -10,7 +10,6 @@ namespace Patient.Hubs
         {
             IHubContext hubContext = GlobalHost.ConnectionManager.GetHubContext<PatientHub>();
 
-
             hubContext.Clients.All.addNewMessageToPage("Comment", message.Comment);
         }
     }
