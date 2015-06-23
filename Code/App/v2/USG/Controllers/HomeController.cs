@@ -79,7 +79,7 @@ namespace USG.Controllers
             var addExaminationCommand = _addExaminationToPatientCommandHandler.Add(new AddExaminationToPatientCommand
             {
                 PatientDieseaseId = appData.PatientDieseaseId,
-                ExaminationType = ExaminationTypeEnum.ExaminationType.LAB,
+                ExaminationType = ExaminationTypeEnum.ExaminationType.USG,
                 LogType = Messages.Models.LogTypeEnum.LogType.Response,
                 Comment = appData.Comment
             }, ref examinationId);

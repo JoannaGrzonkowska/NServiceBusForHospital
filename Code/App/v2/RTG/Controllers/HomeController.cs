@@ -78,7 +78,7 @@ namespace RTG.Controllers
             var addExaminationCommand = _addExaminationToPatientCommandHandler.Add(new AddExaminationToPatientCommand
             {
                 PatientDieseaseId = appData.PatientDieseaseId,
-                ExaminationType = ExaminationTypeEnum.ExaminationType.LAB,
+                ExaminationType = ExaminationTypeEnum.ExaminationType.RTG,
                 LogType = Messages.Models.LogTypeEnum.LogType.Response,
                 Comment = appData.Comment
             }, ref examinationId);

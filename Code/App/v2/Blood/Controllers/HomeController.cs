@@ -82,7 +82,7 @@ namespace Blood.Controllers
             var addExaminationCommand = _addExaminationToPatientCommandHandler.Add(new AddExaminationToPatientCommand
             {
                 PatientDieseaseId = appData.PatientDieseaseId,
-                ExaminationType = ExaminationTypeEnum.ExaminationType.LAB,
+                ExaminationType = ExaminationTypeEnum.ExaminationType.BLOOD,
                 LogType = Messages.Models.LogTypeEnum.LogType.Request,
                 Comment = appData.Comment
             }, ref examinationId);
