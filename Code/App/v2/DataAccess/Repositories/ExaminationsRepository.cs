@@ -19,5 +19,13 @@ namespace DataAccess.Repositories
             return Context.Set<Examinations>()
                 .Where(x => x.PatientDieseaseId == patientDieseaseId);
         }
+
+
+        public IEnumerable<Examinations> GetExaminationsByPatientDieseaseIdWithFilter(int patientDieseaseId, int logType)
+        {
+            return Context.Set<Examinations>()
+                 .Where(x => x.PatientDieseaseId == patientDieseaseId && x.LogType == logType);
+        
+        }
     }
 }
