@@ -68,8 +68,7 @@ namespace RTG.Controllers
                 RTGComment = currentRTGExamination,
                 PatientDieseaseId = message.PatientDieseaseId
             };
-
-
+            
             _showToUIHubService.ShowRTGExamination(rtgExamination);
         }
         [HttpPost]
@@ -80,7 +79,7 @@ namespace RTG.Controllers
             {
                 PatientDieseaseId = appData.PatientDieseaseId,
                 ExaminationType = ExaminationTypeEnum.ExaminationType.LAB,
-                LogType = Messages.Models.LogTypeEnum.LogType.Request,
+                LogType = Messages.Models.LogTypeEnum.LogType.Response,
                 Comment = appData.Comment
             }, ref examinationId);
 

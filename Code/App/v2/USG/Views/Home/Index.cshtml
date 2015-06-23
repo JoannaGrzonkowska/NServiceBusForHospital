@@ -65,9 +65,8 @@
                 self.sendResultsToWard = function (item) {
                     usgExaminationService.sendResultsToWard(
                         {
-                            PatientID: item.PatientInfo.Id(),
+                            PatientDieseaseId: item.PatientDieseaseId,
                             Comment: item.examinationDescriptionUSG()
-
                         },
                         function () {
 

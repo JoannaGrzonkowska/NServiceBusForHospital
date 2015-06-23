@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using Laboratory.ViewModels;
+using Microsoft.AspNet.SignalR;
 
 namespace Laboratory.Hubs.Services
 {
@@ -12,7 +13,7 @@ namespace Laboratory.Hubs.Services
         }
 
        
-        public void ShowLabExamination(ViewModels.LabExaminationViewModel message)
+        public void ShowLabExamination(LabExaminationViewModel message)
         {
             _hubContext.Clients.All.addNewRequestToLab(message);
         

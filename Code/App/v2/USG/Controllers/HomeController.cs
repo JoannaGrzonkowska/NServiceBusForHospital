@@ -80,7 +80,7 @@ namespace USG.Controllers
             {
                 PatientDieseaseId = appData.PatientDieseaseId,
                 ExaminationType = ExaminationTypeEnum.ExaminationType.LAB,
-                LogType = Messages.Models.LogTypeEnum.LogType.Request,
+                LogType = Messages.Models.LogTypeEnum.LogType.Response,
                 Comment = appData.Comment
             }, ref examinationId);
 
@@ -95,7 +95,6 @@ namespace USG.Controllers
                 _bus.Send(message);
             }
             return Json(new CommandResult(), JsonRequestBehavior.AllowGet);
-
         }
     }
 }

@@ -142,6 +142,7 @@ namespace Ward
             AddLogToUIAndTryFinish(new PatientLogViewModel
            {
                Comment = examination.Comment,
+               PatientDieseaseId = message.PatientDieseaseId,
                ExaminationType = ExaminationTypeEnum.ExaminationType.USG
            });
         }
@@ -149,11 +150,7 @@ namespace Ward
         public void Handle(ILabWardResults message)
         {
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
-
-
             var examination = _examinationsService.GetById(message.ExaminationId);
-
-
             AddLogToUIAndTryFinish(new PatientLogViewModel
             {
                 Comment = examination.Comment,//"",//message.Comment,

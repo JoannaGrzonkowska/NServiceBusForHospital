@@ -156,11 +156,21 @@
                 chat.client.addNewDeclarationToWard = function (declaration) {
                     wardViewModel.wardData.push(new WardPatientDeclarationViewModel(declaration));
                 };
-                chat.client.addNewPatientLog = function (log) {
-                    wardViewModel.wardData().forEach(function (item) {
-                        if (item.PatientDieseaseId == log.PatientDieseaseId) {
-                            item.PatientLogs.push(new PatientLogViewModel(log));
-                        }
+                chat.client.addNewPatientLog = function (log1) {
+                    var log = new PatientLogViewModel(
+                    {
+                        PatientDieseaseId: log1.PatientDieseaseId,
+                        Comment: log1.Comment,
+                        ExaminationType: log1.ExaminationType,
+                        LogType: log1.LogType
+                    });
+                    wardViewModel.wardData().forEach(function (patientItem) {
+                            patientItem.DieseaseLogs().forEach(function (dieseseLog) {
+                                if (dieseseLog.CurrentDiesease.PatientDieseaseId() == log.PatientDieseaseId()) {
+                                    dieseseLog.PatientLogs.push(log);
+                                }
+                            });
+                        
                     });
                 };
                 chat.client.addPublishedDirectorMessage = function (message) {

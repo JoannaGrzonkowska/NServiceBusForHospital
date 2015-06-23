@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Models;
+using Laboratory.ViewModels;
 
 namespace Laboratory.ViewModels
 {
