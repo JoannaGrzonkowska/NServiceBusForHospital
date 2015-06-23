@@ -23,9 +23,9 @@ namespace Patient.Hubs.Services
         }
 
 
-        public void ShowFinalExaminationsResults(List<ExaminationsModel> examinationsResults)
+        public void ShowFinalExaminationsResults(List<ExaminationsModel> examinationsResults, int patientId)
         {
-            _hubContext.Clients.All.addExaminationsResults(examinationsResults);
+            _hubContext.Clients.All.addExaminationsResults(examinationsResults, patientId);
         }
     }
 }

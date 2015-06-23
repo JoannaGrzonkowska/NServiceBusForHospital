@@ -11,7 +11,7 @@ namespace Patient.Hubs.Services
     public interface IShowToUIHubService
     {
         void ShowPublishedDirectorMessage(DirectorPatientMessage message);
-        void ShowFinalExaminationsResults(List<ExaminationsModel> examinationsResults);
+        void ShowFinalExaminationsResults(List<ExaminationsModel> examinationsResults, int patientId);
     
     }
 }

@@ -33,6 +33,7 @@ namespace BusinessLogic.Services
                     });
                 result.Add(new PatientsDieseasesModel
                 {
+                    Id = x.Id,
                     DieseaseName = x.Dieseases.Name,
                     Description = x.Description,
                     DieseasesExaminations = examinations

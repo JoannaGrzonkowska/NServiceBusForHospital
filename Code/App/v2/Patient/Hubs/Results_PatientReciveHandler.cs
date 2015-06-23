@@ -10,12 +10,15 @@ namespace Patient.Hubs
     {
         private readonly IExaminationsService _examinationsService;
         private readonly IShowToUIHubService _showToUIHubService;
-
+        private readonly IPatientsDieseasesService _patientsDieseasesService;
+        
         public Results_PatientReciveHandler(IExaminationsService examinationsService, 
-            IShowToUIHubService showToUIHubService)
+            IShowToUIHubService showToUIHubService,
+            IPatientsDieseasesService patientsDieseasesService)
         {
             _examinationsService = examinationsService;
             _showToUIHubService = showToUIHubService;
+            _patientsDieseasesService = patientsDieseasesService;
         }
 
         public void Handle(IResults_PatientRecive message)
@@ -24,7 +27,9 @@ namespace Patient.Hubs
             var examinationsResults = _examinationsService
                 .GetExaminationsByPatientDieseaseIdWithFilter(message.PatientDieseaseId, 2);
 
-            _showToUIHubService.ShowFinalExaminationsResults(examinationsResults);
+            var patient = _patientsDieseasesService.GetPatientById(message.PatientDieseaseId);
+
+            _showToUIHubService.ShowFinalExaminationsResults(examinationsResults, patient.Id);
         }
     }
 }
