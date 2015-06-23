@@ -24,7 +24,34 @@
             <div data-bind="template: { name: 'patient-info-template'}"></div>
         </div>
         <div class="col-sm-6">
-            <div data-bind="template: { name: 'add-diesease-template'}"></div>
+            <div data-bind="template: { name: 'add-diesease-template'}">
+    <div id="add-alergy-container">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h2>Inform about new patient's diesease</h2></div>
+            <div class="panel-body">
+                <div data-bind="visible: isSendMessageVisible" class="alert alert-success">Send Message</div>
+                <form id="add-alergy-form">
+                    <div class="form-group">
+                        <label>Choose</label>
+                        <div>
+                            <select class="form-control input-lg" id="dieseaseTypeSelect" data-bind="foreach: dieseasesTypes, value: selectedDieseasesTypeId, select2: { width: '100%', placeholder: 'Choose2' }">
+                                <option data-bind="text: Name(), value: Id" value="1">Test1</option>
+                            
+                                <option data-bind="text: Name(), value: Id" value="2">Test2</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="activityDescriptionInput" class="form-control" rows="4" cols="70" placeholder="Please add new description" data-bind="value: dieseaseDescription, attr:{maxlength:dieseaseDescriptionMaxLength()} "></textarea>
+                    </div>
+                    <button class="btn btn-primary btn-lg" data-bind="click: addDieseaseToPatient, enable: isFormAddDieseaseValid">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
         </div>
     </div>
 
@@ -192,11 +219,24 @@
                     dieseasesViewModel.publishedMessages.push(new DirectorPatientMessage(message));
                 }
 
-                chat.client.addExaminationsResults = function (examinationsResultsList) {
-                    examinationsResultsList.forEach(function (examinationResult) {
-                        DieseasesExaminations.push(examinationResult);
+                chat.client.addExaminationsResults = function (examinationsResultsList, patientId) {
 
-                    })
+                    var loggedPatientId = '@Model.Id';
+
+                    if (loggedPatientId == patientId) {
+
+                        var patientDieseaseId = examinationsResultsList[0].PatientDieseaseId;
+
+                        dieseasesViewModel.patientDieseases().forEach(function (patientDiesease) {
+                            if (patientDiesease.Id() === patientDieseaseId) {
+
+                                examinationsResultsList.forEach(function (examinationResult) {
+                                    patientDiesease.DieseasesExaminations.push(new ExaminationModel(examinationResult));
+
+                                })
+                            }
+                        });
+                    }
                 }
                 
 
