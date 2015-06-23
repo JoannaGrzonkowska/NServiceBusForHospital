@@ -81,7 +81,7 @@ namespace Laboratory.Controllers
             var addExaminationCommand = _addExaminationToPatientCommandHandler.Add(new AddExaminationToPatientCommand
             {
                 PatientDieseaseId = appData.PatientDieseaseId,
-                ExaminationType = ExaminationTypeEnum.ExaminationType.BLOOD,
+                ExaminationType = ExaminationTypeEnum.ExaminationType.LAB,
                 LogType = Messages.Models.LogTypeEnum.LogType.Response,
                 Comment = appData.Comment
             }, ref examinationId);

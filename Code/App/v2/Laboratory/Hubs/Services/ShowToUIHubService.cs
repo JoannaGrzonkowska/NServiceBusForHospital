@@ -12,7 +12,6 @@ namespace Laboratory.Hubs.Services
             _hubContext = GlobalHost.ConnectionManager.GetHubContext<LabHub>();
         }
 
-       
         public void ShowLabExamination(LabExaminationViewModel message)
         {
             _hubContext.Clients.All.addNewRequestToLab(message);
