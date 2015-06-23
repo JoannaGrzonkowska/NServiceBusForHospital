@@ -56,9 +56,10 @@
 
             <!-- ko foreach: PatientLogs -->
             <div class="row log-row" data-bind="css: ExaminationCssClassName()">
-                <span class="col-sm-2" data-bind="text: When" ></span>
+                <span class="col-sm-2" data-bind="localizedDateTime: When"></span>
                 <span class="col-sm-2" data-bind="text: ExaminationName"></span>
-                <span class="col-sm-8" data-bind="text: Comment"></span>
+                <span class="col-sm-2" data-bind="text: LogName"></span>
+                <span class="col-sm-6" data-bind="text: Comment"></span>
             </div>
             <!-- /ko -->
         </div>
@@ -103,8 +104,8 @@
                                             Comment: description,
                                             ExaminationType: examinationType,
                                             LogType: LogType.Request,
-                                            When: time.getDate() + "-" + time.getMonth() + "-" + time.getFullYear()
-                                            + "   " + time.getHours() + ":" + time.getMinutes()
+                                            When: time.getFullYear() + "-" + time.getMonth() + "-" + time.getDate()
+                                            + " " + time.getHours() + ":" + time.getMinutes()
                                         });
                     wardExaminationService.sendToExamination(
                         {

@@ -25,7 +25,7 @@ namespace Patient.Hubs
         {
             IHubContext hubContext = GlobalHost.ConnectionManager.GetHubContext<PatientHub>();
             var examinationsResults = _examinationsService
-                .GetExaminationsByPatientDieseaseIdWithFilter(message.PatientDieseaseId, 2);
+                .GetExaminationsByPatientDieseaseIdWithFilter(message.PatientDieseaseId);
 
             var patient = _patientsDieseasesService.GetPatientById(message.PatientDieseaseId);
 

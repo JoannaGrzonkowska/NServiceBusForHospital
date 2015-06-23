@@ -16,4 +16,8 @@
         return getExaminationTypeName(self.ExaminationType()) + "-" + getLogTypeName(self.LogType());
     }, this);
 
+    this.LogName = ko.computed(function () {
+        return getLogTypeName(self.LogType());
+    }, this);
+
 };

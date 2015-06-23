@@ -116,54 +116,44 @@ namespace Ward
            }
         }
 
-        private void AddLogToUIAndTryFinish(PatientLogViewModel log)
-        {
-            log.LogType = Messages.Models.LogTypeEnum.LogType.Response;
-            _showToUIHubService.ShowPatientLog(log);
-
-            if (log.ExaminationType != ExaminationTypeEnum.ExaminationType.LAB)
-                ConcludeExaminationAndTryFinish(log.ExaminationType);
-            else
-                ConcludeExaminationAndTryFinish(ExaminationTypeEnum.ExaminationType.BLOOD);
-
-        }
-
         public void Handle(IRTGWardResults message)
         {
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
             var examination = _examinationsService.GetById(message.ExaminationId);
-            AddLogToUIAndTryFinish(new PatientLogViewModel
-            {
-                Comment = examination.Comment,
-                PatientDieseaseId = message.PatientDieseaseId,
-                ExaminationType = ExaminationTypeEnum.ExaminationType.RTG
-            });
+            AddLogToUIAndTryFinish(examination, ExaminationTypeEnum.ExaminationType.RTG);
         }
 
         public void Handle(IUSGWardResults message)
         {
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
             var examination = _examinationsService.GetById(message.ExaminationId);
-            AddLogToUIAndTryFinish(new PatientLogViewModel
-           {
-               Comment = examination.Comment,
-               PatientDieseaseId = message.PatientDieseaseId,
-               ExaminationType = ExaminationTypeEnum.ExaminationType.USG
-           });
+            AddLogToUIAndTryFinish(examination, ExaminationTypeEnum.ExaminationType.USG);
         }
 
         public void Handle(ILabWardResults message)
         {
             base.Data.PatientDieseaseId = message.PatientDieseaseId;
             var examination = _examinationsService.GetById(message.ExaminationId);
-            AddLogToUIAndTryFinish(new PatientLogViewModel
-            {
-                Comment = examination.Comment,
-                PatientDieseaseId = message.PatientDieseaseId,
-                ExaminationType = ExaminationTypeEnum.ExaminationType.LAB
-            });
+            AddLogToUIAndTryFinish(examination, ExaminationTypeEnum.ExaminationType.LAB);
         }
 
+        private void AddLogToUIAndTryFinish(BusinessLogic.Models.ExaminationsModel examination, ExaminationTypeEnum.ExaminationType examinationType)
+        {
+            var log = new PatientLogViewModel
+            {
+                Comment = examination.Comment,
+                PatientDieseaseId = examination.PatientDieseaseId,
+                ExaminationType = examinationType,
+                LogType = Messages.Models.LogTypeEnum.LogType.Response,
+                When = examination.When
+            };
+            _showToUIHubService.ShowPatientLog(log);
+
+            if (log.ExaminationType != ExaminationTypeEnum.ExaminationType.LAB)
+                ConcludeExaminationAndTryFinish(log.ExaminationType);
+            else
+                ConcludeExaminationAndTryFinish(ExaminationTypeEnum.ExaminationType.BLOOD);
+        }
 
         private void CheckIfTreatmentComplete()
         {
@@ -171,7 +161,6 @@ namespace Ward
             {
                 ReplyToOriginator(new Results_PatientRecive
                 {
-                    Comment = "Treatment Completed. YOLO",
                     PatientDieseaseId = Data.PatientDieseaseId,
                 });
                 MarkAsComplete();
@@ -180,8 +169,11 @@ namespace Ward
 
         private void ConcludeExamination(ExaminationTypeEnum.ExaminationType type)
         {
-            var examination = Data.Examinations.Where(x => x.Type == type && !x.IsReceived ).First();
-            examination.IsReceived = true;
+            var examination = Data.Examinations.Where(x => x.Type == type && !x.IsReceived).FirstOrDefault();
+            if (examination != null)
+            {
+                examination.IsReceived = true;
+            }
         }
 
         private void ConcludeExaminationAndTryFinish(ExaminationTypeEnum.ExaminationType type)

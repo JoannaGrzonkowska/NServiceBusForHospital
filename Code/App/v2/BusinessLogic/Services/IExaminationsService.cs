@@ -7,7 +7,7 @@ namespace BusinessLogic.Services
     public interface IExaminationsService
     {
         ExaminationsModel GetById(int id);
-        List<ExaminationsModel> GetExaminationsByPatientDieseaseIdWithFilter(int patientDieseaseId, int logType);
+        List<ExaminationsModel> GetExaminationsByPatientDieseaseIdWithFilter(int patientDieseaseId);
 
     }
 }

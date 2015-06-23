@@ -31,9 +31,9 @@ namespace BusinessLogic.Services
 
 
 
-        public List<ExaminationsModel> GetExaminationsByPatientDieseaseIdWithFilter(int patientDieseaseId, int logType)
+        public List<ExaminationsModel> GetExaminationsByPatientDieseaseIdWithFilter(int patientDieseaseId)
         {
-            var examinations = _examinationsRepository.GetExaminationsByPatientDieseaseIdWithFilter(patientDieseaseId, logType);
+            var examinations = _examinationsRepository.GetExaminationsByPatientDieseaseIdWithFilter(patientDieseaseId);
             List<ExaminationsModel> examinationModelsList = new List<ExaminationsModel>();
             foreach(var examination in examinations)
             {
