@@ -120,7 +120,12 @@ namespace Ward
         {
             log.LogType = Messages.Models.LogTypeEnum.LogType.Response;
             _showToUIHubService.ShowPatientLog(log);
-            ConcludeExaminationAndTryFinish(log.ExaminationType);
+
+            if (log.ExaminationType != ExaminationTypeEnum.ExaminationType.LAB)
+                ConcludeExaminationAndTryFinish(log.ExaminationType);
+            else
+                ConcludeExaminationAndTryFinish(ExaminationTypeEnum.ExaminationType.BLOOD);
+
         }
 
         public void Handle(IRTGWardResults message)
@@ -153,7 +158,7 @@ namespace Ward
             var examination = _examinationsService.GetById(message.ExaminationId);
             AddLogToUIAndTryFinish(new PatientLogViewModel
             {
-                Comment = examination.Comment,//"",//message.Comment,
+                Comment = examination.Comment,
                 PatientDieseaseId = message.PatientDieseaseId,
                 ExaminationType = ExaminationTypeEnum.ExaminationType.LAB
             });
