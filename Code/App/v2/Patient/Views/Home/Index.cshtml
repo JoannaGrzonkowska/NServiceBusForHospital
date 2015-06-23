@@ -97,8 +97,8 @@
                     <div class="form-group">
                         <label>@Localizations.PatientDieseaseDescription_Label</label>
                         <textarea id="activityDescriptionInput" class="form-control" rows="4" cols="70"
-                                  placeholder="@Localizations.PatientDieseaseDescription_Placeholder" 
-                                  data-bind="value: dieseaseDescription, attr:{maxlength:dieseaseDescriptionMaxLength()} "></textarea>
+                                  placeholder="@Localizations.PatientDieseaseDescription_Placeholder"
+                                  data-bind="value: dieseaseDescription, attr:{maxlength:dieseaseDescriptionMaxLength()}, valueUpdate: 'afterkeydown' "></textarea>
                     </div>
                     <button class="btn btn-primary btn-lg" data-bind="click: addDieseaseToPatient, enable: isFormAddDieseaseValid">@Localizations.AddAlergyToPatient</button>
                 </form>
@@ -179,7 +179,7 @@
                 self.contentPath = urls.content;
 
                 self.isFormAddDieseaseValid = ko.computed(function () {
-                    return self.selectedDieseasesTypeId() > 0 && self.dieseaseDescription !== '';
+                    return self.selectedDieseasesTypeId() > 0 && self.dieseaseDescription() !== '';
                 });
 
                 
