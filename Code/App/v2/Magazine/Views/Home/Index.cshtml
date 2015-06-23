@@ -63,16 +63,18 @@
             });
 
             self.sendMessages = function () {
-                directorService.sendMessages(
-                        {
-                            Content: self.messageContent(),
-                            Type: self.selectedMessageType()
-                        },
-                        function () {
-                            self.isSendMessageVisible(true);
-                            self.messageContent('');
+                if (self.messageContent() !== '') {
+                    directorService.sendMessages(
+                            {
+                                Content: self.messageContent(),
+                                Type: self.selectedMessageType()
+                            },
+                            function () {
+                                self.isSendMessageVisible(true);
+                                self.messageContent('');
 
-                        });
+                            });
+                }
             };        
          };
 

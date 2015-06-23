@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddNewNotification" xml:space="preserve">
-    <value>Send Spam</value>
+    <value>Publish message</value>
   </data>
   <data name="ChooseMessageType_Label" xml:space="preserve">
     <value>Destination</value>

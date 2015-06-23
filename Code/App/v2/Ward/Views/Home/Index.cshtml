@@ -97,31 +97,33 @@
                 self.wardData = ko.observableArray([]);
 
                 self.sendToExamination = function (patientDieseaseId, description, examinationType) {
-                    var time = new Date();
-                    var log = new PatientLogViewModel(
-                                        {
-                                            PatientDieseaseId: patientDieseaseId,
-                                            Comment: description,
-                                            ExaminationType: examinationType,
-                                            LogType: LogType.Request,
-                                            When: time.getFullYear() + "-" + time.getMonth() + "-" + time.getDate()
-                                            + " " + time.getHours() + ":" + time.getMinutes()
-                                        });
-                    wardExaminationService.sendToExamination(
-                        {
-                            PatientDieseaseId: log.PatientDieseaseId(),
-                            Comment: log.Comment(),
-                            Type: log.ExaminationType()
-                        },
-                        function () {
-                            self.wardData().forEach(function (patientItem) {
-                                patientItem.DieseaseLogs().forEach(function (dieseseLog) {
-                                    if (dieseseLog.CurrentDiesease.PatientDieseaseId == patientDieseaseId) {
-                                        dieseseLog.PatientLogs.push(log);
-                                    }
+                    if (description !== '') {
+                        var time = new Date();
+                        var log = new PatientLogViewModel(
+                                            {
+                                                PatientDieseaseId: patientDieseaseId,
+                                                Comment: description,
+                                                ExaminationType: examinationType,
+                                                LogType: LogType.Request,
+                                                When: time.getFullYear() + "-" + time.getMonth() + "-" + time.getDate()
+                                                + " " + time.getHours() + ":" + time.getMinutes()
+                                            });
+                        wardExaminationService.sendToExamination(
+                            {
+                                PatientDieseaseId: log.PatientDieseaseId(),
+                                Comment: log.Comment(),
+                                Type: log.ExaminationType()
+                            },
+                            function () {
+                                self.wardData().forEach(function (patientItem) {
+                                    patientItem.DieseaseLogs().forEach(function (dieseseLog) {
+                                        if (dieseseLog.CurrentDiesease.PatientDieseaseId == patientDieseaseId) {
+                                            dieseseLog.PatientLogs.push(log);
+                                        }
+                                    });
                                 });
                             });
-                        });
+                    }
                 };
 
                 self.sendToExaminationBlood = function (item) {

@@ -6,7 +6,7 @@
 <main id="ward-patient-data-content" class="container">
     <div data-bind="foreach: labData">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <section class="panel panel-info">
                     <div class="panel-heading">Patient's info</div>
                     <div class="panel-body">
@@ -23,7 +23,7 @@
 
             </div>
 
-            <div class="col-sm-8">
+            <div class="col-sm-6">
                 <span data-bind="text: LabComment.LabExaminationComment"></span>
                 <div class="row">
                     <div class="form-group">
@@ -63,14 +63,16 @@
                 self.labData = ko.observableArray([]);
 
                 self.sendResultsToWard = function (item) {
-                    labExaminationService.sendResultsToWard(
-                        {
-                            PatientDieseaseId: item.PatientDieseaseId,
-                            Comment: item.examinationDescriptionLab()
-                        },
-                        function () {
+                    if (item.examinationDescriptionLab() !== '') {
+                        labExaminationService.sendResultsToWard(
+                            {
+                                PatientDieseaseId: item.PatientDieseaseId,
+                                Comment: item.examinationDescriptionLab()
+                            },
+                            function () {
 
-                        });
+                            });
+                    }
                 };
             };
 

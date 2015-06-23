@@ -83,7 +83,7 @@ namespace Blood.Controllers
             {
                 PatientDieseaseId = appData.PatientDieseaseId,
                 ExaminationType = ExaminationTypeEnum.ExaminationType.BLOOD,
-                LogType = Messages.Models.LogTypeEnum.LogType.Request,
+                LogType = Messages.Models.LogTypeEnum.LogType.Response,
                 Comment = appData.Comment
             }, ref examinationId);
 
