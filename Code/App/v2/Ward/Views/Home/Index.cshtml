@@ -165,16 +165,8 @@
                 chat.client.addNewDeclarationToWard = function (declaration) {
                     wardViewModel.wardData.push(new WardPatientDeclarationViewModel(declaration));
                 };
-                chat.client.addNewPatientLog = function (log1) {
-                    var log = new PatientLogViewModel(
-                    {
-                        PatientDieseaseId: log1.PatientDieseaseId,
-                        Comment: log1.Comment,
-                        ExaminationType: log1.ExaminationType,
-                        LogType: log1.LogType,
-                        When: log1.When
-                        
-                    });
+                chat.client.addNewPatientLog = function (data) {
+                    var log = new PatientLogViewModel(data);
                     wardViewModel.wardData().forEach(function (patientItem) {
                             patientItem.DieseaseLogs().forEach(function (dieseseLog) {
                                 if (dieseseLog.CurrentDiesease.PatientDieseaseId() == log.PatientDieseaseId()) {
