@@ -103,7 +103,7 @@
                                             Comment: description,
                                             ExaminationType: examinationType,
                                             LogType: LogType.Request,
-                                            When: time.getDate() + "." + time.getMonth() + "." + time.getFullYear()
+                                            When: time.getDate() + "-" + time.getMonth() + "-" + time.getFullYear()
                                             + "   " + time.getHours() + ":" + time.getMinutes()
                                         });
                     wardExaminationService.sendToExamination(
