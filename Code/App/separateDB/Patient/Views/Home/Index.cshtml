@@ -1,0 +1,256 @@
+﻿@model RepositoryClasses.Models.PatientsModel
+@using Resources
+
+@{
+    ViewBag.Title = "Patient Data";
+}
+
+<h3>@ViewBag.Message</h3>
+
+<main id="patient-personal-data-content" class="container">
+
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <div data-bind="foreach: publishedMessages">
+                <div class="col-sm-4" data-bind="localizedDateTime: When"></div>
+                <div class="col-sm-8" data-bind="text: Comment"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div data-bind="template: { name: 'patient-info-template'}"></div>
+        </div>
+        <div class="col-sm-6">
+            <div data-bind="template: { name: 'add-diesease-template'}">
+            </div>
+        </div>
+    </div>
+
+    <div data-bind="template:{name:'patient-dieseases-template'}"></div>
+
+    <div class="panel panel-info">
+        <div class="panel-heading">Historical director's messages</div>
+        <div class="panel-body">
+            <div data-bind="foreach: publishedMessagesHistory">
+                <div class="col-sm-4" data-bind="localizedDateTime: When()"></div>
+                <div class="col-sm-8" data-bind="text: Comment()"></div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script id="patient-info-template" type="text/html">
+    <section class="panel panel-info">
+        <div class="panel-heading">Patient's info</div>
+        <div class="panel-body">
+            <div class="row">
+                <label class="col-sm-2">Name:</label>
+                <span data-bind="text: info().Name"></span>
+            </div>
+            <div class="row">
+                <label class="col-sm-2">Age:</label>
+                <span data-bind="text: info().Age"></span>
+            </div>
+        </div>
+    </section>
+</script>
+
+<script id="add-diesease-template" type="text/html">
+    <div id="add-alergy-container">
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h2>@Localizations.AddNewDiesease</h2></div>
+            <div class="panel-body">
+                <div data-bind="visible: isSendMessageVisible" class="alert alert-success">@Localizations.SendMessage</div>
+                <form id="add-alergy-form">
+                    <div class="form-group">
+                        <label>@Localizations.ChooseDieseaseType_Label</label>
+                        <div>
+                            <select class="form-control input-lg" id="dieseaseTypeSelect" data-bind="foreach: dieseasesTypes, value: selectedDieseasesTypeId, select2: { width: '100%', placeholder: '@Localizations.ChooseAlergyType_Placeholder' }">
+                                <option data-bind="text: Name(), value: Id"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>@Localizations.PatientDieseaseDescription_Label</label>
+                        <textarea id="activityDescriptionInput" class="form-control" rows="4" cols="70"
+                                  placeholder="@Localizations.PatientDieseaseDescription_Placeholder"
+                                  data-bind="value: dieseaseDescription, attr:{maxlength:dieseaseDescriptionMaxLength()}, valueUpdate: 'afterkeydown' "></textarea>
+                    </div>
+                    <button class="btn btn-primary btn-lg" data-bind="click: addDieseaseToPatient, enable: isFormAddDieseaseValid">@Localizations.AddAlergyToPatient</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<script id="patient-dieseases-template" type="text/html">
+    <section id="dieseases-container" class="panel panel-info">
+        <div class="panel-heading"><h2>Patient's dieseases</h2></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <strong>@Localizations.DieseasesNameHeader</strong>
+                </div>
+                <div class="col-sm-8">
+                    <span>@Localizations.DescriptionHeader</span>
+                </div>
+
+            </div>
+            <div data-bind="template: { name: 'patient-diesease-template', foreach: patientDieseases}"></div>
+        </div>
+    </section>
+</script>
+
+
+<script id="patient-diesease-template" type="text/html">
+    <div class="row" style="font-size:large">
+        <strong class="col-sm-3" data-bind="text: DieseaseName"></strong>
+        <span class="col-sm-9" data-bind="text: Description"></span>
+    </div>
+
+    <div data-bind="foreach: DieseasesExaminations">
+        <div class="row log-row" data-bind="css: ExaminationCssClassName()">
+            <span class="col-sm-3" data-bind="localizedDateTime: When"></span>
+            <span class="col-sm-3" data-bind="text: ExaminationName"></span>
+            <span class="col-sm-3" data-bind="text: LogName"></span>
+            <span class="col-sm-3" data-bind="text: Comment"></span>
+        </div>
+    </div>
+</script>
+
+@section scripts {
+
+    @Scripts.Render("~/bundles/patient_index")
+    <script src="~/Scripts/App/Model/PersonalData/PatientsPersonalDataViewModel.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script type="text/javascript">
+
+        (function () {
+            var urls = {
+                content: '@Url.Content("~/content")',
+                addDiesease: "@Url.RouteUrl("Default", new { httproute = "", controller = "PatientPersonalData", action = "AddDiesease" })",
+                getDieseases: "@Url.RouteUrl("Default", new { httproute = "", controller = "PatientPersonalData", action = "GetPatientDieseases" })",
+                getDirectorMessages: "@Url.RouteUrl("Default", new { httproute = "", controller = "PatientPersonalData", action = "GetDirectorMessages" })"
+        };
+
+            var patientPersonalDataService = new PatientsPersonalDataService(urls);
+
+            var DieseasesViewModel = function () {
+                var self = this;
+
+                self.publishedMessages = ko.observableArray([]);
+                self.publishedMessagesHistory = ko.observableArray([]);
+
+                self.info = ko.observable();
+                self.patientDieseases = ko.observableArray([]);
+                self.dieseasesTypes = ko.observableArray([]);
+                self.dieseaseDescriptionMaxLength = ko.observable();
+
+                self.selectedDieseasesTypeId = ko.observable();
+                self.dieseaseDescription = ko.observable('');
+
+                self.isSendMessageVisible = ko.observable(false);
+
+                self.contentPath = urls.content;
+
+                self.isFormAddDieseaseValid = ko.computed(function () {
+                    return self.selectedDieseasesTypeId() > 0 && self.dieseaseDescription() !== '';
+                });
+
+
+                self.addDieseaseToPatient = function () {
+                    patientPersonalDataService.addDiesease(
+                        {
+                            DieseaseId: self.selectedDieseasesTypeId(),
+                            Description: self.dieseaseDescription()
+                        },
+                        function () {
+                            self.selectedDieseasesTypeId(-1);
+                            self.dieseaseDescription('');
+
+                            self.getPatientDieseases();
+                            self.isSendMessageVisible(true);
+                        });
+                };
+
+                self.getPatientDieseases = function () {
+                    patientPersonalDataService.getDieseases(function (data) {
+                        self.patientDieseases(data);
+                    });
+                }
+
+                self.getDirectorMessages = function () {
+                    patientPersonalDataService.getDirectorMessages(function (data) {
+                        self.publishedMessagesHistory(data);
+                    });
+                }
+            };
+
+
+            $(function () {
+
+                var dieseasesViewModel = new DieseasesViewModel();
+                $('add-alergy-form').submit(function () {
+                    return false;
+                });
+
+                var chat = $.connection.patientHub;
+
+                chat.client.addPublishedDirectorMessage = function (message) {
+                    dieseasesViewModel.publishedMessages.push(new DirectorMessagesModel(message));
+                }
+
+                chat.client.addExaminationsResults = function (examinationsResultsList, patientId) {
+
+                    var loggedPatientId = '@Model.Id';
+
+                    if (loggedPatientId == patientId) {
+
+                        var patientDieseaseId = examinationsResultsList[0].PatientDieseaseId;
+
+                        dieseasesViewModel.patientDieseases().forEach(function (patientDiesease) {
+                            if (patientDiesease.Id() === patientDieseaseId) {
+
+                                examinationsResultsList.forEach(function (examinationResult) {
+                                    patientDiesease.DieseasesExaminations.push(new ExaminationModel(examinationResult));
+
+                                })
+                            }
+                        });
+                    }
+                }
+
+
+                $.connection.hub.start().done(function () {
+
+                    patientPersonalDataService.getPersonalData(function (data) {
+                        dieseasesViewModel.info(data.Info);
+                        dieseasesViewModel.patientDieseases(data.PatientDieseases());
+                        dieseasesViewModel.dieseasesTypes(data.DieseasesTypes());
+                        dieseasesViewModel.dieseaseDescriptionMaxLength(data.DieseaseDescriptionMaxLength);
+
+                        dieseasesViewModel.getDirectorMessages();
+
+                        ko.applyBindings(dieseasesViewModel, document.getElementById("patient-personal-data-content"));
+                        $.data(document.body, "DieseasesViewModel", dieseasesViewModel);
+
+                        $('[data-toggle="tooltip"]').tooltip({
+                            container: 'body'
+                        });
+
+                    });
+                });
+
+
+
+            });
+        })();
+    </script>
+}

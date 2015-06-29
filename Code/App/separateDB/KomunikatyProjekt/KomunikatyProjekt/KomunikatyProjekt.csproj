@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BCD57A7D-3748-4B44-9C90-10CD50FB25C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KomunikatyProjekt</RootNamespace>
+    <AssemblyName>KomunikatyProjekt</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NServiceBus.Core">
+      <HintPath>..\..\packages\NServiceBus.5.2.0\lib\net45\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConfigErrorQueue.cs" />
+    <Compile Include="Emergency Room\Classes\Results_PatientRecive.cs" />
+    <Compile Include="Emergency Room\Interfaces\IResults_PatientRecive.cs" />
+    <Compile Include="Emergency Room\Interfaces\IWardAcceptance.cs" />
+    <Compile Include="Emergency Room\Interfaces\IAcceptance_CardiologicalWard.cs" />
+    <Compile Include="Emergency Room\Interfaces\IAcceptance_MaternityWard.cs" />
+    <Compile Include="Emergency Room\Interfaces\IAcceptance_InfectiousDiseasesWard.cs" />
+    <Compile Include="Emergency Room\Interfaces\IAcceptance_OIOM.cs" />
+    <Compile Include="LAB\Interfaces\ILabResults.cs" />
+    <Compile Include="LAB\Interfaces\IBloodTestOrder.cs" />
+    <Compile Include="Magazine\Interfaces\IMedicamentAmount.cs" />
+    <Compile Include="Magazine\Interfaces\IMagazineResponse.cs" />
+    <Compile Include="Magazine\Interfaces\IMedicamentRequest.cs" />
+    <Compile Include="Magazine\Medicament.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Referrals\Interfaces\IReferral.cs" />
+    <Compile Include="Referrals\Interfaces\IReferral_InfectiousDiesease.cs" />
+    <Compile Include="Referrals\Interfaces\IReferral_Cardiological.cs" />
+    <Compile Include="Referrals\Interfaces\IReferral_OIOM.cs" />
+    <Compile Include="Referrals\Interfaces\IReferral_Maternity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Referrals\Classes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

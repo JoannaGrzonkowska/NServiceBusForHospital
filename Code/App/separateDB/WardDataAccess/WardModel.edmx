@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KSR_WardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DirectorMessages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="When" Type="datetime" Nullable="false" />
+          <Property Name="ExtDirectorMessageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Examinations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientDieseaseId" Type="int" Nullable="false" />
+          <Property Name="ExaminationType" Type="int" Nullable="false" />
+          <Property Name="LogType" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="WhenExamined" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ExtPatientId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PatientsDieseases">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ExtPatientDieseaseId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Examinati__Patie__15502E78">
+          <End Role="PatientsDieseases" Type="Self.PatientsDieseases" Multiplicity="1" />
+          <End Role="Examinations" Type="Self.Examinations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientsDieseases">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Examinations">
+              <PropertyRef Name="PatientDieseaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PatientsD__Patie__1273C1CD">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="PatientsDieseases" Type="Self.PatientsDieseases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientsDieseases">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KSR_WardModelStoreContainer">
+          <EntitySet Name="DirectorMessages" EntityType="Self.DirectorMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Examinations" EntityType="Self.Examinations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientsDieseases" EntityType="Self.PatientsDieseases" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Examinati__Patie__15502E78" Association="Self.FK__Examinati__Patie__15502E78">
+            <End Role="PatientsDieseases" EntitySet="PatientsDieseases" />
+            <End Role="Examinations" EntitySet="Examinations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PatientsD__Patie__1273C1CD" Association="Self.FK__PatientsD__Patie__1273C1CD">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatientsDieseases" EntitySet="PatientsDieseases" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KSR_WardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DirectorMessages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="When" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ExtDirectorMessageId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Examinations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientDieseaseId" Type="Int32" Nullable="false" />
+          <Property Name="ExaminationType" Type="Int32" Nullable="false" />
+          <Property Name="LogType" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WhenExamined" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PatientsDieseases" Relationship="Self.FK__Examinati__Patie__15502E78" FromRole="Examinations" ToRole="PatientsDieseases" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExtPatientId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PatientsDieseases" Relationship="Self.FK__PatientsD__Patie__1273C1CD" FromRole="Patients" ToRole="PatientsDieseases" />
+        </EntityType>
+        <EntityType Name="PatientsDieseases">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ExtPatientDieseaseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Examinations" Relationship="Self.FK__Examinati__Patie__15502E78" FromRole="PatientsDieseases" ToRole="Examinations" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__PatientsD__Patie__1273C1CD" FromRole="PatientsDieseases" ToRole="Patients" />
+        </EntityType>
+        <Association Name="FK__Examinati__Patie__15502E78">
+          <End Role="PatientsDieseases" Type="Self.PatientsDieseases" Multiplicity="1" />
+          <End Role="Examinations" Type="Self.Examinations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientsDieseases">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Examinations">
+              <PropertyRef Name="PatientDieseaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PatientsD__Patie__1273C1CD">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="1" />
+          <End Role="PatientsDieseases" Type="Self.PatientsDieseases" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PatientsDieseases">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KSR_WardEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DirectorMessages" EntityType="Self.DirectorMessages" />
+          <EntitySet Name="Examinations" EntityType="Self.Examinations" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" />
+          <EntitySet Name="PatientsDieseases" EntityType="Self.PatientsDieseases" />
+          <AssociationSet Name="FK__Examinati__Patie__15502E78" Association="Self.FK__Examinati__Patie__15502E78">
+            <End Role="PatientsDieseases" EntitySet="PatientsDieseases" />
+            <End Role="Examinations" EntitySet="Examinations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PatientsD__Patie__1273C1CD" Association="Self.FK__PatientsD__Patie__1273C1CD">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="PatientsDieseases" EntitySet="PatientsDieseases" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KSR_WardModelStoreContainer" CdmEntityContainer="KSR_WardEntities">
+          <EntitySetMapping Name="DirectorMessages">
+            <EntityTypeMapping TypeName="KSR_WardModel.DirectorMessages">
+              <MappingFragment StoreEntitySet="DirectorMessages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="When" ColumnName="When" />
+                <ScalarProperty Name="ExtDirectorMessageId" ColumnName="ExtDirectorMessageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Examinations">
+            <EntityTypeMapping TypeName="KSR_WardModel.Examinations">
+              <MappingFragment StoreEntitySet="Examinations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PatientDieseaseId" ColumnName="PatientDieseaseId" />
+                <ScalarProperty Name="ExaminationType" ColumnName="ExaminationType" />
+                <ScalarProperty Name="LogType" ColumnName="LogType" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="WhenExamined" ColumnName="WhenExamined" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="KSR_WardModel.Patients">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ExtPatientId" ColumnName="ExtPatientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientsDieseases">
+            <EntityTypeMapping TypeName="KSR_WardModel.PatientsDieseases">
+              <MappingFragment StoreEntitySet="PatientsDieseases">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ExtPatientDieseaseId" ColumnName="ExtPatientDieseaseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
