@@ -1,7 +1,7 @@
-create database KSR_Lab
+create database KSR_Rtg
 go
 
-USE KSR_Lab
+USE KSR_Rtg
 GO
 
 
